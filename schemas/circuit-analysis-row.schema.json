@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/fblln/apexline/schemas/circuit-analysis-row.schema.json",
+  "title": "Apexline circuit analysis row",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "artifact_kind",
+    "provenance",
+    "validation_complete",
+    "analysis_status",
+    "year",
+    "round",
+    "event_name",
+    "session_type",
+    "circuit_id",
+    "circuit_name",
+    "lap_compliance_summary"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "artifact_kind": {"const": "circuit_analysis_row"},
+    "validation_complete": {"type": "boolean"},
+    "analysis_status": {"enum": ["complete", "incomplete"]},
+    "year": {"type": "integer"},
+    "round": {"type": "integer"},
+    "event_name": {"type": "string"},
+    "session_type": {"type": "string"},
+    "circuit_id": {"type": "string"},
+    "circuit_name": {"type": "string"},
+    "lap_compliance_summary": {"type": "object"},
+    "provenance": {"type": "object"}
+  }
+}

@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install
+        run: python -m pip install -e ".[dev]"
+      - name: Lint
+        run: ruff check .
+      - name: Test
+        run: pytest
+      - name: Schema check checked-in examples
+        run: |
+          apexline schema-check --allow-legacy \
+            data/circuit-polylines-2025.json \
+            data/lap-diagnostics-2025.json \
+            docs/assets/rejected-laps-2025/10-canadian-grand-prix.json
+      - name: Fixture smoke
+        run: |
+          apexline fixture-demo --output-dir data/fixture-demo
+          apexline schema-check \
+            data/fixture-demo/circuit-analysis.json \
+            data/fixture-demo/lap-diagnostics.json \
+            data/fixture-demo/artifact-manifest.json
+          apexline-summarize --manifest data/fixture-demo/artifact-manifest.json \
+            --output-md data/fixture-demo/summary.md \
+            --output-svg data/fixture-demo/summary.svg

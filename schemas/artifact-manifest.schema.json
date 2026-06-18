@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/fblln/apexline/schemas/artifact-manifest.schema.json",
+  "title": "Apexline artifact manifest",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "artifact_kind",
+    "run_mode",
+    "year",
+    "event_name",
+    "session_type",
+    "circuit_id",
+    "thresholds",
+    "outputs",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "artifact_kind": {"const": "artifact_manifest"},
+    "run_mode": {"enum": ["single-event", "batch", "fixture"]},
+    "year": {"type": "integer"},
+    "event_name": {"type": ["string", "null"]},
+    "session_type": {"type": "string"},
+    "circuit_id": {"type": ["string", "null"]},
+    "thresholds": {"type": "object"},
+    "outputs": {"type": "object"},
+    "provenance": {"type": "object"}
+  }
+}

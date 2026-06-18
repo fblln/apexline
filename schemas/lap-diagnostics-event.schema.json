@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/fblln/apexline/schemas/lap-diagnostics-event.schema.json",
+  "title": "Apexline lap diagnostics event",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "artifact_kind",
+    "provenance",
+    "year",
+    "session_type",
+    "round",
+    "event_name",
+    "circuit_id",
+    "circuit_name",
+    "total_laps",
+    "fitted_laps",
+    "compliant_laps",
+    "non_compliant_laps",
+    "shape_non_compliant_laps",
+    "reason_counts",
+    "thresholds"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "artifact_kind": {"const": "lap_diagnostics_event"},
+    "year": {"type": "integer"},
+    "session_type": {"type": "string"},
+    "round": {"type": "integer"},
+    "event_name": {"type": "string"},
+    "circuit_id": {"type": "string"},
+    "circuit_name": {"type": "string"},
+    "total_laps": {"type": "integer"},
+    "fitted_laps": {"type": "integer"},
+    "compliant_laps": {"type": "integer"},
+    "non_compliant_laps": {"type": "integer"},
+    "shape_non_compliant_laps": {"type": "integer"},
+    "reason_counts": {"type": "object"},
+    "thresholds": {"type": "object"},
+    "provenance": {"type": "object"}
+  }
+}

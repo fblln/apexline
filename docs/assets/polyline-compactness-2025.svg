@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+  <rect width="100%" height="100%" fill="#f8fafc"/>
+  <text x="46" y="48" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="700" fill="#111827">Canada 2025: what polyline simplification does</text>
+  <text x="46" y="78" font-family="Inter, Arial, sans-serif" font-size="14" fill="#475569">The validated GPS line is simplified only where the removed points stay within the 1.0 m tolerance.</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <rect x="46" y="128" width="318" height="310" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="72" y="166" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" fill="#111827">1. Source GPS line</text>
+  <text x="72" y="192" font-family="Inter, Arial, sans-serif" font-size="13" fill="#475569">All points from the f1-circuits LineString.</text>
+  <polyline points="92,335 111,302 132,282 154,286 173,252 201,230 232,243 251,214 282,205 312,232 329,274 313,319 280,354 231,367 178,360 129,357 92,335" fill="none" stroke="#94a3b8" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+  <g fill="#2563eb">
+    <circle cx="92" cy="335" r="3"/><circle cx="111" cy="302" r="3"/><circle cx="132" cy="282" r="3"/><circle cx="154" cy="286" r="3"/>
+    <circle cx="173" cy="252" r="3"/><circle cx="201" cy="230" r="3"/><circle cx="232" cy="243" r="3"/><circle cx="251" cy="214" r="3"/>
+    <circle cx="282" cy="205" r="3"/><circle cx="312" cy="232" r="3"/><circle cx="329" cy="274" r="3"/><circle cx="313" cy="319" r="3"/>
+    <circle cx="280" cy="354" r="3"/><circle cx="231" cy="367" r="3"/><circle cx="178" cy="360" r="3"/><circle cx="129" cy="357" r="3"/>
+  </g>
+  <text x="72" y="408" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="700" fill="#111827">102 points</text>
+
+  <line x1="382" y1="284" x2="448" y2="284" stroke="#475569" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="386" y="257" font-family="Inter, Arial, sans-serif" font-size="12" fill="#475569">RDP, 1.0 m</text>
+
+  <rect x="466" y="128" width="318" height="310" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="492" y="166" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" fill="#111827">2. Simplified line</text>
+  <text x="492" y="192" font-family="Inter, Arial, sans-serif" font-size="13" fill="#475569">Points are removed only when shape loss is tiny.</text>
+  <polyline points="512,335 552,282 593,252 652,243 702,205 749,274 700,354 598,360 512,335" fill="none" stroke="#059669" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+  <g fill="#059669">
+    <circle cx="512" cy="335" r="4"/><circle cx="552" cy="282" r="4"/><circle cx="593" cy="252" r="4"/><circle cx="652" cy="243" r="4"/>
+    <circle cx="702" cy="205" r="4"/><circle cx="749" cy="274" r="4"/><circle cx="700" cy="354" r="4"/><circle cx="598" cy="360" r="4"/>
+  </g>
+  <text x="492" y="408" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="700" fill="#111827">84 points</text>
+  <text x="620" y="408" font-family="Inter, Arial, sans-serif" font-size="15" fill="#475569">18 fewer points</text>
+
+  <line x1="802" y1="284" x2="868" y2="284" stroke="#475569" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="806" y="257" font-family="Inter, Arial, sans-serif" font-size="12" fill="#475569">encode</text>
+
+  <rect x="886" y="128" width="268" height="310" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="912" y="166" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" fill="#111827">3. Encoded polyline</text>
+  <text x="912" y="192" font-family="Inter, Arial, sans-serif" font-size="13" fill="#475569">A compact string for maps and APIs.</text>
+  <rect x="912" y="226" width="216" height="98" rx="6" fill="#111827"/>
+  <text x="932" y="260" font-family="JetBrains Mono, monospace" font-size="13" fill="#d1fae5">kavtGh_w_MvIiBhBYxAAjFd@ZEP...</text>
+  <text x="932" y="288" font-family="JetBrains Mono, monospace" font-size="13" fill="#d1fae5">...encoded lat/lon deltas...</text>
+  <text x="912" y="408" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="700" fill="#111827">242 chars</text>
+
+  <rect x="46" y="486" width="1108" height="86" rx="8" fill="#ecfeff" stroke="#67e8f9"/>
+  <text x="72" y="520" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700" fill="#164e63">What the tolerance means</text>
+  <text x="72" y="548" font-family="Inter, Arial, sans-serif" font-size="14" fill="#155e75">Max removed-point error: 0.95 m. Path length change: -0.39 m on a 4,365.04 m lap. The line gets smaller without cutting chicanes.</text>
+</svg>

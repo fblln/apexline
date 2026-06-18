@@ -1,0 +1,13 @@
+.DS_Store
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+build/
+dist/
+*.egg-info/
+.mypy_cache/
+data/fastf1-cache/
+.matplotlib-cache/
+/tmp/

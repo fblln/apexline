@@ -1,0 +1,67 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "apexline"
+version = "0.1.0"
+description = "Validate F1 circuit reference geometry against FastF1 lap position traces."
+readme = "README.md"
+requires-python = ">=3.12"
+license = {text = "MIT"}
+authors = [
+  {name = "Fabio"},
+]
+keywords = ["fastf1", "formula-1", "telemetry", "geometry", "polyline"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering :: GIS",
+]
+dependencies = [
+  "fastf1>=3.5,<4",
+  "pandas>=2.2,<3",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8,<9",
+  "ruff>=0.8,<1",
+]
+
+[project.urls]
+Homepage = "https://github.com/fblln/apexline"
+Repository = "https://github.com/fblln/apexline"
+Issues = "https://github.com/fblln/apexline/issues"
+
+[project.scripts]
+apexline = "apexline.cli:main"
+apexline-summarize = "apexline.summarize:main"
+apexline-canada-examples = "apexline.plot_canada_examples:main"
+apexline-rejected-galleries = "apexline.plot_rejected_lap_galleries:main"
+apexline-render-evidence = "apexline.render_evidence:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"scripts/*.py" = ["E402"]
+"tests/test_integration_fastf1.py" = ["E402"]
+"tests/test_schemas.py" = ["E402"]
+"src/apexline/analyze_f1_circuit_gps.py" = ["F401"]
