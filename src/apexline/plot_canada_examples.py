@@ -14,6 +14,7 @@ from typing import Any
 from xml.sax.saxutils import escape
 
 from . import analyze_f1_circuit_gps as analyzer
+from .geometry import normalize_repeated_lap_segment
 
 
 PROJECT_DIR = Path.cwd()
@@ -158,16 +159,16 @@ def draw_lap_examples(
             "lap": 63,
             "reason": "compliant",
             "color": "#059669",
-            "show_fit": True,
+            "repair_text": None,
         },
         {
-            "title": "Path-length outlier",
-            "subtitle": "VER lap 2, projected with clean-lap transform",
+            "title": "Boundary seam repaired",
+            "subtitle": "VER lap 2, normalized to one clean loop before fit",
             "driver": "VER",
             "lap": 2,
-            "reason": "path_length_outlier",
-            "color": "#dc2626",
-            "show_fit": False,
+            "reason": "compliant after seam repair",
+            "color": "#2563eb",
+            "repair_text": "raw trace looked too long, but one-lap normalization recovered a valid loop",
         },
         {
             "title": "Pit/inaccurate lap",
@@ -176,7 +177,7 @@ def draw_lap_examples(
             "lap": 13,
             "reason": "pit_lap + fastf1_inaccurate",
             "color": "#f97316",
-            "show_fit": False,
+            "repair_text": None,
         },
     ]
     anchor_lap = find_lap(session, "RUS", 63)
@@ -194,24 +195,42 @@ def draw_lap_examples(
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
         '<rect width="100%" height="100%" fill="#f8fafc"/>',
         text_svg(28, 42, "Canada 2025: real FastF1 position traces against f1-circuits GPS", size=24, weight=700),
-        text_svg(28, 68, "Gray is the repository GPS outline. Color is FastF1 projected with one transform learned from clean RUS lap 63.", size=14, fill="#475569"),
+        text_svg(28, 68, "Gray is the oracle circuit line. Color is FastF1 projected with one transform learned from clean RUS lap 63.", size=14, fill="#475569"),
     ]
 
     for index, example in enumerate(examples):
         panel_x = left + index * (panel_w + gap)
         lap = find_lap(session, example["driver"], example["lap"])
         points = analyzer.lap_position_points(lap)
-        transformed = apply_transform(points, anchor_scale_rotate, anchor_translation)
-        path_length_m = analyzer.path_length(analyzer.closed_path(points)) * 0.1
-        length_error_m = path_length_m - reference_length
+        raw_path_length_m = analyzer.path_length(analyzer.closed_path(points)) * 0.1
+        display_points = points
+        display_path_length_m = raw_path_length_m
+        fit = None
+        if example["repair_text"] is not None:
+            normalized = normalize_repeated_lap_segment(
+                points,
+                target_length_m=reference_length,
+                length_tolerance_pct=0.05,
+                min_points=100,
+            )
+            if normalized is not None:
+                display_points, normalization = normalized
+                display_path_length_m = normalization.normalized_path_length_m
+                fit = analyzer.validate_shape(display_points, gps_xy, sample_count=240, offset_step=8)
+                example["repair_text"] = (
+                    f"raw {raw_path_length_m:.1f} m -> normalized {display_path_length_m:.1f} m, "
+                    f"RMSE {fit.rmse_m:.1f} m"
+                )
+        elif example["reason"] == "compliant":
+            fit = anchor_fit
+        transformed = apply_transform(display_points, anchor_scale_rotate, anchor_translation)
+        length_error_m = display_path_length_m - reference_length
         length_error_pct = length_error_m / reference_length * 100
         lap_time_ms = analyzer.value_to_ms(lap.get("LapTime"))
         box = merged_bbox([gps_xy, transformed])
-        fit_text = (
-            f"fit: RMSE {anchor_fit.rmse_m:.1f} m, p95 {anchor_fit.p95_m:.1f} m"
-            if example["show_fit"]
-            else "shape fit: skipped after pre-fit rejection"
-        )
+        fit_text = "shape fit: skipped after pre-fit rejection"
+        if fit is not None:
+            fit_text = f"fit: RMSE {fit.rmse_m:.1f} m, p95 {fit.p95_m:.1f} m"
 
         parts.extend(
             [
@@ -230,11 +249,13 @@ def draw_lap_examples(
                 f'<circle cx="{start[0]:.1f}" cy="{start[1]:.1f}" r="4.5" fill="#111827"/>',
                 f'<circle cx="{end[0]:.1f}" cy="{end[1]:.1f}" r="4.5" fill="#64748b"/>',
                 text_svg(panel_x + 20, panel_y + 392, f"time: {format_ms(lap_time_ms)}", size=13),
-                text_svg(panel_x + 20, panel_y + 416, f"length: {path_length_m:.1f} m ({length_error_pct:+.1f}%)", size=13),
+                text_svg(panel_x + 20, panel_y + 416, f"length: {display_path_length_m:.1f} m ({length_error_pct:+.1f}%)", size=13),
                 text_svg(panel_x + 20, panel_y + 440, fit_text, size=13),
                 text_svg(panel_x + 20, panel_y + 464, f"reason: {example['reason']}", size=13, fill=example["color"]),
             ]
         )
+        if example["repair_text"] is not None:
+            parts.append(text_svg(panel_x + 20, panel_y + 488, example["repair_text"], size=12, fill="#475569"))
 
     parts.extend(
         [
@@ -291,9 +312,9 @@ def draw_offset_refinement(
         parts.append(f'<line x1="{chart_x}" y1="{y:.1f}" x2="{chart_x + chart_w}" y2="{y:.1f}" stroke="#e2e8f0"/>')
         parts.append(text_svg(chart_x - 44, y + 4, str(tick), size=11, fill="#64748b"))
 
-    threshold_y = baseline - (25 / max_rmse) * chart_h
+    threshold_y = baseline - (32 / max_rmse) * chart_h
     parts.append(f'<line x1="{chart_x}" y1="{threshold_y:.1f}" x2="{chart_x + chart_w}" y2="{threshold_y:.1f}" stroke="#f97316" stroke-width="2" stroke-dasharray="6 5"/>')
-    parts.append(text_svg(chart_x + chart_w - 118, threshold_y - 8, "25 m threshold", size=12, fill="#c2410c"))
+    parts.append(text_svg(chart_x + chart_w - 118, threshold_y - 8, "32 m threshold", size=12, fill="#c2410c"))
 
     for index, (offset, rmse) in enumerate(zip(offsets, rmses)):
         x = chart_x + index * (bar_w + bar_gap)

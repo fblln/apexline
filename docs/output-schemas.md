@@ -38,6 +38,9 @@ Metrics are reported in meters unless otherwise noted:
 | `path_length_m` | meters |
 | `length_error_m` | meters |
 | `length_error_pct` | fraction of reference path length |
+| `normalized_path_length_m` | meters after overlap trimming, or null |
+| `normalized_length_error_m` | meters after overlap trimming, or null |
+| `normalized_length_error_pct` | fraction after overlap trimming, or null |
 | `scale_m_per_fastf1_unit` | meters per FastF1 local XY unit |
 
 Default thresholds in the CLI:
@@ -45,8 +48,8 @@ Default thresholds in the CLI:
 | Threshold | Default |
 |---|---:|
 | `length_tolerance_pct` | `0.05` |
-| `rmse_threshold_m` | `25.0` |
-| `p95_threshold_m` | `50.0` |
+| `rmse_threshold_m` | `32.0` |
+| `p95_threshold_m` | `75.0` |
 | `min_position_samples` | `100` |
 
 Known rejection reasons:
@@ -115,8 +118,10 @@ Required top-level fields:
 - `worst_shape_laps`
 - `worst_fitted_laps`
 
-Embedded lap records include the stable lap identifiers plus fit metrics when a
-lap passed the pre-fit checks.
+Embedded lap records include the stable lap identifiers, raw path length, any
+overlap-normalized path length, and fit metrics when a lap passed the pre-fit
+checks. `normalization` records how much prefix/suffix distance was trimmed from
+an over-long lap before shape matching.
 
 ### `rejected_lap_gallery`
 
@@ -128,7 +133,12 @@ Required top-level fields:
 - `artifact_kind`
 - `year`
 - `event_name`
+- `round`
+- `session_type`
+- `circuit_id`
 - `circuit_name`
+- `thresholds`
+- `generation_provenance`
 - `reference_length_m`
 - `anchor`
 - `max_render_points`

@@ -67,7 +67,7 @@ def build_markdown(rows: list[dict[str, Any]], year: int) -> str:
     lines = [
         f"# {year} lap compliance summary",
         "",
-        "Good laps are laps that pass Apexline's geometry-reference checks.",
+        "Good laps are laps that pass Apexline's oracle-shape evidence checks.",
         "Bad laps are laps rejected for at least one reason such as FastF1",
         "`IsAccurate == False`, pit in/out, missing time, too few position",
         "samples, path-length outlier, or shape residual over threshold.",

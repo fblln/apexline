@@ -2,31 +2,42 @@
   "schema_version": "1.0.0",
   "artifact_kind": "rejected_lap_gallery",
   "year": 2025,
+  "session_type": "R",
   "event_name": "Belgian Grand Prix",
   "round": 13,
-  "session_type": "R",
   "circuit_id": "be-1925",
   "circuit_name": "Circuit de Spa-Francorchamps",
   "thresholds": {
     "lap_length_tolerance_pct": 0.05,
-    "shape_rmse_threshold_m": 25.0,
-    "shape_p95_threshold_m": 50.0,
+    "shape_rmse_threshold_m": 32.0,
+    "shape_p95_threshold_m": 75.0,
     "min_position_samples": 100,
     "validation_samples": 240,
     "validation_offset_step": 8
   },
   "generation_provenance": {
-    "generated_at": "2026-06-18T06:15:52Z",
+    "generated_at": "2026-06-19T04:49:48Z",
     "generator": "apexline",
     "schema_version": "1.0.0",
     "command": "apexline-rejected-galleries",
     "args": {
       "year": 2025,
       "session": "R",
-      "max_render_points": 0,
+      "circuits": [
+        "Canada",
+        "Belgian",
+        "Australia",
+        "British"
+      ],
+      "fastf1_cache_dir": "/private/tmp/apexline-fastf1-cache",
+      "circuits_repo": "/private/tmp/f1-circuits",
+      "circuits_repo_url": "https://github.com/bacinger/f1-circuits.git",
+      "output_dir": "docs/assets/rejected-laps-2025",
+      "index_output": "docs/rejected-lap-galleries-2025.md",
+      "max_render_points": 900,
       "lap_length_tolerance_pct": 0.05,
-      "shape_rmse_threshold_m": 25.0,
-      "shape_p95_threshold_m": 50.0,
+      "shape_rmse_threshold_m": 32.0,
+      "shape_p95_threshold_m": 75.0,
       "min_position_samples": 100,
       "validation_samples": 240,
       "validation_offset_step": 8
@@ -34,7 +45,7 @@
   },
   "reference_length_m": 6978.355531367031,
   "anchor": "PIA lap 43, RMSE 5.2 m",
-  "max_render_points": 0,
+  "max_render_points": 900,
   "rendering_note": "max_render_points <= 0 means raw points are rendered without thinning",
   "rejected_laps": [
     {
@@ -2395,8 +2406,7 @@
       "lap_number": 28,
       "lap_time_ms": 108056,
       "reasons": [
-        "shape_rmse_over_threshold",
-        "shape_p95_over_threshold"
+        "shape_rmse_over_threshold"
       ],
       "path_length_m": 6948.281959349369,
       "length_error_pct": -0.00430954999103798,
@@ -3448,8 +3458,7 @@
       "lap_number": 6,
       "lap_time_ms": 123162,
       "reasons": [
-        "shape_rmse_over_threshold",
-        "shape_p95_over_threshold"
+        "shape_rmse_over_threshold"
       ],
       "path_length_m": 7109.30727175156,
       "length_error_pct": 0.018765415404232853,

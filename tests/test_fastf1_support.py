@@ -83,6 +83,30 @@ class FastF1SupportTests(unittest.TestCase):
         )
         self.assertIn("path_length_outlier", diagnostic.reasons)
 
+    def test_classify_lap_normalizes_repeated_overlap_before_shape_fit(self) -> None:
+        points = [(0.0, 0.0), (100.0, 0.0), (100.0, 100.0), (0.0, 100.0), (0.0, 0.0), (100.0, 0.0)]
+        diagnostic = classify_lap(
+            driver="RUS",
+            lap_number=2,
+            lap_time_ms=74_000,
+            is_accurate=True,
+            is_pit_lap=False,
+            points=points,
+            reference_xy=self.reference_xy,
+            validation_samples=120,
+            validation_offset_step=4,
+            length_tolerance_pct=0.05,
+            rmse_threshold_m=25.0,
+            p95_threshold_m=50.0,
+            min_position_samples=4,
+        )
+        self.assertNotIn("path_length_outlier", diagnostic.reasons)
+        self.assertTrue(diagnostic.compliant)
+        self.assertIsNotNone(diagnostic.fit)
+        self.assertIsNotNone(diagnostic.normalization)
+        self.assertAlmostEqual(diagnostic.path_length_m, 60.0)
+        self.assertAlmostEqual(diagnostic.normalized_path_length_m or 0.0, 40.0)
+
     def test_classify_lap_flags_shape_thresholds(self) -> None:
         rectangle_points = [(0.0, 0.0), (125.0, 0.0), (125.0, 75.0), (0.0, 75.0)]
         diagnostic = classify_lap(

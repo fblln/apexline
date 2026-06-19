@@ -62,6 +62,15 @@ def validate_lap_diagnostic_record(record: Any, *, allow_legacy: bool = False) -
     ]
     if not allow_legacy:
         required.extend(["year", "round", "event_name", "session_type", "lap_key"])
+        required.extend(
+            [
+                "normalized_position_samples",
+                "normalized_path_length_m",
+                "normalized_length_error_m",
+                "normalized_length_error_pct",
+                "normalization",
+            ]
+        )
     _require_keys(value, "lap_diagnostic_record", required)
     reasons = _require_list(value["reasons"], "lap_diagnostic_record.reasons")
     for reason in reasons:

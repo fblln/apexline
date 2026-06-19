@@ -12,6 +12,7 @@ from xml.sax.saxutils import escape
 
 from . import analyze_f1_circuit_gps as analyzer
 from .artifacts import default_run_dir, normalize_session, provenance, slugify
+from .geometry import normalize_repeated_lap_segment
 from .plot_canada_examples import apply_transform, lap_transform
 from .schemas import SCHEMA_VERSION
 
@@ -207,8 +208,22 @@ def classify_laps(
                 reasons.append("too_few_position_samples")
 
             path_length_m = analyzer.path_length(analyzer.closed_path(points)) * 0.1
+            effective_points = points
+            effective_path_length_m = path_length_m
             length_error_pct = (path_length_m - reference_length_m) / reference_length_m
-            if abs(length_error_pct) > length_tolerance_pct:
+            effective_length_error_pct = length_error_pct
+            if length_error_pct > length_tolerance_pct:
+                normalized = normalize_repeated_lap_segment(
+                    points,
+                    target_length_m=reference_length_m,
+                    length_tolerance_pct=length_tolerance_pct,
+                    min_points=min_position_samples,
+                )
+                if normalized is not None:
+                    effective_points, normalization = normalized
+                    effective_path_length_m = normalization.normalized_path_length_m
+                    effective_length_error_pct = (effective_path_length_m - reference_length_m) / reference_length_m
+            if abs(effective_length_error_pct) > length_tolerance_pct:
                 reasons.append("path_length_outlier")
 
             fit: analyzer.FitStats | None = None
@@ -216,10 +231,10 @@ def classify_laps(
                 is_accurate
                 and not is_pit_lap
                 and len(points) >= min_position_samples
-                and abs(length_error_pct) <= length_tolerance_pct
+                and abs(effective_length_error_pct) <= length_tolerance_pct
             ):
                 fit = analyzer.validate_shape(
-                    fastf1_xy=points,
+                    fastf1_xy=effective_points,
                     gps_xy=gps_xy,
                     sample_count=validation_samples,
                     offset_step=validation_offset_step,
@@ -236,9 +251,9 @@ def classify_laps(
                         lap_number=lap_number,
                         lap_time_ms=lap_time_ms,
                         reasons=reasons,
-                        points=points,
-                        path_length_m=path_length_m,
-                        length_error_pct=length_error_pct,
+                        points=effective_points,
+                        path_length_m=effective_path_length_m,
+                        length_error_pct=effective_length_error_pct,
                         fit=fit,
                     )
                 )
@@ -492,8 +507,8 @@ def main() -> None:
     parser.add_argument("--output-dir", type=Path, default=None)
     parser.add_argument("--index-output", type=Path, default=None)
     parser.add_argument("--lap-length-tolerance-pct", type=float, default=0.05)
-    parser.add_argument("--shape-rmse-threshold-m", type=float, default=25.0)
-    parser.add_argument("--shape-p95-threshold-m", type=float, default=50.0)
+    parser.add_argument("--shape-rmse-threshold-m", type=float, default=32.0)
+    parser.add_argument("--shape-p95-threshold-m", type=float, default=75.0)
     parser.add_argument("--min-position-samples", type=int, default=100)
     parser.add_argument("--validation-samples", type=int, default=240)
     parser.add_argument("--validation-offset-step", type=int, default=8)

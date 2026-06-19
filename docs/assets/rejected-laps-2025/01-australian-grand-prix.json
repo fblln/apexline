@@ -2,31 +2,42 @@
   "schema_version": "1.0.0",
   "artifact_kind": "rejected_lap_gallery",
   "year": 2025,
+  "session_type": "R",
   "event_name": "Australian Grand Prix",
   "round": 1,
-  "session_type": "R",
   "circuit_id": "au-1953",
   "circuit_name": "Albert Park Circuit",
   "thresholds": {
     "lap_length_tolerance_pct": 0.05,
-    "shape_rmse_threshold_m": 25.0,
-    "shape_p95_threshold_m": 50.0,
+    "shape_rmse_threshold_m": 32.0,
+    "shape_p95_threshold_m": 75.0,
     "min_position_samples": 100,
     "validation_samples": 240,
     "validation_offset_step": 8
   },
   "generation_provenance": {
-    "generated_at": "2026-06-18T06:15:52Z",
+    "generated_at": "2026-06-19T04:50:32Z",
     "generator": "apexline",
     "schema_version": "1.0.0",
     "command": "apexline-rejected-galleries",
     "args": {
       "year": 2025,
       "session": "R",
-      "max_render_points": 0,
+      "circuits": [
+        "Canada",
+        "Belgian",
+        "Australia",
+        "British"
+      ],
+      "fastf1_cache_dir": "/private/tmp/apexline-fastf1-cache",
+      "circuits_repo": "/private/tmp/f1-circuits",
+      "circuits_repo_url": "https://github.com/bacinger/f1-circuits.git",
+      "output_dir": "docs/assets/rejected-laps-2025",
+      "index_output": "docs/rejected-lap-galleries-2025.md",
+      "max_render_points": 900,
       "lap_length_tolerance_pct": 0.05,
-      "shape_rmse_threshold_m": 25.0,
-      "shape_p95_threshold_m": 50.0,
+      "shape_rmse_threshold_m": 32.0,
+      "shape_p95_threshold_m": 75.0,
       "min_position_samples": 100,
       "validation_samples": 240,
       "validation_offset_step": 8
@@ -34,7 +45,7 @@
   },
   "reference_length_m": 5273.311085559068,
   "anchor": "RUS lap 42, RMSE 6.7 m",
-  "max_render_points": 0,
+  "max_render_points": 900,
   "rendering_note": "max_render_points <= 0 means raw points are rendered without thinning",
   "rejected_laps": [
     {

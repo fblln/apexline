@@ -1,6 +1,7 @@
 # Single-Session Example
 
-This is the fastest user-facing path through Apexline.
+This is the fastest path for validating FastF1 laps against an oracle circuit
+GPS LineString with Apexline.
 
 ## Install
 
@@ -26,6 +27,9 @@ data/2025/canadian-grand-prix/r/circuit-analysis.csv
 data/2025/canadian-grand-prix/r/lap-diagnostics.json
 data/2025/canadian-grand-prix/r/artifact-manifest.json
 ```
+
+`lap-diagnostics.json` records raw lap length, overlap-normalized length when
+cleanup was possible, and the final shape fit against the oracle circuit line.
 
 ## Check And Summarize
 

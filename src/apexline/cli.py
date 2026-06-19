@@ -67,8 +67,8 @@ def common_run_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--lap-diagnostics-samples", type=int, default=240)
     parser.add_argument("--lap-diagnostics-offset-step", type=int, default=8)
     parser.add_argument("--lap-length-tolerance-pct", type=float, default=0.05)
-    parser.add_argument("--shape-rmse-threshold-m", type=float, default=25.0)
-    parser.add_argument("--shape-p95-threshold-m", type=float, default=50.0)
+    parser.add_argument("--shape-rmse-threshold-m", type=float, default=32.0)
+    parser.add_argument("--shape-p95-threshold-m", type=float, default=75.0)
     parser.add_argument("--min-position-samples", type=int, default=100)
     parser.add_argument("--dry-run", action="store_true")
 
@@ -259,7 +259,7 @@ def analyze_event(
     provenance_payload: dict[str, Any],
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     event_name = str(event["EventName"])
-    circuit_id = args.circuit_id or str(circuit["id"])
+    circuit_id = getattr(args, "circuit_id", None) or str(circuit["id"])
     circuit_points, properties = load_circuit_latlon(args.circuits_repo, circuit_id)
     origin = projection_origin(circuit_points)
     gps_xy = [latlon_to_xy(point, origin) for point in circuit_points]
@@ -385,6 +385,8 @@ def analyze_event(
         "fastf1_lap_key": lap_key(args.year, round_index, event_name, session_type, fastf1_lap.driver, fastf1_lap.lap_number),
         "fastf1_points": len(fastf1_lap.points),
         "fastf1_path_length_m": fastf1_lap.path_length_m,
+        "fastf1_raw_path_length_m": fastf1_lap.raw_path_length_m,
+        "fastf1_normalization": asdict(fastf1_lap.normalization) if fastf1_lap.normalization is not None else None,
         "repo_vs_fastf1": asdict(fit),
         "averaged_fastf1_laps": [
             {
@@ -392,6 +394,8 @@ def analyze_event(
                 "lap": item.lap.lap_number,
                 "lap_key": lap_key(args.year, round_index, event_name, session_type, item.lap.driver, item.lap.lap_number),
                 "path_length_m": item.lap.path_length_m,
+                "raw_path_length_m": item.lap.raw_path_length_m,
+                "normalization": asdict(item.lap.normalization) if item.lap.normalization is not None else None,
                 "length_error_m": item.length_error_m,
                 "rmse_m": item.fit.rmse_m,
                 "p95_m": item.fit.p95_m,
@@ -547,6 +551,11 @@ def run_fixture_demo(args: argparse.Namespace) -> None:
         "path_length_m": 40.0,
         "length_error_m": 0.0,
         "length_error_pct": 0.0,
+        "normalized_position_samples": None,
+        "normalized_path_length_m": None,
+        "normalized_length_error_m": None,
+        "normalized_length_error_pct": None,
+        "normalization": None,
         "fit": {
             "direction": "forward",
             "start_offset_samples": 0,
@@ -583,7 +592,7 @@ def run_fixture_demo(args: argparse.Namespace) -> None:
             "non_compliant_laps": 0,
             "shape_non_compliant_laps": 0,
             "reason_counts": {"compliant": 1},
-            "thresholds": {"length_tolerance_pct": 0.05, "rmse_threshold_m": 25.0, "p95_threshold_m": 50.0},
+            "thresholds": {"length_tolerance_pct": 0.05, "rmse_threshold_m": 32.0, "p95_threshold_m": 75.0},
             "fastest_lap_with_position": lap_record,
             "fastest_compliant_lap": lap_record,
             "worst_shape_laps": [],
@@ -612,8 +621,10 @@ def run_fixture_demo(args: argparse.Namespace) -> None:
             "fastf1_lap_key": "2099-01-fixture-grand-prix-r-tst-lap-1",
             "fastf1_points": 4,
             "fastf1_path_length_m": 40.0,
+            "fastf1_raw_path_length_m": 40.0,
+            "fastf1_normalization": None,
             "repo_vs_fastf1": lap_record["fit"],
-            "averaged_fastf1_laps": [{"driver": "TST", "lap": 1, "lap_key": lap_record["lap_key"], "path_length_m": 40.0, "length_error_m": 0.0, "rmse_m": 0.0, "p95_m": 0.0}],
+            "averaged_fastf1_laps": [{"driver": "TST", "lap": 1, "lap_key": lap_record["lap_key"], "path_length_m": 40.0, "raw_path_length_m": 40.0, "normalization": None, "length_error_m": 0.0, "rmse_m": 0.0, "p95_m": 0.0}],
             "repo_vs_fastf1_average": {"sample_count": 4, "rmse_m": 0.0, "p50_m": 0.0, "p95_m": 0.0, "max_m": 0.0},
             "lap_compliance_summary": {key: lap_rows[0][key] for key in ("total_laps", "fitted_laps", "compliant_laps", "non_compliant_laps", "shape_non_compliant_laps", "reason_counts", "thresholds", "fastest_lap_with_position", "fastest_compliant_lap")},
             "averaged_fastf1_polyline_vs_source": {"source_points": 4, "simplified_points": 4, "encoded_chars": 12, "tolerance_m": 1.0, "rmse_m": 0.0, "p95_m": 0.0, "max_m": 0.0, "source_length_m": 40.0, "simplified_length_m": 40.0, "length_delta_m": 0.0, "length_delta_pct": 0.0},

@@ -36,12 +36,26 @@ class SimplificationStats:
 
 
 @dataclass(frozen=True)
+class LapNormalization:
+    original_points: int
+    normalized_points: int
+    original_path_length_m: float
+    normalized_path_length_m: float
+    target_length_m: float
+    trimmed_prefix_m: float
+    trimmed_suffix_m: float
+    endpoint_gap_m: float
+
+
+@dataclass(frozen=True)
 class FastF1Lap:
     driver: str
     lap_number: int
     points: list[XY]
     path_length_m: float
     lap_time_ms: int | None = None
+    raw_path_length_m: float | None = None
+    normalization: LapNormalization | None = None
 
 
 @dataclass(frozen=True)
@@ -77,6 +91,11 @@ class LapDiagnostic:
     path_length_m: float | None
     length_error_m: float | None
     length_error_pct: float | None
+    normalized_position_samples: int | None
+    normalized_path_length_m: float | None
+    normalized_length_error_m: float | None
+    normalized_length_error_pct: float | None
+    normalization: LapNormalization | None
     fit: FitStats | None
     compliant: bool
     reasons: list[str]

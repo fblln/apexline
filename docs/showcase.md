@@ -1,8 +1,8 @@
 # Apexline Showcase
 
-Apexline validates a reference circuit line against real FastF1 position traces
-for a requested year, event, and session. Canada 2025 is the checked-in proof
-point, but the workflow is not tied to that season.
+Apexline validates whether FastF1 lap position traces match an oracle circuit
+GPS LineString for a requested year, event, and session. Canada 2025 is the
+checked-in proof point, but the workflow is not tied to that season.
 
 ## Example 1: Single Race Session
 
@@ -21,9 +21,13 @@ This writes:
 The checked-in Canada result demonstrates the main capability:
 
 - 1,349 laps inspected.
-- 1,157 geometry-usable laps.
-- 192 rejected laps with explicit reasons.
+- 1,197 geometry-usable laps.
+- 152 rejected laps with explicit reasons.
 - 84-point compact polyline with less than 1 m simplification error.
+
+The key Canada story is no longer “a lap looked too long, so it was rejected.”
+It is “a lap looked too long, Apexline repaired the lap-boundary seam, and the
+normalized one-lap trace passed the oracle fit.”
 
 ![Canada 2025 lap diagnostic overlays](assets/canada-2025-lap-diagnostic-overlays.svg)
 
@@ -56,6 +60,16 @@ Batch mode is useful for season-level summaries and galleries. It is not
 required for normal use; single-session validation is the primary workflow.
 
 ![2025 lap compliance](assets/lap-compliance-2025.svg)
+
+Current 2025 season totals:
+
+- 26,689 laps inspected.
+- 21,119 good laps (79.1%).
+- 5,570 bad laps (20.9%).
+- 1,923 shape-threshold rejects.
+
+For the deeper analysis, use
+[../notebooks/2025-season-insights.ipynb](../notebooks/2025-season-insights.ipynb).
 
 ## No-Download Demo
 

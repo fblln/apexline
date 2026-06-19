@@ -11,7 +11,8 @@ But small geometry errors matter:
 - a line can be in the wrong direction or have a strange start point,
 - a map overlay can look right zoomed out but wrong at turn-level zoom.
 
-Apexline exists to make those problems measurable.
+Apexline exists to make those problems measurable by asking whether FastF1 lap
+traces match the oracle circuit GPS LineString closely enough to trust it.
 
 ## The Key Constraint
 
@@ -30,7 +31,7 @@ means Apexline cannot say:
 
 It can say:
 
-> This repository GPS outline has the same shape as the FastF1 lap trace, after
+> This FastF1 lap trace has the same shape as the oracle circuit line, after
 > accounting for scale, rotation, translation, start offset, and direction.
 
 That is still very useful.
@@ -39,16 +40,29 @@ That is still very useful.
 
 For each circuit:
 
-1. Load the GPS LineString from `bacinger/f1-circuits`.
+1. Load the oracle GPS LineString from `bacinger/f1-circuits`.
 2. Project it into local meter-space.
-3. Load candidate FastF1 race laps.
-4. Filter candidate laps by path length.
-5. Resample GPS and FastF1 shapes by equal lap progress.
-6. Search for the best start offset and direction.
-7. Fit FastF1 to GPS with scale, rotation, and translation.
-8. Report RMSE, median, p95, and max pointwise shape error.
-9. Simplify the GPS line with a conservative meter tolerance.
-10. Encode the simplified line as a Google encoded polyline.
+3. Load candidate FastF1 laps for the requested session.
+4. Normalize over-long laps when a repeated overlap segment can be trimmed.
+5. Reject laps that still do not represent one clean oracle-length loop.
+6. Resample oracle and FastF1 shapes by equal lap progress.
+7. Search for the best start offset and direction.
+8. Fit FastF1 to the oracle with scale, rotation, and translation.
+9. Report RMSE, median, p95, and max pointwise shape error.
+10. Simplify the oracle line with a conservative meter tolerance.
+11. Encode the simplified line as a Google encoded polyline.
+
+## Why Normalize Lap Overlap First?
+
+Some FastF1 lap slices are too long because a segment near the timing line is
+included twice. Rejecting those immediately loses useful evidence, but fitting
+the raw over-long trace would compare the oracle against more than one lap.
+
+Apexline handles that middle case by searching for a contiguous one-lap window
+whose length matches the oracle and whose start/end point closes cleanly. If it
+finds one, the normalized trace is matched against the oracle and the artifact
+keeps both raw and normalized length metadata. If it cannot recover a clean
+one-lap trace, the lap remains a `path_length_outlier`.
 
 ## Why Similarity Fitting?
 
@@ -160,9 +174,8 @@ The script keeps enough intermediate data to inspect:
 
 For production map overlays:
 
-1. Use the repository GPS polyline as the rendered track.
-2. Validate it against FastF1 with best-lap RMSE/p95.
+1. Treat the repository GPS LineString as the oracle rendered track.
+2. Validate FastF1 laps against that oracle with best-lap RMSE/p95.
 3. Keep 1 m simplification unless you have a visual QA step.
 4. Treat averaged FastF1 as a diagnostic layer, not the default track shape.
 5. Flag circuits above 15-20 m RMSE for manual review.
-

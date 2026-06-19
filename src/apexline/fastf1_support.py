@@ -4,7 +4,7 @@ from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 
-from .geometry import closed_path, path_length, validate_shape
+from .geometry import closed_path, normalize_repeated_lap_segment, path_length, validate_shape
 from .models import FastF1Candidate, FastF1Lap, FitStats, LapDiagnostic, ScoredFastF1Lap, XY
 from .sources import value_to_ms
 
@@ -84,16 +84,31 @@ def score_fastf1_laps(
             if len(points) < 100:
                 continue
 
-            path_length_m = path_length(closed_path(points)) * 0.1
+            raw_path_length_m = path_length(closed_path(points)) * 0.1
+            candidate_points = points
+            path_length_m = raw_path_length_m
+            normalization = None
+            if reference_length_m and (raw_path_length_m - reference_length_m) / reference_length_m > 0.15:
+                normalized = normalize_repeated_lap_segment(
+                    points,
+                    target_length_m=reference_length_m,
+                    length_tolerance_pct=0.15,
+                    min_points=100,
+                )
+                if normalized is not None:
+                    candidate_points, normalization = normalized
+                    path_length_m = normalization.normalized_path_length_m
             if reference_length_m and abs(path_length_m - reference_length_m) / reference_length_m > 0.15:
                 continue
 
             candidate = FastF1Lap(
                 driver=driver,
                 lap_number=int(lap.get("LapNumber")),
-                points=points,
+                points=candidate_points,
                 path_length_m=path_length_m,
                 lap_time_ms=value_to_ms(lap.get("LapTime")),
+                raw_path_length_m=raw_path_length_m,
+                normalization=normalization,
             )
             candidates.append(
                 FastF1Candidate(
@@ -195,6 +210,11 @@ def classify_lap(
             path_length_m=None,
             length_error_m=None,
             length_error_pct=None,
+            normalized_position_samples=None,
+            normalized_path_length_m=None,
+            normalized_length_error_m=None,
+            normalized_length_error_pct=None,
+            normalization=None,
             fit=None,
             compliant=False,
             reasons=reasons,
@@ -206,21 +226,42 @@ def classify_lap(
         reasons.append("too_few_position_samples")
 
     path_length_m = path_length(closed_path(points)) * 0.1
+    candidate_points = points
+    candidate_path_length_m = path_length_m
+    normalization = None
+    if reference_length_m and (path_length_m - reference_length_m) / reference_length_m > length_tolerance_pct:
+        normalized = normalize_repeated_lap_segment(
+            points,
+            target_length_m=reference_length_m,
+            length_tolerance_pct=length_tolerance_pct,
+            min_points=min_position_samples,
+        )
+        if normalized is not None:
+            candidate_points, normalization = normalized
+            candidate_path_length_m = normalization.normalized_path_length_m
+
     length_error_m = path_length_m - reference_length_m
     length_error_pct = length_error_m / reference_length_m if reference_length_m else None
+    normalized_length_error_m = None
+    normalized_length_error_pct = None
+    if normalization is not None:
+        normalized_length_error_m = candidate_path_length_m - reference_length_m
+        normalized_length_error_pct = normalized_length_error_m / reference_length_m if reference_length_m else None
+    effective_length_error_pct = normalized_length_error_pct if normalization is not None else length_error_pct
     if length_error_pct is not None and abs(length_error_pct) > length_tolerance_pct:
-        reasons.append("path_length_outlier")
+        if effective_length_error_pct is None or abs(effective_length_error_pct) > length_tolerance_pct:
+            reasons.append("path_length_outlier")
 
     fit: FitStats | None = None
     if (
         is_accurate
         and not is_pit_lap
         and position_samples >= min_position_samples
-        and length_error_pct is not None
-        and abs(length_error_pct) <= length_tolerance_pct
+        and effective_length_error_pct is not None
+        and abs(effective_length_error_pct) <= length_tolerance_pct
     ):
         fit = validate_shape(
-            fastf1_xy=points,
+            fastf1_xy=candidate_points,
             gps_xy=reference_xy,
             sample_count=validation_samples,
             offset_step=validation_offset_step,
@@ -240,6 +281,11 @@ def classify_lap(
         path_length_m=path_length_m,
         length_error_m=length_error_m,
         length_error_pct=length_error_pct,
+        normalized_position_samples=len(candidate_points) if normalization is not None else None,
+        normalized_path_length_m=candidate_path_length_m if normalization is not None else None,
+        normalized_length_error_m=normalized_length_error_m,
+        normalized_length_error_pct=normalized_length_error_pct,
+        normalization=normalization,
         fit=fit,
         compliant=not reasons,
         reasons=reasons,

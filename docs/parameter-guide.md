@@ -2,8 +2,8 @@
 
 Apexline has two jobs:
 
-1. Validate a GPS circuit shape against FastF1 local telemetry shape.
-2. Encode the GPS shape compactly without losing important geometry.
+1. Validate FastF1 local telemetry laps against an oracle circuit shape.
+2. Encode the oracle circuit shape compactly without losing important geometry.
 
 The defaults are intentionally conservative.
 
@@ -22,7 +22,7 @@ The defaults are intentionally conservative.
 ## Validation Samples
 
 `--validation-samples` controls how many equal-progress points are compared
-between the repository GPS line and FastF1 lap shape.
+between the oracle circuit line and FastF1 lap shape.
 
 Recommended: `720`
 
@@ -41,7 +41,7 @@ than insight.
 
 Recommended: `4`
 
-FastF1 lap samples and repository GPS LineStrings rarely start at exactly the
+FastF1 lap samples and oracle circuit LineStrings rarely start at exactly the
 same physical point. The script searches different phase offsets around the
 closed loop. Step `4` at `720` samples means offsets are tested every 0.56% of a
 lap.
@@ -95,10 +95,11 @@ marked accurate.
 The script now:
 
 1. collects clean non-pit laps,
-2. rejects laps whose FastF1 path length is too far from the GPS circuit length,
-3. ranks remaining laps by path-length closeness,
-4. runs expensive shape fitting on the top candidates,
-5. picks the lowest RMSE fit.
+2. trims repeated lap-boundary overlap when an over-long lap contains one clean loop,
+3. rejects laps whose normalized FastF1 path length is still too far from the oracle length,
+4. ranks remaining laps by path-length closeness,
+5. runs expensive shape fitting on the top candidates,
+6. picks the lowest RMSE fit.
 
 This fixed the Canadian GP false outlier: the first accurate lap looked terrible
 against the repository shape, but a later representative lap matched at about
@@ -113,7 +114,7 @@ Recommended: `5`
 
 Important: averaging is not always better.
 
-FastF1 traces are driven racing lines. The repository GPS shape is usually a
+FastF1 traces are driven racing lines. The oracle circuit shape is usually a
 centerline. Multiple good laps can use different corner entries, exits, and
 curb usage. Averaging those racing lines can move the result away from the
 centerline.
@@ -132,7 +133,7 @@ native GPS channel here.
 They mean:
 
 > After allowing scale, rotation, translation, direction, and start offset, how
-> closely does the FastF1 local track shape match the repository GPS shape?
+> closely does the FastF1 local track shape match the oracle circuit shape?
 
 Useful thresholds:
 
@@ -142,4 +143,3 @@ Useful thresholds:
 | 5-10 m | Good agreement for display and validation. |
 | 10-20 m | Investigate localized differences, especially street circuits. |
 | 20+ m | Likely wrong lap, wrong layout, or source geometry mismatch. |
-

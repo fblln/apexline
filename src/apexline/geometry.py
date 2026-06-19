@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import math
 
-from .models import DirectLineStats, FitStats, LatLon, ScoredFastF1Lap, SimplificationStats, XY
+from .models import DirectLineStats, FitStats, LapNormalization, LatLon, ScoredFastF1Lap, SimplificationStats, XY
 
 
 def projection_origin(points: list[LatLon]) -> LatLon:
@@ -36,6 +36,123 @@ def xy_to_latlon(point: XY, origin: LatLon) -> LatLon:
 
 def path_length(points: list[XY]) -> float:
     return sum(math.hypot(b[0] - a[0], b[1] - a[1]) for a, b in zip(points, points[1:]))
+
+
+def cumulative_lengths(points: list[XY]) -> list[float]:
+    distances = [0.0]
+    total = 0.0
+    for a, b in zip(points, points[1:]):
+        total += math.hypot(b[0] - a[0], b[1] - a[1])
+        distances.append(total)
+    return distances
+
+
+def point_at_distance(points: list[XY], distances: list[float], target: float) -> XY:
+    if target <= 0.0:
+        return points[0]
+    if target >= distances[-1]:
+        return points[-1]
+
+    low = 0
+    high = len(distances) - 1
+    while low < high:
+        mid = (low + high) // 2
+        if distances[mid] < target:
+            low = mid + 1
+        else:
+            high = mid
+
+    right = max(1, low)
+    left = right - 1
+    segment_length = max(distances[right] - distances[left], 1e-9)
+    t = (target - distances[left]) / segment_length
+    ax, ay = points[left]
+    bx, by = points[right]
+    return (ax + t * (bx - ax), ay + t * (by - ay))
+
+
+def slice_polyline_by_distance(points: list[XY], distances: list[float], start: float, end: float) -> list[XY]:
+    if start >= end:
+        return []
+
+    sliced = [point_at_distance(points, distances, start)]
+    for point, distance in zip(points, distances):
+        if start < distance < end:
+            if point != sliced[-1]:
+                sliced.append(point)
+    end_point = point_at_distance(points, distances, end)
+    if end_point != sliced[-1]:
+        sliced.append(end_point)
+    return sliced
+
+
+def normalize_repeated_lap_segment(
+    points: list[XY],
+    *,
+    target_length_m: float,
+    scale_m_per_unit: float = 0.1,
+    length_tolerance_pct: float = 0.05,
+    min_points: int = 4,
+    max_endpoint_gap_m: float | None = None,
+) -> tuple[list[XY], LapNormalization] | None:
+    """Trim a repeated overlap from an over-long FastF1 lap trace.
+
+    FastF1 lap boundaries can occasionally include a short segment twice. This
+    finds a contiguous one-lap window whose length matches the oracle circuit
+    and whose start/end close like a lap, without warping the shape.
+    """
+
+    if len(points) < min_points or target_length_m <= 0.0 or scale_m_per_unit <= 0.0:
+        return None
+
+    distances = cumulative_lengths(points)
+    total_units = distances[-1]
+    total_m = total_units * scale_m_per_unit
+    if total_m < target_length_m:
+        return None
+
+    target_units = target_length_m / scale_m_per_unit
+    endpoint_limit_m = max_endpoint_gap_m if max_endpoint_gap_m is not None else max(25.0, target_length_m * 0.015)
+    best: tuple[float, list[XY], LapNormalization] | None = None
+
+    candidate_starts = sorted(
+        {
+            start
+            for start in [*distances[:-1], *(distance - target_units for distance in distances[1:])]
+            if 0.0 <= start and start + target_units <= total_units
+        }
+    )
+
+    for start in candidate_starts:
+        end = start + target_units
+
+        candidate = slice_polyline_by_distance(points, distances, start, end)
+        if len(candidate) < min_points:
+            continue
+
+        endpoint_gap_m = math.hypot(candidate[-1][0] - candidate[0][0], candidate[-1][1] - candidate[0][1]) * scale_m_per_unit
+        normalized_length_m = path_length(closed_path(candidate)) * scale_m_per_unit
+        length_error_pct = abs(normalized_length_m - target_length_m) / target_length_m
+        if endpoint_gap_m > endpoint_limit_m or length_error_pct > length_tolerance_pct:
+            continue
+
+        normalization = LapNormalization(
+            original_points=len(points),
+            normalized_points=len(candidate),
+            original_path_length_m=path_length(closed_path(points)) * scale_m_per_unit,
+            normalized_path_length_m=normalized_length_m,
+            target_length_m=target_length_m,
+            trimmed_prefix_m=start * scale_m_per_unit,
+            trimmed_suffix_m=(total_units - end) * scale_m_per_unit,
+            endpoint_gap_m=endpoint_gap_m,
+        )
+        score = endpoint_gap_m + abs(normalized_length_m - target_length_m)
+        if best is None or score < best[0]:
+            best = (score, candidate, normalization)
+
+    if best is None:
+        return None
+    return best[1], best[2]
 
 
 def without_duplicate_closure(points: list[XY]) -> list[XY]:
@@ -180,7 +297,11 @@ def fit_aligned_samples(lap_points: list[XY], gps_xy: list[XY], fit: FitStats, s
     )
     translation = target_mean - coefficient * source_mean
     transformed = [coefficient * point + translation for point in source_complex]
-    return [(point.real, point.imag) for point in transformed]
+    aligned = [(point.real, point.imag) for point in transformed]
+    aligned = rotate_samples(aligned, -fit.start_offset_samples)
+    if fit.direction == "reversed":
+        aligned = list(reversed(aligned))
+    return aligned
 
 
 def average_fitted_laps(scored_laps: list[ScoredFastF1Lap], gps_xy: list[XY], sample_count: int) -> list[XY]:
