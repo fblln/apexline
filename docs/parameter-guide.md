@@ -101,9 +101,10 @@ The script now:
 5. runs expensive shape fitting on the top candidates,
 6. picks the lowest RMSE fit.
 
-This fixed the Canadian GP false outlier: the first accurate lap looked terrible
-against the repository shape, but a later representative lap matched at about
-5 m RMSE.
+The more important Canada lesson now is seam repair: some laps look too long
+only because the timing-line segment repeats. When Apexline can trim that
+overlap and recover one clean loop, the lap becomes usable evidence instead of
+a false rejection.
 
 ## Averaging Laps
 

@@ -8,7 +8,6 @@ library. That keeps the diagnostic figures reproducible in sandboxes and CI.
 from __future__ import annotations
 
 import argparse
-import math
 from pathlib import Path
 from typing import Any
 from xml.sax.saxutils import escape
@@ -271,74 +270,6 @@ def draw_lap_examples(
     output.write_text("\n".join(parts), encoding="utf-8")
 
 
-def draw_offset_refinement(
-    *,
-    session: Any,
-    gps_xy: list[XY],
-    output: Path,
-) -> None:
-    lap = find_lap(session, "RUS", 63)
-    points = analyzer.lap_position_points(lap)
-    source = analyzer.resample_closed(points, 240)
-    target = analyzer.resample_closed(gps_xy, 240)
-    offsets = list(range(4, 21))
-    rmses = [
-        analyzer.similarity_fit(source, analyzer.rotate_samples(target, offset)).rmse_m
-        for offset in offsets
-    ]
-    best_index = min(range(len(offsets)), key=lambda index: rmses[index])
-    max_rmse = max(rmses)
-
-    width = 980
-    height = 520
-    chart_x = 76
-    chart_y = 82
-    chart_w = 850
-    chart_h = 330
-    baseline = chart_y + chart_h
-    bar_gap = 8
-    bar_w = (chart_w - bar_gap * (len(offsets) - 1)) / len(offsets)
-
-    parts = [
-        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
-        '<rect width="100%" height="100%" fill="#f8fafc"/>',
-        text_svg(34, 42, "Why local offset refinement matters", size=24, weight=700),
-        text_svg(34, 68, "Russell lap 63 was falsely rejected when the coarse search skipped the correct phase.", size=14, fill="#475569"),
-        f'<rect x="{chart_x}" y="{chart_y}" width="{chart_w}" height="{chart_h}" fill="#ffffff" stroke="#cbd5e1"/>',
-    ]
-
-    for tick in range(0, int(math.ceil(max_rmse / 50)) * 50 + 1, 50):
-        y = baseline - (tick / max_rmse) * chart_h
-        parts.append(f'<line x1="{chart_x}" y1="{y:.1f}" x2="{chart_x + chart_w}" y2="{y:.1f}" stroke="#e2e8f0"/>')
-        parts.append(text_svg(chart_x - 44, y + 4, str(tick), size=11, fill="#64748b"))
-
-    threshold_y = baseline - (32 / max_rmse) * chart_h
-    parts.append(f'<line x1="{chart_x}" y1="{threshold_y:.1f}" x2="{chart_x + chart_w}" y2="{threshold_y:.1f}" stroke="#f97316" stroke-width="2" stroke-dasharray="6 5"/>')
-    parts.append(text_svg(chart_x + chart_w - 118, threshold_y - 8, "32 m threshold", size=12, fill="#c2410c"))
-
-    for index, (offset, rmse) in enumerate(zip(offsets, rmses)):
-        x = chart_x + index * (bar_w + bar_gap)
-        bar_h = (rmse / max_rmse) * chart_h
-        y = baseline - bar_h
-        color = "#2563eb" if index == best_index else "#94a3b8"
-        parts.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{bar_w:.1f}" height="{bar_h:.1f}" fill="{color}"/>')
-        parts.append(text_svg(x + bar_w / 2 - 6, baseline + 22, str(offset), size=11, fill="#475569"))
-        if offset in (8, 12, 16):
-            parts.append(text_svg(x + bar_w / 2 - 18, y - 8, f"{rmse:.1f}m", size=11, fill="#334155" if offset != 12 else "#1d4ed8"))
-
-    parts.extend(
-        [
-            text_svg(chart_x + chart_w / 2 - 130, 470, "Start offset at 240 resampled points", size=13, fill="#334155"),
-            text_svg(18, 260, "RMSE (m)", size=13, fill="#334155"),
-            text_svg(590, 456, "Offsets 8 and 16 looked bad; offset 12 is the correct phase.", size=13, fill="#475569"),
-            "</svg>",
-        ]
-    )
-
-    output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text("\n".join(parts), encoding="utf-8")
-
-
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--year", type=int, default=2025)
@@ -361,14 +292,8 @@ def main() -> None:
         gps_xy=gps_xy,
         output=args.output_dir / "canada-2025-lap-diagnostic-overlays.svg",
     )
-    draw_offset_refinement(
-        session=session,
-        gps_xy=gps_xy,
-        output=args.output_dir / "canada-2025-offset-refinement.svg",
-    )
 
     print(f"Wrote {args.output_dir / 'canada-2025-lap-diagnostic-overlays.svg'}")
-    print(f"Wrote {args.output_dir / 'canada-2025-offset-refinement.svg'}")
 
 
 if __name__ == "__main__":

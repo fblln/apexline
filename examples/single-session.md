@@ -1,7 +1,8 @@
 # Single-Session Example
 
 This is the fastest path for validating FastF1 laps against an oracle circuit
-GPS LineString with Apexline.
+GPS LineString with Apexline. This is the primary product workflow; season runs
+are optional batch analysis.
 
 ## Install
 
@@ -29,7 +30,8 @@ data/2025/canadian-grand-prix/r/artifact-manifest.json
 ```
 
 `lap-diagnostics.json` records raw lap length, overlap-normalized length when
-cleanup was possible, and the final shape fit against the oracle circuit line.
+cleanup was possible, and the final shape fit against the oracle GPS
+LineString.
 
 ## Check And Summarize
 

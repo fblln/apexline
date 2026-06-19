@@ -1,8 +1,9 @@
 # Apexline Showcase
 
 Apexline validates whether FastF1 lap position traces match an oracle circuit
-GPS LineString for a requested year, event, and session. Canada 2025 is the
-checked-in proof point, but the workflow is not tied to that season.
+GPS LineString for a requested year, event, and session. The repo is organized
+around single-session validation first, with Canada 2025 as the repair proof
+point and Belgium 2025 as the failure gallery.
 
 ## Example 1: Single Race Session
 
@@ -25,15 +26,15 @@ The checked-in Canada result demonstrates the main capability:
 - 152 rejected laps with explicit reasons.
 - 84-point compact polyline with less than 1 m simplification error.
 
-The key Canada story is no longer “a lap looked too long, so it was rejected.”
-It is “a lap looked too long, Apexline repaired the lap-boundary seam, and the
-normalized one-lap trace passed the oracle fit.”
+The key Canada story is not “bad lap in, bad lap out.” It is “the raw lap slice
+looked too long, Apexline trimmed the repeated seam segment, and the recovered
+one-lap trace passed the oracle fit.”
 
 ![Canada 2025 lap diagnostic overlays](assets/canada-2025-lap-diagnostic-overlays.svg)
 
 Belgium 2025 is the stronger rejected-lap shape showcase. Spa has many laps
-that need visual inspection because the projected lap shape diverges from the
-reference geometry:
+that pass the cheap availability checks but still diverge from the oracle shape
+once Apexline does the actual fit:
 
 ![Belgian Grand Prix rejected-lap gallery](assets/rejected-laps-2025/13-belgian-grand-prix.svg)
 
