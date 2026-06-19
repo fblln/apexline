@@ -205,13 +205,14 @@ def text_svg(x: float, y: float, text: str, *, size: int = 13, weight: int = 400
 
 def build_svg(rows: list[dict[str, Any]], year: int) -> str:
     rows = sorted(complete_rows(rows), key=lambda item: item["round"])
-    width = 1320
+    width = 1380
     row_h = 24
-    header_h = 118
+    header_h = 150
     footer_h = 40
     height = header_h + len(rows) * row_h + footer_h
-    chart_x = 360
-    chart_w = 830
+    chart_x = 390
+    chart_w = 790
+    value_x = 1230
     max_rmse = max(max(best_rmse(row), avg_rmse(row)) for row in rows)
 
     parts = [
@@ -226,8 +227,7 @@ def build_svg(rows: list[dict[str, Any]], year: int) -> str:
         x = chart_x + chart_w * tick / max_rmse
         parts.append(f'<line x1="{x:.1f}" y1="{header_h - 12}" x2="{x:.1f}" y2="{height - footer_h}" stroke="#e2e8f0"/>')
         parts.append(text_svg(x - 6, header_h - 18, str(tick), size=11, fill="#64748b"))
-
-    parts.append(text_svg(60, height / 2, "RMSE meters", size=13, fill="#9fb0bf"))
+    parts.append(text_svg(chart_x, 116, "RMSE (m)", size=12, fill="#64748b"))
 
     for index, row in enumerate(rows):
         y = header_h + index * row_h
@@ -237,14 +237,14 @@ def build_svg(rows: list[dict[str, Any]], year: int) -> str:
         parts.append(f'<line x1="{chart_x}" y1="{y + 10:.1f}" x2="{avg_x:.1f}" y2="{y + 10:.1f}" stroke="#94a3b8" stroke-width="3" opacity="0.9"/>')
         parts.append(f'<circle cx="{best_x:.1f}" cy="{y + 10:.1f}" r="4.4" fill="#059669"/>')
         parts.append(f'<circle cx="{avg_x:.1f}" cy="{y + 10:.1f}" r="4.0" fill="#334155"/>')
-        parts.append(text_svg(1210, y + 14, f"{best_rmse(row):.1f} / {avg_rmse(row):.1f}", size=11, fill="#475569"))
+        parts.append(text_svg(value_x, y + 14, f"{best_rmse(row):.1f} / {avg_rmse(row):.1f}", size=11, fill="#475569"))
 
     parts.extend(
         [
-            '<rect x="360" y="76" width="18" height="8" fill="#059669"/>',
-            text_svg(385, 84, "best lap", size=12, fill="#475569"),
-            '<rect x="455" y="76" width="18" height="8" fill="#334155"/>',
-            text_svg(480, 84, "avg of best 5", size=12, fill="#475569"),
+            '<rect x="650" y="102" width="18" height="8" fill="#059669"/>',
+            text_svg(675, 110, "best lap", size=12, fill="#475569"),
+            '<rect x="748" y="102" width="18" height="8" fill="#334155"/>',
+            text_svg(773, 110, "avg of best 5", size=12, fill="#475569"),
             "</svg>",
         ]
     )

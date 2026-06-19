@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
   <rect width="100%" height="100%" fill="#f8fafc"/>
-  <text x="46" y="48" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="700" fill="#111827">Canada 2025: how Apexline shrinks the validated GPS line</text>
-  <text x="46" y="78" font-family="Inter, Arial, sans-serif" font-size="14" fill="#475569">Left: full oracle GPS points. Middle: same line after under-1 m simplification. Right: the compact string shipped to maps.</text>
+  <text x="46" y="48" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="700" fill="#111827">Canada 2025: shrinking the validated GPS line</text>
+  <text x="46" y="78" font-family="Inter, Arial, sans-serif" font-size="14" fill="#475569">Full GPS points -&gt; under-1 m simplification -&gt; one compact string for maps and APIs.</text>
 
   <defs>
     <marker id="arrow" markerWidth="12" markerHeight="12" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
@@ -26,7 +26,7 @@
 
   <rect x="466" y="128" width="318" height="310" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
   <text x="492" y="166" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" fill="#111827">2. Simplified line</text>
-  <text x="492" y="192" font-family="Inter, Arial, sans-serif" font-size="13" fill="#475569">Only low-value points are dropped; the corner shape stays within tolerance.</text>
+  <text x="492" y="192" font-family="Inter, Arial, sans-serif" font-size="13" fill="#475569">Only drop points that move the shape by less than 1 m.</text>
   <polyline points="512,335 552,282 593,252 652,243 702,205 749,274 700,354 598,360 512,335" fill="none" stroke="#059669" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
   <g fill="#059669">
     <circle cx="512" cy="335" r="4"/><circle cx="552" cy="282" r="4"/><circle cx="593" cy="252" r="4"/><circle cx="652" cy="243" r="4"/>
@@ -40,7 +40,7 @@
 
   <rect x="886" y="128" width="268" height="310" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
   <text x="912" y="166" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" fill="#111827">3. Encoded polyline</text>
-  <text x="912" y="192" font-family="Inter, Arial, sans-serif" font-size="13" fill="#475569">This exact string is what a map client or API can store and decode.</text>
+  <text x="912" y="192" font-family="Inter, Arial, sans-serif" font-size="13" fill="#475569">Compact string for maps and APIs.</text>
   <rect x="912" y="226" width="216" height="98" rx="6" fill="#111827"/>
   <text x="932" y="260" font-family="JetBrains Mono, monospace" font-size="13" fill="#d1fae5">kavtGh_w_MvIiBhBYxAAjFd@ZEP...</text>
   <text x="932" y="288" font-family="JetBrains Mono, monospace" font-size="13" fill="#d1fae5">...encoded lat/lon deltas...</text>
@@ -48,5 +48,5 @@
 
   <rect x="46" y="486" width="1108" height="86" rx="8" fill="#ecfeff" stroke="#67e8f9"/>
   <text x="72" y="520" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700" fill="#164e63">What the 1 m tolerance means</text>
-  <text x="72" y="548" font-family="Inter, Arial, sans-serif" font-size="14" fill="#155e75">Every removed source point stayed within 0.95 m of the kept line. Path length changed by only -0.39 m on a 4,365.04 m lap, so the file got smaller without reshaping the chicanes.</text>
+  <text x="72" y="548" font-family="Inter, Arial, sans-serif" font-size="14" fill="#155e75">Every removed source point stayed within 0.95 m of the kept line. Path length changed by only -0.39 m on a 4,365.04 m lap, so the file got smaller without reshaping the lap.</text>
 </svg>
