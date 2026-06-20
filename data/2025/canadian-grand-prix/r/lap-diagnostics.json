@@ -3,7 +3,7 @@
     "schema_version": "1.0.0",
     "artifact_kind": "lap_diagnostics_event",
     "provenance": {
-      "generated_at": "2026-06-19T19:34:33Z",
+      "generated_at": "2026-06-20T08:06:15Z",
       "generator": "apexline",
       "schema_version": "1.0.0",
       "command": "validate",
@@ -35,6 +35,8 @@
         "lap_length_tolerance_pct": 0.05,
         "shape_rmse_threshold_m": 32.0,
         "shape_p95_threshold_m": 75.0,
+        "shape_rmse_threshold_pct_of_length": 0.016,
+        "shape_p95_threshold_pct_of_length": 0.025,
         "min_position_samples": 100,
         "dry_run": false
       }
@@ -53,7 +55,6 @@
     "reason_counts": {
       "compliant": 1197,
       "fastf1_inaccurate": 152,
-      "missing_lap_time": 3,
       "path_length_outlier": 2,
       "pit_lap": 131,
       "too_few_position_samples": 1
@@ -62,6 +63,11 @@
       "length_tolerance_pct": 0.05,
       "rmse_threshold_m": 32.0,
       "p95_threshold_m": 75.0,
+      "rmse_threshold_pct_of_length": 0.016,
+      "p95_threshold_pct_of_length": 0.025,
+      "reference_length_m": 4365.038623674106,
+      "effective_rmse_threshold_m": 69.8406179787857,
+      "effective_p95_threshold_m": 109.12596559185266,
       "min_position_samples": 100,
       "validation_samples": 240,
       "validation_offset_step": 8

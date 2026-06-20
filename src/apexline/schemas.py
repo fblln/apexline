@@ -8,7 +8,6 @@ KNOWN_REJECTION_REASONS = {
     "compliant",
     "fastf1_inaccurate",
     "pit_lap",
-    "missing_lap_time",
     "too_few_position_samples",
     "path_length_outlier",
     "shape_rmse_over_threshold",
@@ -42,6 +41,24 @@ def _validate_reason_counts(reason_counts: Any, label: str) -> None:
             raise ValueError(f"{label}.{reason} is not a recognized rejection reason")
         if not isinstance(count, int):
             raise ValueError(f"{label}.{reason} must be an integer")
+
+
+def _validate_thresholds(thresholds: Any, label: str) -> None:
+    mapping = _require_mapping(thresholds, label)
+    _require_keys(
+        mapping,
+        label,
+        [
+            "length_tolerance_pct",
+            "rmse_threshold_m",
+            "p95_threshold_m",
+            "rmse_threshold_pct_of_length",
+            "p95_threshold_pct_of_length",
+            "reference_length_m",
+            "effective_rmse_threshold_m",
+            "effective_p95_threshold_m",
+        ],
+    )
 
 
 def validate_lap_diagnostic_record(record: Any, *, allow_legacy: bool = False) -> None:
@@ -125,7 +142,7 @@ def validate_lap_diagnostics_event(record: Any, *, allow_legacy: bool = False) -
         ],
     )
     _validate_reason_counts(value["reason_counts"], "lap_diagnostics_event.reason_counts")
-    _require_mapping(value["thresholds"], "lap_diagnostics_event.thresholds")
+    _validate_thresholds(value["thresholds"], "lap_diagnostics_event.thresholds")
     if value["fastest_lap_with_position"] is not None:
         validate_lap_diagnostic_record(value["fastest_lap_with_position"], allow_legacy=allow_legacy)
     if value["fastest_compliant_lap"] is not None:

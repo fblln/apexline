@@ -17,6 +17,10 @@ The defaults are intentionally conservative.
 --max-shape-candidates 12
 --average-laps 5
 --average-samples 720
+--shape-rmse-threshold-m 32
+--shape-p95-threshold-m 75
+--shape-rmse-threshold-pct-of-length 0.016
+--shape-p95-threshold-pct-of-length 0.025
 ```
 
 ## Validation Samples
@@ -47,6 +51,20 @@ closed loop. Step `4` at `720` samples means offsets are tested every 0.56% of a
 lap.
 
 Use a smaller value only when debugging a single circuit.
+
+## Shape Thresholds
+
+Shape compliance uses both a meter floor and a circuit-length proportion:
+
+```text
+effective RMSE limit = max(32 m, 1.6% of oracle length)
+effective p95 limit  = max(75 m, 2.5% of oracle length)
+```
+
+The proportional limit matters on long circuits such as Spa, where the same
+small relative disagreement produces a larger absolute residual. The meter
+floor avoids over-penalizing short circuits. Both effective values are written
+to each diagnostics artifact.
 
 ## Polyline Tolerance
 

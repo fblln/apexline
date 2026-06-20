@@ -7,7 +7,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from apexline.fastf1_support import classify_lap, lap_key
+from apexline.fastf1_support import classify_lap, effective_shape_thresholds, lap_key
 
 
 class FastF1SupportTests(unittest.TestCase):
@@ -25,6 +25,17 @@ class FastF1SupportTests(unittest.TestCase):
         qualifying_key = lap_key(2025, 10, "Canadian Grand Prix", "Q", "RUS", 1)
         self.assertNotEqual(race_key, qualifying_key)
 
+    def test_effective_shape_thresholds_scale_with_reference_length(self) -> None:
+        rmse_threshold_m, p95_threshold_m = effective_shape_thresholds(
+            reference_length_m=7000.0,
+            rmse_threshold_m=32.0,
+            p95_threshold_m=75.0,
+            rmse_threshold_pct_of_length=0.016,
+            p95_threshold_pct_of_length=0.025,
+        )
+        self.assertAlmostEqual(rmse_threshold_m, 112.0)
+        self.assertAlmostEqual(p95_threshold_m, 175.0)
+
     def test_classify_lap_flags_basic_rejections(self) -> None:
         diagnostic = classify_lap(
             driver="RUS",
@@ -39,11 +50,13 @@ class FastF1SupportTests(unittest.TestCase):
             length_tolerance_pct=0.05,
             rmse_threshold_m=25.0,
             p95_threshold_m=50.0,
+            rmse_threshold_pct_of_length=0.0,
+            p95_threshold_pct_of_length=0.0,
             min_position_samples=4,
         )
         self.assertCountEqual(
             diagnostic.reasons,
-            ["fastf1_inaccurate", "pit_lap", "missing_lap_time", "no_position_data"],
+            ["fastf1_inaccurate", "pit_lap", "no_position_data"],
         )
 
     def test_classify_lap_flags_too_few_samples(self) -> None:
@@ -60,6 +73,8 @@ class FastF1SupportTests(unittest.TestCase):
             length_tolerance_pct=0.05,
             rmse_threshold_m=25.0,
             p95_threshold_m=50.0,
+            rmse_threshold_pct_of_length=0.0,
+            p95_threshold_pct_of_length=0.0,
             min_position_samples=4,
         )
         self.assertIn("too_few_position_samples", diagnostic.reasons)
@@ -79,6 +94,8 @@ class FastF1SupportTests(unittest.TestCase):
             length_tolerance_pct=0.05,
             rmse_threshold_m=25.0,
             p95_threshold_m=50.0,
+            rmse_threshold_pct_of_length=0.0,
+            p95_threshold_pct_of_length=0.0,
             min_position_samples=4,
         )
         self.assertIn("path_length_outlier", diagnostic.reasons)
@@ -98,6 +115,8 @@ class FastF1SupportTests(unittest.TestCase):
             length_tolerance_pct=0.05,
             rmse_threshold_m=25.0,
             p95_threshold_m=50.0,
+            rmse_threshold_pct_of_length=0.0,
+            p95_threshold_pct_of_length=0.0,
             min_position_samples=4,
         )
         self.assertNotIn("path_length_outlier", diagnostic.reasons)
@@ -122,6 +141,8 @@ class FastF1SupportTests(unittest.TestCase):
             length_tolerance_pct=0.20,
             rmse_threshold_m=0.5,
             p95_threshold_m=0.5,
+            rmse_threshold_pct_of_length=0.0,
+            p95_threshold_pct_of_length=0.0,
             min_position_samples=4,
         )
         self.assertIn("shape_rmse_over_threshold", diagnostic.reasons)

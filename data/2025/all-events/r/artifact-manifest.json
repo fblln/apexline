@@ -19,16 +19,18 @@
     "lap_length_tolerance_pct": 0.05,
     "shape_rmse_threshold_m": 32.0,
     "shape_p95_threshold_m": 75.0,
+    "shape_rmse_threshold_pct_of_length": 0.016,
+    "shape_p95_threshold_pct_of_length": 0.025,
     "min_position_samples": 100
   },
   "outputs": {
-    "circuit_analysis_json": "data/circuit-polylines-2025.json",
-    "circuit_analysis_csv": "data/circuit-polylines-2025.csv",
-    "lap_diagnostics_json": "data/lap-diagnostics-2025.json",
-    "manifest_json": "data/artifact-manifest-2025.json"
+    "circuit_analysis_json": "data/2025/all-events/r/circuit-analysis.json",
+    "circuit_analysis_csv": "data/2025/all-events/r/circuit-analysis.csv",
+    "lap_diagnostics_json": "data/2025/all-events/r/lap-diagnostics.json",
+    "manifest_json": "data/2025/all-events/r/artifact-manifest.json"
   },
   "provenance": {
-    "generated_at": "2026-06-19T04:34:45Z",
+    "generated_at": "2026-06-20T07:55:33Z",
     "generator": "apexline",
     "schema_version": "1.0.0",
     "command": "batch",
@@ -42,10 +44,10 @@
       "circuits_repo": "/private/tmp/f1-circuits",
       "circuits_repo_url": "https://github.com/bacinger/f1-circuits.git",
       "output_dir": "data",
-      "output_json": "data/circuit-polylines-2025.json",
-      "output_csv": "data/circuit-polylines-2025.csv",
-      "lap_diagnostics_output": "data/lap-diagnostics-2025.json",
-      "manifest_output": "data/artifact-manifest-2025.json",
+      "output_json": null,
+      "output_csv": null,
+      "lap_diagnostics_output": null,
+      "manifest_output": null,
       "write_mode": "overwrite",
       "polyline_tolerance_m": 1.0,
       "polyline_precision": 5,
@@ -60,6 +62,8 @@
       "lap_length_tolerance_pct": 0.05,
       "shape_rmse_threshold_m": 32.0,
       "shape_p95_threshold_m": 75.0,
+      "shape_rmse_threshold_pct_of_length": 0.016,
+      "shape_p95_threshold_pct_of_length": 0.025,
       "min_position_samples": 100,
       "dry_run": false
     }

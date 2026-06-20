@@ -21,7 +21,7 @@ class SmokeTests(unittest.TestCase):
                     "--year",
                     "2025",
                     "--diagnostics-json",
-                    str(ROOT / "data" / "lap-diagnostics-2025.json"),
+                    str(ROOT / "data/2025/all-events/r/lap-diagnostics.json"),
                     "--output-md",
                     str(output_md),
                     "--output-svg",

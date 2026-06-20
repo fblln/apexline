@@ -36,7 +36,29 @@
     "non_compliant_laps": {"type": "integer"},
     "shape_non_compliant_laps": {"type": "integer"},
     "reason_counts": {"type": "object"},
-    "thresholds": {"type": "object"},
+    "thresholds": {
+      "type": "object",
+      "required": [
+        "length_tolerance_pct",
+        "rmse_threshold_m",
+        "p95_threshold_m",
+        "rmse_threshold_pct_of_length",
+        "p95_threshold_pct_of_length",
+        "reference_length_m",
+        "effective_rmse_threshold_m",
+        "effective_p95_threshold_m"
+      ],
+      "properties": {
+        "length_tolerance_pct": {"type": "number"},
+        "rmse_threshold_m": {"type": "number"},
+        "p95_threshold_m": {"type": "number"},
+        "rmse_threshold_pct_of_length": {"type": "number"},
+        "p95_threshold_pct_of_length": {"type": "number"},
+        "reference_length_m": {"type": "number"},
+        "effective_rmse_threshold_m": {"type": "number"},
+        "effective_p95_threshold_m": {"type": "number"}
+      }
+    },
     "provenance": {"type": "object"}
   }
 }

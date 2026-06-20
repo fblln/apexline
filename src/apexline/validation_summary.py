@@ -10,6 +10,8 @@ from pathlib import Path
 from typing import Any
 from xml.sax.saxutils import escape
 
+from .artifacts import session_slug
+
 
 PROJECT_DIR = Path.cwd()
 
@@ -254,6 +256,7 @@ def build_svg(rows: list[dict[str, Any]], year: int) -> str:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--year", type=int, default=2025)
+    parser.add_argument("--session", default="R")
     parser.add_argument("--manifest", type=Path, default=None)
     parser.add_argument("--circuit-analysis-json", type=Path, default=None)
     parser.add_argument("--output-md", type=Path, default=None)
@@ -265,7 +268,9 @@ def main() -> None:
         analysis_json, manifest_year = analysis_from_manifest(args.manifest)
         year = manifest_year or year
     else:
-        analysis_json = args.circuit_analysis_json or PROJECT_DIR / "data" / f"circuit-polylines-{year}.json"
+        analysis_json = args.circuit_analysis_json or (
+            PROJECT_DIR / "data" / str(year) / "all-events" / session_slug(args.session) / "circuit-analysis.json"
+        )
     output_md = args.output_md or PROJECT_DIR / "docs" / f"{year}-validation-summary.md"
     output_svg = args.output_svg or PROJECT_DIR / "docs" / "assets" / f"validation-rmse-{year}.svg"
 

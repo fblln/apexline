@@ -19,6 +19,8 @@
     "lap_length_tolerance_pct": 0.05,
     "shape_rmse_threshold_m": 32.0,
     "shape_p95_threshold_m": 75.0,
+    "shape_rmse_threshold_pct_of_length": 0.016,
+    "shape_p95_threshold_pct_of_length": 0.025,
     "min_position_samples": 100
   },
   "outputs": {
@@ -28,7 +30,7 @@
     "manifest_json": "data/2025/canadian-grand-prix/r/artifact-manifest.json"
   },
   "provenance": {
-    "generated_at": "2026-06-19T19:34:33Z",
+    "generated_at": "2026-06-20T08:06:15Z",
     "generator": "apexline",
     "schema_version": "1.0.0",
     "command": "validate",
@@ -60,6 +62,8 @@
       "lap_length_tolerance_pct": 0.05,
       "shape_rmse_threshold_m": 32.0,
       "shape_p95_threshold_m": 75.0,
+      "shape_rmse_threshold_pct_of_length": 0.016,
+      "shape_p95_threshold_pct_of_length": 0.025,
       "min_position_samples": 100,
       "dry_run": false
     }

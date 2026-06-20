@@ -10,6 +10,8 @@ from pathlib import Path
 from typing import Any
 from xml.sax.saxutils import escape
 
+from .artifacts import session_slug
+
 
 PROJECT_DIR = Path.cwd()
 
@@ -69,8 +71,8 @@ def build_markdown(rows: list[dict[str, Any]], year: int) -> str:
         "",
         "Good laps are laps that pass Apexline's oracle-shape evidence checks.",
         "Bad laps are laps rejected for at least one reason such as FastF1",
-        "`IsAccurate == False`, pit in/out, missing time, too few position",
-        "samples, path-length outlier, or shape residual over threshold.",
+        "`IsAccurate == False`, pit in/out, too few position samples,",
+        "path-length outlier, or shape residual over threshold.",
         "",
         "Reason counts are not mutually exclusive: one bad lap can be both a",
         "pit lap and FastF1-inaccurate.",
@@ -192,6 +194,7 @@ def build_svg(rows: list[dict[str, Any]], year: int) -> str:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--year", type=int, default=2025)
+    parser.add_argument("--session", default="R")
     parser.add_argument("--manifest", type=Path, default=None)
     parser.add_argument("--diagnostics-json", type=Path, default=None)
     parser.add_argument("--output-md", type=Path, default=None)
@@ -203,7 +206,9 @@ def main() -> None:
         diagnostics_json, manifest_year = diagnostics_from_manifest(args.manifest)
         year = manifest_year or year
     else:
-        diagnostics_json = args.diagnostics_json or PROJECT_DIR / "data" / f"lap-diagnostics-{year}.json"
+        diagnostics_json = args.diagnostics_json or (
+            PROJECT_DIR / "data" / str(year) / "all-events" / session_slug(args.session) / "lap-diagnostics.json"
+        )
     output_md = args.output_md or PROJECT_DIR / "docs" / f"lap-compliance-{year}.md"
     output_svg = args.output_svg or PROJECT_DIR / "docs" / "assets" / f"lap-compliance-{year}.svg"
 

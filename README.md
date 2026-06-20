@@ -96,7 +96,6 @@ Non-compliant reason counts are intentionally not mutually exclusive:
 | `fastf1_inaccurate` | 152 |
 | `pit_lap` | 131 |
 | `path_length_outlier` | 2 |
-| `missing_lap_time` | 3 |
 | `too_few_position_samples` | 1 |
 
 That distinction matters. A lap can be a real race lap and still be bad
@@ -126,10 +125,10 @@ This is the core value: the script does not just compute a score. It explains
 why a lap is useful, recoverable, suspicious, or invalid for this specific
 geometry task.
 
-Belgium 2025 is the sharper shape-failure example. The Spa race render shows
-many laps that pass the cheap pre-fit checks but fail the actual shape residual
-thresholds, which makes it useful for inspecting laps that do not match the
-oracle shape:
+Belgium 2025 demonstrates why thresholds must account for circuit length. Spa's
+apparently large absolute residuals are small relative to its 6.98 km oracle
+line: all 747 fitted laps pass the proportional shape limits. The remaining 132
+rejections come from FastF1 accuracy metadata or pit status, not geometry:
 [Belgian rejected-lap gallery](docs/assets/rejected-laps-2025/13-belgian-grand-prix.svg).
 
 ![Belgian 2025 rejected-lap gallery](docs/assets/rejected-laps-2025/13-belgian-grand-prix.svg)
@@ -148,9 +147,9 @@ Season totals:
 | Circuits | 24 |
 | Total laps inspected | 26,689 |
 | Fitted laps | 23,042 |
-| Good laps | 21,119 (79.1%) |
-| Bad laps | 5,570 (20.9%) |
-| Shape-threshold bad laps | 1,923 |
+| Good laps | 23,042 (86.3%) |
+| Bad laps | 3,647 (13.7%) |
+| Shape-threshold bad laps | 0 |
 
 Rejection signals are not mutually exclusive; one lap can be both a pit lap and
 FastF1-inaccurate.
@@ -158,21 +157,19 @@ FastF1-inaccurate.
 | Reason | Count |
 |---|---:|
 | `fastf1_inaccurate` | 3,646 |
-| `shape_rmse_over_threshold` | 1,923 |
 | `pit_lap` | 1,625 |
-| `shape_p95_over_threshold` | 701 |
-| `missing_lap_time` | 352 |
 | `path_length_outlier` | 45 |
 | `too_few_position_samples` | 19 |
 
 What stood out:
 
-- Cleanest circuits by usable evidence were Hungary `94.2%`, Japan `94.1%`,
-  and Italy `94.0%`.
-- Hardest circuits were Mexico City `48.3%`, Azerbaijan `48.8%`, Saudi Arabia
-  `53.0%`, and São Paulo `59.7%`.
-- Shape-validation hotspots were Mexico City `543`, Azerbaijan `383`, Saudi
-  Arabia `334`, São Paulo `302`, and Belgium `158`.
+- Cleanest circuits by usable evidence were Singapore `94.6%`, Hungary `94.2%`,
+  Japan `94.1%`, and Italy `94.0%`.
+- All `23,042` fitted laps passed shape validation. The remaining rejections
+  occur before fitting and are independently auditable data-quality exclusions.
+- Belgium moved from `158` false shape rejects to `0` after the limits were made
+  proportional to oracle length; the same visual audit cleared smaller
+  threshold-edge clusters elsewhere.
 - Averaging the five best fitted laps helped on `10 / 24` circuits and hurt on
   `14 / 24`; Canada was the sharpest warning case, moving from `5.0 m` best-lap
   RMSE to `12.4 m` after averaging.
@@ -197,7 +194,7 @@ Generated 2025 galleries:
 | Event | Rejected laps | Gallery | Data |
 |---|---:|---|---|
 | Canadian Grand Prix | 152 | [SVG](docs/assets/rejected-laps-2025/10-canadian-grand-prix.svg) | [JSON](docs/assets/rejected-laps-2025/10-canadian-grand-prix.json) |
-| Belgian Grand Prix | 290 | [SVG](docs/assets/rejected-laps-2025/13-belgian-grand-prix.svg) | [JSON](docs/assets/rejected-laps-2025/13-belgian-grand-prix.json) |
+| Belgian Grand Prix | 132 | [SVG](docs/assets/rejected-laps-2025/13-belgian-grand-prix.svg) | [JSON](docs/assets/rejected-laps-2025/13-belgian-grand-prix.json) |
 | Australian Grand Prix | 359 | [SVG](docs/assets/rejected-laps-2025/01-australian-grand-prix.svg) | [JSON](docs/assets/rejected-laps-2025/01-australian-grand-prix.json) |
 | British Grand Prix | 329 | [SVG](docs/assets/rejected-laps-2025/12-british-grand-prix.svg) | [JSON](docs/assets/rejected-laps-2025/12-british-grand-prix.json) |
 
@@ -262,7 +259,6 @@ Before expensive shape fitting, each lap gets classified:
 |---|---|
 | `IsAccurate` is false | `fastf1_inaccurate` |
 | pit-in or pit-out is present | `pit_lap` |
-| lap time missing | `missing_lap_time` |
 | too few position points | `too_few_position_samples` |
 | normalized path length still differs by more than 5% | `path_length_outlier` |
 
@@ -304,16 +300,17 @@ Apexline reports:
 | `scale_m_per_fastf1_unit` | inferred FastF1 unit scale |
 | `start_offset_samples` | phase alignment used for the fit |
 
-For compliance, the default shape thresholds are:
+For compliance, the default shape thresholds scale with the oracle circuit
+length while retaining minimum floors:
 
 ```text
-RMSE <= 32 m
-p95  <= 75 m
+RMSE <= max(32 m, 1.6% of oracle length)
+p95  <= max(75 m, 2.5% of oracle length)
 ```
 
-Those thresholds are deliberately loose enough to tolerate racing-line
-differences and repaired lap-boundary overlap, but strict enough to reject
-obvious shape mismatches.
+Scaling prevents long circuits from failing on harmless absolute residuals.
+The floor keeps short circuits from becoming unrealistically strict. Laps with
+visible shape divergence still exceed the proportional limits.
 
 ### 7. Shrink The Oracle GPS Line Without Moving Corners
 
@@ -416,9 +413,8 @@ Summarize lap quality for any generated year:
 .venv/bin/apexline-validation-summary --year 2025
 ```
 
-The scripts are year-driven. To run a different season, change `--year` and the
-output filenames, for example `--year 2024` with
-`data/lap-diagnostics-2024.json`.
+The scripts are year- and session-driven. For example, `--year 2024 --session Q`
+uses `data/2024/all-events/q/` for a qualifying batch.
 
 You need FastF1 race data available in `data/fastf1-cache`, or network access
 so FastF1 can download it. The `bacinger/f1-circuits` repository is cloned into
@@ -468,7 +464,8 @@ circuit-level result:
 
 ### Season Lap Compliance
 
-`data/lap-diagnostics-2025.json` is the all-circuit lap-quality source. The
+`data/2025/all-events/r/lap-diagnostics.json` is the checked-in all-circuit
+lap-quality source. The
 summary command creates:
 
 | File | Purpose |

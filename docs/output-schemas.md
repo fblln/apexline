@@ -5,6 +5,9 @@ CLI runs. Downstream consumers should validate both `schema_version` and
 `artifact_kind` before importing. Single-session outputs default to
 `data/<year>/<event>/<session>/`.
 
+Machine-readable JSON Schemas for every public artifact kind live in
+[`schemas/`](../schemas/).
+
 ## Stable IDs
 
 Per-event and per-lap records use these stable identifiers:
@@ -50,13 +53,18 @@ Default thresholds in the CLI:
 | `length_tolerance_pct` | `0.05` |
 | `rmse_threshold_m` | `32.0` |
 | `p95_threshold_m` | `75.0` |
+| `rmse_threshold_pct_of_length` | `0.016` |
+| `p95_threshold_pct_of_length` | `0.025` |
 | `min_position_samples` | `100` |
+
+The effective shape thresholds are the greater of the fixed meter floor and
+the circuit-length proportion. Generated diagnostics record the oracle length
+and both effective thresholds for reproducibility.
 
 Known rejection reasons:
 
 - `fastf1_inaccurate`
 - `pit_lap`
-- `missing_lap_time`
 - `too_few_position_samples`
 - `path_length_outlier`
 - `shape_rmse_over_threshold`

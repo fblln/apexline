@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -12,6 +13,7 @@ from xml.sax.saxutils import escape
 
 from . import analyze_f1_circuit_gps as analyzer
 from .artifacts import default_run_dir, normalize_session, provenance, slugify
+from .fastf1_support import effective_shape_thresholds
 from .geometry import normalize_repeated_lap_segment
 from .plot_canada_examples import apply_transform, lap_transform
 from .schemas import SCHEMA_VERSION
@@ -43,6 +45,10 @@ def format_ms(ms: int | None) -> str:
 
 def slug(value: str) -> str:
     return "".join(ch.lower() if ch.isalnum() else "-" for ch in value).strip("-").replace("--", "-")
+
+
+def relative_index_link(path: Path, index_output: Path) -> str:
+    return Path(os.path.relpath(path.resolve(), index_output.parent.resolve())).as_posix()
 
 
 def text_svg(x: float, y: float, text: str, *, size: int = 12, weight: int = 400, fill: str = "#111827") -> str:
@@ -130,7 +136,6 @@ def main_reason(reasons: list[str]) -> str:
         "path_length_outlier",
         "pit_lap",
         "fastf1_inaccurate",
-        "missing_lap_time",
         "too_few_position_samples",
         "no_position_data",
     ]
@@ -152,6 +157,18 @@ def reason_color(reason: str) -> str:
     return "#64748b"
 
 
+def rejection_sort_key(lap: RejectedLap) -> tuple[int, float, str, int]:
+    reason = main_reason(lap.reasons)
+    if reason.startswith("shape_"):
+        priority = 0
+    elif reason == "path_length_outlier":
+        priority = 1
+    else:
+        priority = 2
+    fit_error = -(lap.fit.rmse_m if lap.fit is not None else 0.0)
+    return priority, fit_error, lap.driver, lap.lap_number
+
+
 def load_session(year: int, event: str, session_name: str, cache_dir: Path) -> Any:
     import fastf1  # type: ignore[import-not-found]
 
@@ -169,11 +186,20 @@ def classify_laps(
     length_tolerance_pct: float,
     rmse_threshold_m: float,
     p95_threshold_m: float,
+    rmse_threshold_pct_of_length: float,
+    p95_threshold_pct_of_length: float,
     min_position_samples: int,
     validation_samples: int,
     validation_offset_step: int,
 ) -> list[RejectedLap]:
     reference_length_m = analyzer.path_length(gps_xy)
+    effective_rmse_threshold_m, effective_p95_threshold_m = effective_shape_thresholds(
+        reference_length_m=reference_length_m,
+        rmse_threshold_m=rmse_threshold_m,
+        p95_threshold_m=p95_threshold_m,
+        rmse_threshold_pct_of_length=rmse_threshold_pct_of_length,
+        p95_threshold_pct_of_length=p95_threshold_pct_of_length,
+    )
     rejected: list[RejectedLap] = []
 
     for driver_ref in getattr(session, "drivers", []):
@@ -193,8 +219,6 @@ def classify_laps(
                 reasons.append("fastf1_inaccurate")
             if is_pit_lap:
                 reasons.append("pit_lap")
-            if lap_time_ms is None:
-                reasons.append("missing_lap_time")
 
             points = analyzer.lap_position_points(lap)
             if not points:
@@ -239,9 +263,9 @@ def classify_laps(
                     sample_count=validation_samples,
                     offset_step=validation_offset_step,
                 )
-                if fit.rmse_m > rmse_threshold_m:
+                if fit.rmse_m > effective_rmse_threshold_m:
                     reasons.append("shape_rmse_over_threshold")
-                if fit.p95_m > p95_threshold_m:
+                if fit.p95_m > effective_p95_threshold_m:
                     reasons.append("shape_p95_over_threshold")
 
             if reasons:
@@ -509,6 +533,8 @@ def main() -> None:
     parser.add_argument("--lap-length-tolerance-pct", type=float, default=0.05)
     parser.add_argument("--shape-rmse-threshold-m", type=float, default=32.0)
     parser.add_argument("--shape-p95-threshold-m", type=float, default=75.0)
+    parser.add_argument("--shape-rmse-threshold-pct-of-length", type=float, default=0.016)
+    parser.add_argument("--shape-p95-threshold-pct-of-length", type=float, default=0.025)
     parser.add_argument("--min-position-samples", type=int, default=100)
     parser.add_argument("--validation-samples", type=int, default=240)
     parser.add_argument("--validation-offset-step", type=int, default=8)
@@ -526,6 +552,8 @@ def main() -> None:
         "lap_length_tolerance_pct": args.lap_length_tolerance_pct,
         "shape_rmse_threshold_m": args.shape_rmse_threshold_m,
         "shape_p95_threshold_m": args.shape_p95_threshold_m,
+        "shape_rmse_threshold_pct_of_length": args.shape_rmse_threshold_pct_of_length,
+        "shape_p95_threshold_pct_of_length": args.shape_p95_threshold_pct_of_length,
         "min_position_samples": args.min_position_samples,
         "validation_samples": args.validation_samples,
         "validation_offset_step": args.validation_offset_step,
@@ -569,10 +597,26 @@ def main() -> None:
             length_tolerance_pct=args.lap_length_tolerance_pct,
             rmse_threshold_m=args.shape_rmse_threshold_m,
             p95_threshold_m=args.shape_p95_threshold_m,
+            rmse_threshold_pct_of_length=args.shape_rmse_threshold_pct_of_length,
+            p95_threshold_pct_of_length=args.shape_p95_threshold_pct_of_length,
             min_position_samples=args.min_position_samples,
             validation_samples=args.validation_samples,
             validation_offset_step=args.validation_offset_step,
         )
+        rejected.sort(key=rejection_sort_key)
+        effective_rmse_threshold_m, effective_p95_threshold_m = effective_shape_thresholds(
+            reference_length_m=analyzer.path_length(gps_xy),
+            rmse_threshold_m=args.shape_rmse_threshold_m,
+            p95_threshold_m=args.shape_p95_threshold_m,
+            rmse_threshold_pct_of_length=args.shape_rmse_threshold_pct_of_length,
+            p95_threshold_pct_of_length=args.shape_p95_threshold_pct_of_length,
+        )
+        event_thresholds = {
+            **thresholds,
+            "reference_length_m": analyzer.path_length(gps_xy),
+            "effective_rmse_threshold_m": effective_rmse_threshold_m,
+            "effective_p95_threshold_m": effective_p95_threshold_m,
+        }
         anchor_driver, anchor_lap, scale_rotate, translation, anchor_fit = choose_anchor(
             session,
             gps_xy,
@@ -595,15 +639,15 @@ def main() -> None:
             translation=translation,
             output=output,
             max_render_points=args.max_render_points,
-            thresholds=thresholds,
+            thresholds=event_thresholds,
             command_args=command_args,
         )
         entries.append(
             {
                 "event_name": event_name,
                 "count": len(rejected),
-                "svg": output.resolve().relative_to((PROJECT_DIR / "docs").resolve()).as_posix(),
-                "json": output.with_suffix(".json").resolve().relative_to((PROJECT_DIR / "docs").resolve()).as_posix(),
+                "svg": relative_index_link(output, index_output),
+                "json": relative_index_link(output.with_suffix(".json"), index_output),
             }
         )
         print(f"{event_name}: wrote {len(rejected)} rejected laps to {output}")

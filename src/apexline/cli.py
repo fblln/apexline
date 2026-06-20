@@ -69,6 +69,8 @@ def common_run_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--lap-length-tolerance-pct", type=float, default=0.05)
     parser.add_argument("--shape-rmse-threshold-m", type=float, default=32.0)
     parser.add_argument("--shape-p95-threshold-m", type=float, default=75.0)
+    parser.add_argument("--shape-rmse-threshold-pct-of-length", type=float, default=0.016)
+    parser.add_argument("--shape-p95-threshold-pct-of-length", type=float, default=0.025)
     parser.add_argument("--min-position-samples", type=int, default=100)
     parser.add_argument("--dry-run", action="store_true")
 
@@ -127,6 +129,8 @@ def thresholds(args: argparse.Namespace) -> dict[str, Any]:
         "lap_length_tolerance_pct": args.lap_length_tolerance_pct,
         "shape_rmse_threshold_m": args.shape_rmse_threshold_m,
         "shape_p95_threshold_m": args.shape_p95_threshold_m,
+        "shape_rmse_threshold_pct_of_length": args.shape_rmse_threshold_pct_of_length,
+        "shape_p95_threshold_pct_of_length": args.shape_p95_threshold_pct_of_length,
         "min_position_samples": args.min_position_samples,
     }
 
@@ -277,6 +281,8 @@ def analyze_event(
         length_tolerance_pct=args.lap_length_tolerance_pct,
         rmse_threshold_m=args.shape_rmse_threshold_m,
         p95_threshold_m=args.shape_p95_threshold_m,
+        rmse_threshold_pct_of_length=args.shape_rmse_threshold_pct_of_length,
+        p95_threshold_pct_of_length=args.shape_p95_threshold_pct_of_length,
         min_position_samples=args.min_position_samples,
     )
     lap_event = {
@@ -450,7 +456,7 @@ def write_run_outputs(
     paths["circuit_analysis_csv"].parent.mkdir(parents=True, exist_ok=True)
     if csv_rows:
         with paths["circuit_analysis_csv"].open("w", encoding="utf-8", newline="") as handle:
-            writer = csv.DictWriter(handle, fieldnames=list(csv_rows[0].keys()))
+            writer = csv.DictWriter(handle, fieldnames=list(csv_rows[0].keys()), lineterminator="\n")
             writer.writeheader()
             writer.writerows(csv_rows)
 
@@ -592,7 +598,16 @@ def run_fixture_demo(args: argparse.Namespace) -> None:
             "non_compliant_laps": 0,
             "shape_non_compliant_laps": 0,
             "reason_counts": {"compliant": 1},
-            "thresholds": {"length_tolerance_pct": 0.05, "rmse_threshold_m": 32.0, "p95_threshold_m": 75.0},
+            "thresholds": {
+                "length_tolerance_pct": 0.05,
+                "rmse_threshold_m": 32.0,
+                "p95_threshold_m": 75.0,
+                "rmse_threshold_pct_of_length": 0.016,
+                "p95_threshold_pct_of_length": 0.025,
+                "reference_length_m": 40.0,
+                "effective_rmse_threshold_m": 32.0,
+                "effective_p95_threshold_m": 75.0,
+            },
             "fastest_lap_with_position": lap_record,
             "fastest_compliant_lap": lap_record,
             "worst_shape_laps": [],

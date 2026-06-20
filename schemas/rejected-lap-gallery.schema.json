@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/fblln/apexline/schemas/rejected-lap-gallery.schema.json",
+  "title": "Apexline rejected lap gallery",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "artifact_kind",
+    "year",
+    "event_name",
+    "round",
+    "session_type",
+    "circuit_id",
+    "circuit_name",
+    "thresholds",
+    "generation_provenance",
+    "reference_length_m",
+    "anchor",
+    "max_render_points",
+    "rendering_note",
+    "rejected_laps"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "artifact_kind": {"const": "rejected_lap_gallery"},
+    "year": {"type": "integer"},
+    "event_name": {"type": "string"},
+    "round": {"type": "integer"},
+    "session_type": {"type": "string"},
+    "circuit_id": {"type": "string"},
+    "circuit_name": {"type": "string"},
+    "thresholds": {"type": "object"},
+    "generation_provenance": {"type": "object"},
+    "reference_length_m": {"type": "number"},
+    "anchor": {"type": "string"},
+    "max_render_points": {"type": "integer"},
+    "rendering_note": {"type": "string"},
+    "rejected_laps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "driver",
+          "lap_number",
+          "lap_time_ms",
+          "reasons",
+          "path_length_m",
+          "length_error_pct",
+          "fit_rmse_m",
+          "fit_p95_m"
+        ],
+        "properties": {
+          "driver": {"type": "string"},
+          "lap_number": {"type": "integer"},
+          "lap_time_ms": {"type": ["integer", "null"]},
+          "reasons": {"type": "array", "items": {"type": "string"}},
+          "path_length_m": {"type": ["number", "null"]},
+          "length_error_pct": {"type": ["number", "null"]},
+          "fit_rmse_m": {"type": ["number", "null"]},
+          "fit_p95_m": {"type": ["number", "null"]}
+        }
+      }
+    }
+  }
+}

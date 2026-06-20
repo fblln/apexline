@@ -8,6 +8,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from apexline.artifacts import default_batch_dir, default_run_dir, normalize_session, session_slug, slugify
+from apexline.plot_rejected_lap_galleries import relative_index_link
 
 
 class ArtifactPathTests(unittest.TestCase):
@@ -28,6 +29,12 @@ class ArtifactPathTests(unittest.TestCase):
 
     def test_default_batch_output_path(self) -> None:
         self.assertEqual(default_batch_dir(Path("data"), 2025, "Q"), Path("data/2025/all-events/q"))
+
+    def test_gallery_link_is_relative_to_custom_index(self) -> None:
+        root = Path(__file__).resolve().parents[1]
+        index = root / "tmp" / "reports" / "index.md"
+        gallery = root / "tmp" / "assets" / "event.svg"
+        self.assertEqual(relative_index_link(gallery, index), "../assets/event.svg")
 
 
 if __name__ == "__main__":

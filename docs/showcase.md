@@ -2,8 +2,8 @@
 
 Apexline validates whether FastF1 lap position traces match an oracle circuit
 GPS LineString for a requested year, event, and session. The repo is organized
-around single-session validation first, with Canada 2025 as the repair proof
-point and Belgium 2025 as the failure gallery.
+around single-session validation first, with Canada 2025 as the overlap-repair
+proof point and Belgium as the long-circuit calibration case.
 
 ## Example 1: Single Race Session
 
@@ -32,9 +32,9 @@ one-lap trace passed the oracle fit.”
 
 ![Canada 2025 lap diagnostic overlays](assets/canada-2025-lap-diagnostic-overlays.svg)
 
-Belgium 2025 is the stronger rejected-lap shape showcase. Spa has many laps
-that pass the cheap availability checks but still diverge from the oracle shape
-once Apexline does the actual fit:
+Belgium 2025 shows why long circuits need proportional thresholds. Its 747
+fitted laps pass shape validation; the remaining rejects are FastF1 metadata or
+pit-lap exclusions:
 
 ![Belgian Grand Prix rejected-lap gallery](assets/rejected-laps-2025/13-belgian-grand-prix.svg)
 
@@ -65,9 +65,9 @@ required for normal use; single-session validation is the primary workflow.
 Current 2025 season totals:
 
 - 26,689 laps inspected.
-- 21,119 good laps (79.1%).
-- 5,570 bad laps (20.9%).
-- 1,923 shape-threshold rejects.
+- 23,042 good laps (86.3%).
+- 3,647 bad laps (13.7%).
+- 0 shape-threshold rejects after visual calibration.
 
 For the deeper analysis, use
 [../notebooks/2025-season-insights.ipynb](../notebooks/2025-season-insights.ipynb).

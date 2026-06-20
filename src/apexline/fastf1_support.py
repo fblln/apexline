@@ -174,6 +174,19 @@ def lap_key(year: int, round_index: int, event_name: str, session_name: str, dri
     return f"{year}-{round_index:02d}-{event_slug}-{session_name.lower()}-{driver.lower()}-lap-{lap_number}"
 
 
+def effective_shape_thresholds(
+    *,
+    reference_length_m: float,
+    rmse_threshold_m: float,
+    p95_threshold_m: float,
+    rmse_threshold_pct_of_length: float,
+    p95_threshold_pct_of_length: float,
+) -> tuple[float, float]:
+    effective_rmse_threshold_m = max(rmse_threshold_m, reference_length_m * rmse_threshold_pct_of_length)
+    effective_p95_threshold_m = max(p95_threshold_m, reference_length_m * p95_threshold_pct_of_length)
+    return effective_rmse_threshold_m, effective_p95_threshold_m
+
+
 def classify_lap(
     *,
     driver: str,
@@ -188,6 +201,8 @@ def classify_lap(
     length_tolerance_pct: float,
     rmse_threshold_m: float,
     p95_threshold_m: float,
+    rmse_threshold_pct_of_length: float,
+    p95_threshold_pct_of_length: float,
     min_position_samples: int,
 ) -> LapDiagnostic:
     reasons: list[str] = []
@@ -195,8 +210,6 @@ def classify_lap(
         reasons.append("fastf1_inaccurate")
     if is_pit_lap:
         reasons.append("pit_lap")
-    if lap_time_ms is None:
-        reasons.append("missing_lap_time")
 
     if not points:
         reasons.append("no_position_data")
@@ -221,6 +234,13 @@ def classify_lap(
         )
 
     reference_length_m = path_length(reference_xy)
+    effective_rmse_threshold_m, effective_p95_threshold_m = effective_shape_thresholds(
+        reference_length_m=reference_length_m,
+        rmse_threshold_m=rmse_threshold_m,
+        p95_threshold_m=p95_threshold_m,
+        rmse_threshold_pct_of_length=rmse_threshold_pct_of_length,
+        p95_threshold_pct_of_length=p95_threshold_pct_of_length,
+    )
     position_samples = len(points)
     if position_samples < min_position_samples:
         reasons.append("too_few_position_samples")
@@ -266,9 +286,9 @@ def classify_lap(
             sample_count=validation_samples,
             offset_step=validation_offset_step,
         )
-        if fit.rmse_m > rmse_threshold_m:
+        if fit.rmse_m > effective_rmse_threshold_m:
             reasons.append("shape_rmse_over_threshold")
-        if fit.p95_m > p95_threshold_m:
+        if fit.p95_m > effective_p95_threshold_m:
             reasons.append("shape_p95_over_threshold")
 
     return LapDiagnostic(
@@ -305,10 +325,20 @@ def analyze_lap_compliance(
     length_tolerance_pct: float,
     rmse_threshold_m: float,
     p95_threshold_m: float,
+    rmse_threshold_pct_of_length: float,
+    p95_threshold_pct_of_length: float,
     min_position_samples: int,
 ) -> dict[str, Any]:
     session = load_session(year, event, cache_dir, session_name)
     diagnostics: list[LapDiagnostic] = []
+    reference_length_m = path_length(reference_xy)
+    effective_rmse_threshold_m, effective_p95_threshold_m = effective_shape_thresholds(
+        reference_length_m=reference_length_m,
+        rmse_threshold_m=rmse_threshold_m,
+        p95_threshold_m=p95_threshold_m,
+        rmse_threshold_pct_of_length=rmse_threshold_pct_of_length,
+        p95_threshold_pct_of_length=p95_threshold_pct_of_length,
+    )
 
     for driver_ref in getattr(session, "drivers", []):
         try:
@@ -337,6 +367,8 @@ def analyze_lap_compliance(
                     length_tolerance_pct=length_tolerance_pct,
                     rmse_threshold_m=rmse_threshold_m,
                     p95_threshold_m=p95_threshold_m,
+                    rmse_threshold_pct_of_length=rmse_threshold_pct_of_length,
+                    p95_threshold_pct_of_length=p95_threshold_pct_of_length,
                     min_position_samples=min_position_samples,
                 )
             )
@@ -404,6 +436,11 @@ def analyze_lap_compliance(
             "length_tolerance_pct": length_tolerance_pct,
             "rmse_threshold_m": rmse_threshold_m,
             "p95_threshold_m": p95_threshold_m,
+            "rmse_threshold_pct_of_length": rmse_threshold_pct_of_length,
+            "p95_threshold_pct_of_length": p95_threshold_pct_of_length,
+            "reference_length_m": reference_length_m,
+            "effective_rmse_threshold_m": effective_rmse_threshold_m,
+            "effective_p95_threshold_m": effective_p95_threshold_m,
             "min_position_samples": min_position_samples,
             "validation_samples": validation_samples,
             "validation_offset_step": validation_offset_step,

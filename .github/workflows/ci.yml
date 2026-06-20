@@ -23,9 +23,10 @@ jobs:
         run: pytest
       - name: Schema check checked-in examples
         run: |
-          apexline schema-check --allow-legacy \
-            data/circuit-polylines-2025.json \
-            data/lap-diagnostics-2025.json \
+          apexline schema-check \
+            data/2025/all-events/r/circuit-analysis.json \
+            data/2025/all-events/r/lap-diagnostics.json \
+            data/2025/all-events/r/artifact-manifest.json \
             docs/assets/rejected-laps-2025/10-canadian-grand-prix.json
       - name: Fixture smoke
         run: |
