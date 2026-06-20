@@ -198,6 +198,30 @@ Generated 2025 galleries:
 | Australian Grand Prix | 359 | [SVG](docs/assets/rejected-laps-2025/01-australian-grand-prix.svg) | [JSON](docs/assets/rejected-laps-2025/01-australian-grand-prix.json) |
 | British Grand Prix | 329 | [SVG](docs/assets/rejected-laps-2025/12-british-grand-prix.svg) | [JSON](docs/assets/rejected-laps-2025/12-british-grand-prix.json) |
 
+The full galleries are intentionally tall. The updated renders can be inspected
+in place without making the main README permanently thousands of pixels longer:
+
+<details>
+<summary>Canada: 152 rejected laps</summary>
+
+![Canadian 2025 rejected-lap gallery](docs/assets/rejected-laps-2025/10-canadian-grand-prix.svg)
+
+</details>
+
+<details>
+<summary>Australia: 359 rejected laps</summary>
+
+![Australian 2025 rejected-lap gallery](docs/assets/rejected-laps-2025/01-australian-grand-prix.svg)
+
+</details>
+
+<details>
+<summary>Britain: 329 rejected laps</summary>
+
+![British 2025 rejected-lap gallery](docs/assets/rejected-laps-2025/12-british-grand-prix.svg)
+
+</details>
+
 The gallery index is available at
 [docs/rejected-lap-galleries-2025.md](docs/rejected-lap-galleries-2025.md).
 
@@ -358,6 +382,13 @@ In practical terms:
 - the left panel is the full oracle GPS path,
 - the middle panel is the same path after dropping low-value points,
 - the right panel is the exact data you would ship to a map client or API.
+
+The second graphic explains what happens inside that compact string. Encoding
+does not fit or reshape the circuit: it quantizes coordinates, stores movement
+from the previous point, writes those small deltas as variable-length
+characters, and can then be decoded by common mapping libraries.
+
+![Encoded polyline pipeline](docs/assets/polyline-encoding-explainer.svg)
 
 ## Quick Start
 
