@@ -63,19 +63,22 @@ def build_markdown(rows: list[dict[str, Any]], year: int) -> str:
     shape_bad = sum(row["shape_non_compliant_laps"] for row in rows)
 
     reasons = Counter()
+    warnings = Counter()
     for row in rows:
         reasons.update(row["reason_counts"])
+        warnings.update(row.get("warning_counts", {}))
 
     lines = [
         f"# {year} lap compliance summary",
         "",
         "Good laps are laps that pass Apexline's oracle-shape evidence checks.",
-        "Bad laps are laps rejected for at least one reason such as FastF1",
-        "`IsAccurate == False`, pit in/out, too few position samples,",
-        "path-length outlier, or shape residual over threshold.",
+        "Bad laps are laps rejected for at least one geometry-relevant reason",
+        "such as pit in/out, too few position samples, path-length outlier, or",
+        "shape residual over threshold.",
         "",
-        "Reason counts are not mutually exclusive: one bad lap can be both a",
-        "pit lap and FastF1-inaccurate.",
+        "FastF1 `IsAccurate == False` is recorded as a non-blocking warning.",
+        "Timing or track-status warnings do not prevent a lap from passing the",
+        "oracle shape fit.",
         "",
         "## Season totals",
         "",
@@ -98,13 +101,17 @@ def build_markdown(rows: list[dict[str, Any]], year: int) -> str:
             continue
         lines.append(f"| `{reason}` | {count:,} |")
 
+    lines.extend(["", "## Non-blocking warnings", "", "| Warning | Count |", "|---|---:|"])
+    for warning, count in sorted(warnings.items(), key=lambda item: item[1], reverse=True):
+        lines.append(f"| `{warning}` | {count:,} |")
+
     lines.extend(
         [
             "",
             "## Circuit table",
             "",
-            "| Round | Event | Good | Bad | Total | Good % | Shape Bad | Top rejection signals |",
-            "|---:|---|---:|---:|---:|---:|---:|---|",
+            "| Round | Event | Good | Bad | Total | Good % | Shape Bad | Warnings | Top rejection signals |",
+            "|---:|---|---:|---:|---:|---:|---:|---:|---|",
         ]
     )
     for row in sorted(rows, key=lambda item: item["round"]):
@@ -112,7 +119,7 @@ def build_markdown(rows: list[dict[str, Any]], year: int) -> str:
         good = row["compliant_laps"]
         bad = row["non_compliant_laps"]
         lines.append(
-            "| {round} | {event} | {good:,} | {bad:,} | {total:,} | {good_pct} | {shape_bad:,} | {signals} |".format(
+            "| {round} | {event} | {good:,} | {bad:,} | {total:,} | {good_pct} | {shape_bad:,} | {warnings:,} | {signals} |".format(
                 round=row["round"],
                 event=row["event_name"],
                 good=good,
@@ -120,6 +127,7 @@ def build_markdown(rows: list[dict[str, Any]], year: int) -> str:
                 total=total,
                 good_pct=fmt_pct(pct(good, total)),
                 shape_bad=row["shape_non_compliant_laps"],
+                warnings=sum(row.get("warning_counts", {}).values()),
                 signals=rejection_signals(row["reason_counts"]),
             )
         )
@@ -139,6 +147,7 @@ def build_svg(rows: list[dict[str, Any]], year: int) -> str:
     total_laps = sum(row["total_laps"] for row in rows)
     good_laps = sum(row["compliant_laps"] for row in rows)
     bad_laps = sum(row["non_compliant_laps"] for row in rows)
+    warning_laps = sum(row.get("warning_counts", {}).get("fastf1_inaccurate", 0) for row in rows)
 
     width = 1300
     row_h = 30
@@ -148,7 +157,7 @@ def build_svg(rows: list[dict[str, Any]], year: int) -> str:
     label_x = 34
     bar_x = 365
     bar_w = 720
-    pct_x = 1110
+    pct_x = 1085
 
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
@@ -166,6 +175,8 @@ def build_svg(rows: list[dict[str, Any]], year: int) -> str:
         text_svg(390, 88, "good", size=12, fill="#475569"),
         '<rect x="452" y="80" width="18" height="8" fill="#dc2626"/>',
         text_svg(477, 88, "bad", size=12, fill="#475569"),
+        '<rect x="530" y="80" width="18" height="8" fill="#2563eb"/>',
+        text_svg(555, 88, f"warning (non-blocking): {warning_laps:,}", size=12, fill="#475569"),
     ]
 
     for index, row in enumerate(rows):
@@ -173,6 +184,7 @@ def build_svg(rows: list[dict[str, Any]], year: int) -> str:
         total = row["total_laps"]
         good = row["compliant_laps"]
         bad = row["non_compliant_laps"]
+        warning_count = row.get("warning_counts", {}).get("fastf1_inaccurate", 0)
         good_w = bar_w * good / total if total else 0
         bad_w = bar_w - good_w
         label = f"{row['round']:02d} {row['event_name']}"
@@ -183,7 +195,7 @@ def build_svg(rows: list[dict[str, Any]], year: int) -> str:
                 f'<rect x="{bar_x}" y="{y + 6}" width="{good_w:.1f}" height="16" rx="3" fill="#059669"/>',
                 f'<rect x="{bar_x + good_w:.1f}" y="{y + 6}" width="{bad_w:.1f}" height="16" rx="3" fill="#dc2626"/>',
                 text_svg(pct_x, y + 18, f"{fmt_pct(pct(good, total))} good", size=12, fill="#334155"),
-                text_svg(pct_x + 92, y + 18, f"{bad:,} bad", size=12, fill="#64748b"),
+                text_svg(pct_x + 82, y + 18, f"{bad:,} bad / {warning_count:,} warn", size=11, fill="#64748b"),
             ]
         )
 

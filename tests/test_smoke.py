@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -16,8 +17,9 @@ class SmokeTests(unittest.TestCase):
             output_svg = Path(tmpdir) / "lap-compliance.svg"
             subprocess.run(
                 [
-                    "python3",
-                    str(ROOT / "scripts" / "summarize_lap_diagnostics.py"),
+                    sys.executable,
+                    "-m",
+                    "apexline.summarize",
                     "--year",
                     "2025",
                     "--diagnostics-json",
@@ -38,14 +40,15 @@ class SmokeTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             out = Path(tmpdir)
             subprocess.run(
-                ["python3", str(ROOT / "scripts" / "analyze_f1_circuit_gps.py"), "fixture-demo", "--output-dir", str(out)],
+                [sys.executable, "-m", "apexline", "fixture-demo", "--output-dir", str(out)],
                 check=True,
                 cwd=ROOT,
             )
             subprocess.run(
                 [
-                    "python3",
-                    str(ROOT / "scripts" / "analyze_f1_circuit_gps.py"),
+                    sys.executable,
+                    "-m",
+                    "apexline",
                     "schema-check",
                     str(out / "circuit-analysis.json"),
                     str(out / "lap-diagnostics.json"),
@@ -56,8 +59,9 @@ class SmokeTests(unittest.TestCase):
             )
             subprocess.run(
                 [
-                    "python3",
-                    str(ROOT / "scripts" / "summarize_lap_diagnostics.py"),
+                    sys.executable,
+                    "-m",
+                    "apexline.summarize",
                     "--manifest",
                     str(out / "artifact-manifest.json"),
                     "--output-md",

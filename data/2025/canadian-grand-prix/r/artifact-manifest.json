@@ -30,7 +30,7 @@
     "manifest_json": "data/2025/canadian-grand-prix/r/artifact-manifest.json"
   },
   "provenance": {
-    "generated_at": "2026-06-20T08:06:15Z",
+    "generated_at": "2026-06-20T13:05:31Z",
     "generator": "apexline",
     "schema_version": "1.0.0",
     "command": "validate",

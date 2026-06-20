@@ -99,3 +99,4 @@ class LapDiagnostic:
     fit: FitStats | None
     compliant: bool
     reasons: list[str]
+    warnings: list[str]

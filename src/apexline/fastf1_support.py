@@ -75,8 +75,6 @@ def score_fastf1_laps(
     for driver in driver_codes:
         laps = session.laps.pick_drivers(driver)
         for _, lap in laps.iterlaps():
-            if not bool(lap.get("IsAccurate")):
-                continue
             if str(lap.get("PitOutTime")) != "NaT" or str(lap.get("PitInTime")) != "NaT":
                 continue
 
@@ -121,7 +119,7 @@ def score_fastf1_laps(
             break
 
     if not candidates:
-        raise RuntimeError(f"could not find a clean FastF1 lap for {year} {event}")
+        raise RuntimeError(f"could not find a geometry-usable FastF1 lap for {year} {event}")
 
     scored: list[ScoredFastF1Lap] = []
     for candidate in sorted(candidates, key=lambda item: item.length_error_m)[:max_shape_candidates]:
@@ -206,8 +204,9 @@ def classify_lap(
     min_position_samples: int,
 ) -> LapDiagnostic:
     reasons: list[str] = []
+    warnings: list[str] = []
     if not is_accurate:
-        reasons.append("fastf1_inaccurate")
+        warnings.append("fastf1_inaccurate")
     if is_pit_lap:
         reasons.append("pit_lap")
 
@@ -231,6 +230,7 @@ def classify_lap(
             fit=None,
             compliant=False,
             reasons=reasons,
+            warnings=warnings,
         )
 
     reference_length_m = path_length(reference_xy)
@@ -274,8 +274,7 @@ def classify_lap(
 
     fit: FitStats | None = None
     if (
-        is_accurate
-        and not is_pit_lap
+        not is_pit_lap
         and position_samples >= min_position_samples
         and effective_length_error_pct is not None
         and abs(effective_length_error_pct) <= length_tolerance_pct
@@ -309,6 +308,7 @@ def classify_lap(
         fit=fit,
         compliant=not reasons,
         reasons=reasons,
+        warnings=warnings,
     )
 
 
@@ -374,11 +374,14 @@ def analyze_lap_compliance(
             )
 
     reason_counts: dict[str, int] = {}
+    warning_counts: dict[str, int] = {}
     for diagnostic in diagnostics:
         if diagnostic.compliant:
             reason_counts["compliant"] = reason_counts.get("compliant", 0) + 1
         for reason in diagnostic.reasons:
             reason_counts[reason] = reason_counts.get(reason, 0) + 1
+        for warning in diagnostic.warnings:
+            warning_counts[warning] = warning_counts.get(warning, 0) + 1
 
     fitted = [diag for diag in diagnostics if diag.fit is not None]
     compliant = [diag for diag in diagnostics if diag.compliant]
@@ -432,6 +435,7 @@ def analyze_lap_compliance(
         "non_compliant_laps": len(diagnostics) - len(compliant),
         "shape_non_compliant_laps": len(shape_non_compliant),
         "reason_counts": dict(sorted(reason_counts.items())),
+        "warning_counts": dict(sorted(warning_counts.items())),
         "thresholds": {
             "length_tolerance_pct": length_tolerance_pct,
             "rmse_threshold_m": rmse_threshold_m,

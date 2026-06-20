@@ -19,6 +19,7 @@
     "non_compliant_laps",
     "shape_non_compliant_laps",
     "reason_counts",
+    "warning_counts",
     "thresholds"
   ],
   "properties": {
@@ -35,7 +36,26 @@
     "compliant_laps": {"type": "integer"},
     "non_compliant_laps": {"type": "integer"},
     "shape_non_compliant_laps": {"type": "integer"},
-    "reason_counts": {"type": "object"},
+    "reason_counts": {
+      "type": "object",
+      "propertyNames": {
+        "enum": [
+          "compliant",
+          "pit_lap",
+          "too_few_position_samples",
+          "path_length_outlier",
+          "shape_rmse_over_threshold",
+          "shape_p95_over_threshold",
+          "no_position_data"
+        ]
+      },
+      "additionalProperties": {"type": "integer"}
+    },
+    "warning_counts": {
+      "type": "object",
+      "propertyNames": {"const": "fastf1_inaccurate"},
+      "additionalProperties": {"type": "integer"}
+    },
     "thresholds": {
       "type": "object",
       "required": [

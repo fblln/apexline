@@ -2,9 +2,14 @@
 
 ## Unreleased
 
+- Treat FastF1's timing-oriented `IsAccurate` flag as a non-blocking warning;
+  laps with usable position geometry now continue through oracle shape fitting.
 - Made lap-shape thresholds proportional to oracle circuit length and removed
   missing lap time as a rejection reason.
 - Regenerated the complete 2025 race-session dataset and static evidence.
+- Synced README, docs, and galleries to the new lap-marking results and removed
+  the redundant insights notebook, legacy `scripts/` wrappers, the showcase and
+  cross-validation docs, and the heaviest two rejected-lap galleries.
 - Consolidated season artifacts under `data/<year>/all-events/<session>/`.
 - Added effective-threshold provenance, gallery ordering, and custom output
   directory support.

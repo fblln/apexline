@@ -79,13 +79,13 @@ After validation, Apexline found:
 | Metric | Value |
 |---|---:|
 | Total laps inspected | 1349 |
-| Laps fitted against oracle shape | 1197 |
-| Compliant laps | 1197 |
-| Non-compliant laps | 152 |
+| Laps fitted against oracle shape | 1217 |
+| Compliant laps | 1217 |
+| Non-compliant laps | 132 |
 | Shape non-compliant laps | 0 |
 | Fastest lap | RUS lap 63, 74.119 s |
-| Fastest lap fit RMSE | 5.54 m |
-| Fastest lap fit p95 | 8.51 m |
+| Fastest lap fit RMSE | 5.01 m |
+| Fastest lap fit p95 | 8.70 m |
 | Oracle GPS polyline points | 84 |
 | Polyline simplification max error | 0.95 m |
 
@@ -93,10 +93,13 @@ Non-compliant reason counts are intentionally not mutually exclusive:
 
 | Reason | Count |
 |---|---:|
-| `fastf1_inaccurate` | 152 |
 | `pit_lap` | 131 |
 | `path_length_outlier` | 2 |
 | `too_few_position_samples` | 1 |
+
+Separately, 152 laps carry the non-blocking `fastf1_inaccurate` warning. That
+flag is FastF1 timing/track-status metadata; it does not block the shape fit, so
+those laps can still be compliant evidence.
 
 That distinction matters. A lap can be a real race lap and still be bad
 evidence for the oracle circuit shape. Apexline keeps those cases explicit.
@@ -117,9 +120,9 @@ Three different cases are visible:
 
 | Case | What Apexline Sees | Why It Matters |
 |---|---|---|
-| RUS lap 63 | Fastest lap, clean shape fit, RMSE 5.5 m, p95 8.5 m | Representative clean evidence against the oracle line |
+| RUS lap 63 | Fastest lap, clean shape fit, RMSE 3.9 m, p95 6.6 m | Representative clean evidence against the oracle line |
 | VER lap 2 | Raw 5012.9 m trace on a 4365.0 m oracle, normalized to 4415.1 m, RMSE 28.2 m | Shows why lap-boundary seam repair matters: the raw trace looked bad, the recovered one-lap window is usable |
-| RUS lap 13 | Pit-in lap, FastF1 marks it inaccurate, 92.351 s | Projected for inspection, but not shape-fitted |
+| RUS lap 13 | Pit-in lap; FastF1 also raises a timing-integrity warning | Projected for inspection, but rejected because pit geometry is not representative |
 
 This is the core value: the script does not just compute a score. It explains
 why a lap is useful, recoverable, suspicious, or invalid for this specific
@@ -127,8 +130,9 @@ geometry task.
 
 Belgium 2025 demonstrates why thresholds must account for circuit length. Spa's
 apparently large absolute residuals are small relative to its 6.98 km oracle
-line: all 747 fitted laps pass the proportional shape limits. The remaining 132
-rejections come from FastF1 accuracy metadata or pit status, not geometry:
+line: all 807 fitted laps pass the proportional shape limits. The remaining 72
+rejections are pit-status laps, not geometry; a further 132 laps carry the
+non-blocking FastF1 accuracy warning:
 [Belgian rejected-lap gallery](docs/assets/rejected-laps-2025/13-belgian-grand-prix.svg).
 
 ![Belgian 2025 rejected-lap gallery](docs/assets/rejected-laps-2025/13-belgian-grand-prix.svg)
@@ -146,38 +150,42 @@ Season totals:
 |---|---:|
 | Circuits | 24 |
 | Total laps inspected | 26,689 |
-| Fitted laps | 23,042 |
-| Good laps | 23,042 (86.3%) |
-| Bad laps | 3,647 (13.7%) |
-| Shape-threshold bad laps | 0 |
+| Fitted laps | 25,022 |
+| Good laps | 25,019 (93.7%) |
+| Bad laps | 1,670 (6.3%) |
+| Shape-threshold bad laps | 3 |
 
-Rejection signals are not mutually exclusive; one lap can be both a pit lap and
-FastF1-inaccurate.
+Rejection signals are not mutually exclusive; one lap can hit more than one
+reason.
 
 | Reason | Count |
 |---|---:|
-| `fastf1_inaccurate` | 3,646 |
 | `pit_lap` | 1,625 |
 | `path_length_outlier` | 45 |
 | `too_few_position_samples` | 19 |
+| `shape_p95_over_threshold` | 3 |
+
+FastF1's timing-oriented `IsAccurate` flag is tracked separately as the
+non-blocking `fastf1_inaccurate` warning, raised on 3,646 laps. It does not
+prevent a lap from passing the oracle shape fit.
 
 What stood out:
 
-- Cleanest circuits by usable evidence were Singapore `94.6%`, Hungary `94.2%`,
-  Japan `94.1%`, and Italy `94.0%`.
-- All `23,042` fitted laps passed shape validation. The remaining rejections
-  occur before fitting and are independently auditable data-quality exclusions.
+- Cleanest circuits by usable evidence were Singapore `96.1%`, United States
+  `96.1%`, Japan `96.0%`, Miami `95.8%`, and Italy `95.8%`.
+- `25,019` of `25,022` fitted laps passed shape validation; only `3` failed the
+  proportional shape thresholds (Australia `2`, Monaco `1`). The remaining
+  rejections occur before fitting and are independently auditable data-quality
+  exclusions.
 - Belgium moved from `158` false shape rejects to `0` after the limits were made
   proportional to oracle length; the same visual audit cleared smaller
   threshold-edge clusters elsewhere.
-- Averaging the five best fitted laps helped on `10 / 24` circuits and hurt on
-  `14 / 24`; Canada was the sharpest warning case, moving from `5.0 m` best-lap
+- Averaging the five best fitted laps helped on `11 / 24` circuits and hurt on
+  `13 / 24`; Canada was the sharpest warning case, moving from `5.0 m` best-lap
   RMSE to `12.4 m` after averaging.
 
 The full per-circuit table is in [docs/lap-compliance-2025.md](docs/lap-compliance-2025.md).
 The circuit-fit view is in [docs/2025-validation-summary.md](docs/2025-validation-summary.md).
-The deeper season walkthrough is in
-[notebooks/2025-season-insights.ipynb](notebooks/2025-season-insights.ipynb).
 
 ## Rejected Lap Galleries
 
@@ -189,36 +197,31 @@ failure mode. By default these audit galleries render raw position points
 without thinning; `--max-render-points` is available only if smaller SVGs are
 more important than corner-level fidelity.
 
+A FastF1 timing-accuracy warning alone does not put a lap in this gallery. The
+gallery is reserved for blocking geometry/data reasons such as pit geometry,
+insufficient position samples, unrecoverable path length, or residual shape.
+
 Generated 2025 galleries:
 
 | Event | Rejected laps | Gallery | Data |
 |---|---:|---|---|
-| Canadian Grand Prix | 152 | [SVG](docs/assets/rejected-laps-2025/10-canadian-grand-prix.svg) | [JSON](docs/assets/rejected-laps-2025/10-canadian-grand-prix.json) |
-| Belgian Grand Prix | 132 | [SVG](docs/assets/rejected-laps-2025/13-belgian-grand-prix.svg) | [JSON](docs/assets/rejected-laps-2025/13-belgian-grand-prix.json) |
-| Australian Grand Prix | 359 | [SVG](docs/assets/rejected-laps-2025/01-australian-grand-prix.svg) | [JSON](docs/assets/rejected-laps-2025/01-australian-grand-prix.json) |
-| British Grand Prix | 329 | [SVG](docs/assets/rejected-laps-2025/12-british-grand-prix.svg) | [JSON](docs/assets/rejected-laps-2025/12-british-grand-prix.json) |
+| Canadian Grand Prix | 132 | [SVG](docs/assets/rejected-laps-2025/10-canadian-grand-prix.svg) | [JSON](docs/assets/rejected-laps-2025/10-canadian-grand-prix.json) |
+| Belgian Grand Prix | 72 | [SVG](docs/assets/rejected-laps-2025/13-belgian-grand-prix.svg) | [JSON](docs/assets/rejected-laps-2025/13-belgian-grand-prix.json) |
 
 The full galleries are intentionally tall. The updated renders can be inspected
 in place without making the main README permanently thousands of pixels longer:
 
 <details>
-<summary>Canada: 152 rejected laps</summary>
+<summary>Canada: 132 rejected laps</summary>
 
 ![Canadian 2025 rejected-lap gallery](docs/assets/rejected-laps-2025/10-canadian-grand-prix.svg)
 
 </details>
 
 <details>
-<summary>Australia: 359 rejected laps</summary>
+<summary>Belgium: 72 rejected laps</summary>
 
-![Australian 2025 rejected-lap gallery](docs/assets/rejected-laps-2025/01-australian-grand-prix.svg)
-
-</details>
-
-<details>
-<summary>Britain: 329 rejected laps</summary>
-
-![British 2025 rejected-lap gallery](docs/assets/rejected-laps-2025/12-british-grand-prix.svg)
+![Belgian 2025 rejected-lap gallery](docs/assets/rejected-laps-2025/13-belgian-grand-prix.svg)
 
 </details>
 
@@ -231,7 +234,7 @@ Generate the same galleries:
 .venv/bin/apexline-rejected-galleries \
   --year 2025 \
   --session R \
-  --circuits Canada Belgian Australia British
+  --circuits Canada Belgian
 ```
 
 ## Algorithm
@@ -275,20 +278,24 @@ If that window exists, shape fitting uses the normalized one-lap trace while the
 artifact still records the raw path length and trimmed overlap. If cleanup does
 not recover a one-lap trace, the lap remains a `path_length_outlier`.
 
-### 4. Reject Laps That Are Not Valid Evidence
+### 4. Separate Geometry Failures From Timing Warnings
 
-Before expensive shape fitting, each lap gets classified:
+Before expensive shape fitting, each lap gets classified. Only checks that can
+invalidate the geometry block a lap:
 
 | Check | Reason |
 |---|---|
-| `IsAccurate` is false | `fastf1_inaccurate` |
 | pit-in or pit-out is present | `pit_lap` |
 | too few position points | `too_few_position_samples` |
 | normalized path length still differs by more than 5% | `path_length_outlier` |
 
-This is where the tool is useful beyond map generation. It separates "available
-position data" from "position data suitable for validating the oracle circuit
-shape."
+FastF1's `IsAccurate == False` flag is recorded separately as the non-blocking
+`fastf1_inaccurate` warning. That flag covers timing and track-status integrity;
+it does not imply that the GPS shape is wrong. A non-pit lap with usable position
+samples therefore still receives a full oracle shape fit.
+
+This separates timing quality from the actual question Apexline answers:
+whether a FastF1 position trace matches the oracle circuit shape.
 
 ### 5. Fit FastF1 Shape To The Oracle
 
@@ -452,8 +459,8 @@ so FastF1 can download it. The `bacinger/f1-circuits` repository is cloned into
 `/tmp/f1-circuits` by default if missing.
 
 `--output-dir` defaults to `data/`. `--write-mode` controls whether existing
-artifacts are overwritten, skipped, or rejected. Legacy script wrappers are
-kept in `scripts/`, but the `apexline` console command is the primary interface.
+artifacts are overwritten, skipped, or rejected. The `apexline` console command
+is the primary interface.
 
 ## Outputs
 
@@ -487,6 +494,7 @@ circuit-level result:
 | `fitted_laps` | laps that passed pre-fit checks |
 | `compliant_laps` | laps passing all checks |
 | `reason_counts` | count by rejection reason |
+| `warning_counts` | count by non-blocking metadata warning |
 | `fastest_lap_with_position` | fastest lap with enough position samples |
 | `fastest_compliant_lap` | fastest lap that passes all checks |
 | `worst_shape_laps` | laps that failed shape thresholds |
@@ -538,7 +546,6 @@ The README keeps the headline story. The deeper generated analysis lives here:
 - [2025 validation summary](docs/2025-validation-summary.md)
 - [2025 lap compliance summary](docs/lap-compliance-2025.md)
 - [2025 rejected lap galleries](docs/rejected-lap-galleries-2025.md)
-- [2025 season insights notebook](notebooks/2025-season-insights.ipynb)
 
 ## Engineering Notes
 
@@ -557,15 +564,12 @@ for FastF1, and no treating a lap as usable just because position samples exist.
 
 ## Documentation
 
-- [2025 season insights notebook](notebooks/2025-season-insights.ipynb)
 - [2025 lap compliance summary](docs/lap-compliance-2025.md)
 - [2025 rejected lap galleries](docs/rejected-lap-galleries-2025.md)
 - [2025 validation summary](docs/2025-validation-summary.md)
-- [Showcase](docs/showcase.md)
 - [Output schemas](docs/output-schemas.md)
 - [Single-session example](examples/single-session.md)
 - [Parameter guide](docs/parameter-guide.md)
-- [Cross-validation writeup](docs/cross-validation-writeup.md)
 
 ## License And Data Sources
 

@@ -31,6 +31,7 @@ class RejectedLap:
     lap_number: int
     lap_time_ms: int | None
     reasons: list[str]
+    warnings: list[str]
     points: list[XY]
     path_length_m: float | None
     length_error_pct: float | None
@@ -135,7 +136,6 @@ def main_reason(reasons: list[str]) -> str:
         "shape_p95_over_threshold",
         "path_length_outlier",
         "pit_lap",
-        "fastf1_inaccurate",
         "too_few_position_samples",
         "no_position_data",
     ]
@@ -152,8 +152,6 @@ def reason_color(reason: str) -> str:
         return "#dc2626"
     if reason == "pit_lap":
         return "#f97316"
-    if reason == "fastf1_inaccurate":
-        return "#2563eb"
     return "#64748b"
 
 
@@ -210,13 +208,14 @@ def classify_laps(
 
         for _, lap in session.laps.pick_drivers(driver).iterlaps():
             reasons: list[str] = []
+            warnings: list[str] = []
             lap_number = int(lap.get("LapNumber"))
             lap_time_ms = analyzer.value_to_ms(lap.get("LapTime"))
             is_accurate = bool(lap.get("IsAccurate"))
             is_pit_lap = str(lap.get("PitOutTime")) != "NaT" or str(lap.get("PitInTime")) != "NaT"
 
             if not is_accurate:
-                reasons.append("fastf1_inaccurate")
+                warnings.append("fastf1_inaccurate")
             if is_pit_lap:
                 reasons.append("pit_lap")
 
@@ -224,7 +223,7 @@ def classify_laps(
             if not points:
                 reasons.append("no_position_data")
                 rejected.append(
-                    RejectedLap(driver, lap_number, lap_time_ms, reasons, points, None, None, None)
+                    RejectedLap(driver, lap_number, lap_time_ms, reasons, warnings, points, None, None, None)
                 )
                 continue
 
@@ -252,8 +251,7 @@ def classify_laps(
 
             fit: analyzer.FitStats | None = None
             if (
-                is_accurate
-                and not is_pit_lap
+                not is_pit_lap
                 and len(points) >= min_position_samples
                 and abs(effective_length_error_pct) <= length_tolerance_pct
             ):
@@ -275,6 +273,7 @@ def classify_laps(
                         lap_number=lap_number,
                         lap_time_ms=lap_time_ms,
                         reasons=reasons,
+                        warnings=warnings,
                         points=effective_points,
                         path_length_m=effective_path_length_m,
                         length_error_pct=effective_length_error_pct,
@@ -386,6 +385,8 @@ def draw_gallery(
         chart_h = 104
 
         reason_text = ", ".join(lap.reasons)
+        if lap.warnings:
+            reason_text += f" | warning: {', '.join(lap.warnings)}"
         length_text = "--"
         if lap.path_length_m is not None and lap.length_error_pct is not None:
             length_text = f"{lap.path_length_m:.0f} m ({lap.length_error_pct * 100:+.1f}%)"
@@ -478,6 +479,7 @@ def draw_gallery(
                         "lap_number": lap.lap_number,
                         "lap_time_ms": lap.lap_time_ms,
                         "reasons": lap.reasons,
+                        "warnings": lap.warnings,
                         "path_length_m": lap.path_length_m,
                         "length_error_pct": lap.length_error_pct,
                         "fit_rmse_m": lap.fit.rmse_m if lap.fit else None,
@@ -499,6 +501,7 @@ def write_index(entries: list[dict[str, Any]], output: Path) -> None:
         "Each SVG shows every rejected lap for the event. Rejected laps are",
         "projected with a clean anchor-lap transform for that event; they do not",
         "learn their own rotation or translation.",
+        "FastF1 timing-accuracy warnings alone do not put a lap in this gallery.",
         "",
         "| Event | Rejected laps | Gallery | Data |",
         "|---|---:|---|---|",

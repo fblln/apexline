@@ -62,7 +62,6 @@ select = ["E", "F"]
 ignore = ["E501"]
 
 [tool.ruff.lint.per-file-ignores]
-"scripts/*.py" = ["E402"]
 "tests/test_integration_fastf1.py" = ["E402"]
 "tests/test_schemas.py" = ["E402"]
 "src/apexline/analyze_f1_circuit_gps.py" = ["F401"]

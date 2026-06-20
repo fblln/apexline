@@ -56,8 +56,33 @@ class FastF1SupportTests(unittest.TestCase):
         )
         self.assertCountEqual(
             diagnostic.reasons,
-            ["fastf1_inaccurate", "pit_lap", "no_position_data"],
+            ["pit_lap", "no_position_data"],
         )
+        self.assertEqual(diagnostic.warnings, ["fastf1_inaccurate"])
+
+    def test_fastf1_inaccurate_is_a_non_blocking_warning(self) -> None:
+        diagnostic = classify_lap(
+            driver="RUS",
+            lap_number=1,
+            lap_time_ms=None,
+            is_accurate=False,
+            is_pit_lap=False,
+            points=[(0.0, 0.0), (100.0, 0.0), (100.0, 100.0), (0.0, 100.0)],
+            reference_xy=self.reference_xy,
+            validation_samples=120,
+            validation_offset_step=4,
+            length_tolerance_pct=0.05,
+            rmse_threshold_m=25.0,
+            p95_threshold_m=50.0,
+            rmse_threshold_pct_of_length=0.0,
+            p95_threshold_pct_of_length=0.0,
+            min_position_samples=4,
+        )
+
+        self.assertTrue(diagnostic.compliant)
+        self.assertIsNotNone(diagnostic.fit)
+        self.assertEqual(diagnostic.reasons, [])
+        self.assertEqual(diagnostic.warnings, ["fastf1_inaccurate"])
 
     def test_classify_lap_flags_too_few_samples(self) -> None:
         diagnostic = classify_lap(

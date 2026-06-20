@@ -3,7 +3,7 @@
     "schema_version": "1.0.0",
     "artifact_kind": "circuit_analysis_row",
     "provenance": {
-      "generated_at": "2026-06-20T07:55:33Z",
+      "generated_at": "2026-06-20T12:50:59Z",
       "generator": "apexline",
       "schema_version": "1.0.0",
       "command": "batch",
@@ -84,6 +84,17 @@
         "p95_m": 13.807851462102569
       },
       {
+        "driver": "GAS",
+        "lap": 36,
+        "lap_key": "2025-01-australian-grand-prix-r-gas-lap-36",
+        "path_length_m": 5265.1635947246705,
+        "raw_path_length_m": 5265.1635947246705,
+        "normalization": null,
+        "length_error_m": 8.147490834397104,
+        "rmse_m": 7.915191629745439,
+        "p95_m": 14.052247091917785
+      },
+      {
         "driver": "ANT",
         "lap": 43,
         "lap_key": "2025-01-australian-grand-prix-r-ant-lap-43",
@@ -95,58 +106,50 @@
         "p95_m": 16.088002351069008
       },
       {
-        "driver": "STR",
-        "lap": 10,
-        "lap_key": "2025-01-australian-grand-prix-r-str-lap-10",
-        "path_length_m": 5261.796471544436,
-        "raw_path_length_m": 5261.796471544436,
+        "driver": "RUS",
+        "lap": 47,
+        "lap_key": "2025-01-australian-grand-prix-r-rus-lap-47",
+        "path_length_m": 5262.748382116293,
+        "raw_path_length_m": 5262.748382116293,
         "normalization": null,
-        "length_error_m": 11.514614014631661,
-        "rmse_m": 9.160944815105005,
-        "p95_m": 15.71654013729721
+        "length_error_m": 10.562703442774364,
+        "rmse_m": 8.563377978605466,
+        "p95_m": 14.554453067848366
       },
       {
-        "driver": "STR",
-        "lap": 42,
-        "lap_key": "2025-01-australian-grand-prix-r-str-lap-42",
-        "path_length_m": 5258.162442027932,
-        "raw_path_length_m": 5258.162442027932,
+        "driver": "PIA",
+        "lap": 1,
+        "lap_key": "2025-01-australian-grand-prix-r-pia-lap-1",
+        "path_length_m": 5263.017758533082,
+        "raw_path_length_m": 5263.017758533082,
         "normalization": null,
-        "length_error_m": 15.148643531135349,
-        "rmse_m": 9.196247754099236,
-        "p95_m": 15.544088060373717
-      },
-      {
-        "driver": "ANT",
-        "lap": 10,
-        "lap_key": "2025-01-australian-grand-prix-r-ant-lap-10",
-        "path_length_m": 5268.698662123324,
-        "raw_path_length_m": 5268.698662123324,
-        "normalization": null,
-        "length_error_m": 4.612423435743949,
-        "rmse_m": 9.29097148597441,
-        "p95_m": 17.913027991559584
+        "length_error_m": 10.29332702598549,
+        "rmse_m": 8.884818649798886,
+        "p95_m": 15.277307713698967
       }
     ],
     "repo_vs_fastf1_average": {
       "sample_count": 720,
-      "rmse_m": 8.11094491697698,
-      "p50_m": 5.910794157460641,
-      "p95_m": 15.126726997659956,
-      "max_m": 21.675793222660104
+      "rmse_m": 11.400300621855857,
+      "p50_m": 8.63998934401249,
+      "p95_m": 20.64845230032742,
+      "max_m": 24.733650575270865
     },
     "lap_compliance_summary": {
       "total_laps": 927,
-      "fitted_laps": 568,
-      "compliant_laps": 568,
-      "non_compliant_laps": 359,
-      "shape_non_compliant_laps": 0,
+      "fitted_laps": 791,
+      "compliant_laps": 789,
+      "non_compliant_laps": 138,
+      "shape_non_compliant_laps": 2,
       "reason_counts": {
-        "compliant": 568,
-        "fastf1_inaccurate": 359,
+        "compliant": 789,
         "path_length_outlier": 5,
         "pit_lap": 132,
+        "shape_p95_over_threshold": 2,
         "too_few_position_samples": 2
+      },
+      "warning_counts": {
+        "fastf1_inaccurate": 359
       },
       "thresholds": {
         "length_tolerance_pct": 0.05,
@@ -189,6 +192,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 1,
         "event_name": "Australian Grand Prix",
@@ -223,6 +227,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 1,
         "event_name": "Australian Grand Prix",
@@ -233,15 +238,15 @@
     "averaged_fastf1_polyline_vs_source": {
       "source_points": 720,
       "simplified_points": 125,
-      "encoded_chars": 389,
+      "encoded_chars": 400,
       "tolerance_m": 1.0,
-      "rmse_m": 0.4089578374541744,
-      "p95_m": 0.8062233177992161,
-      "max_m": 0.9924770662534959,
-      "source_length_m": 5210.450348685683,
-      "simplified_length_m": 5206.576629897013,
-      "length_delta_m": -3.8737187886699758,
-      "length_delta_pct": -0.07434518188331085
+      "rmse_m": 0.42297556349808646,
+      "p95_m": 0.8569674232428899,
+      "max_m": 0.9982642877897868,
+      "source_length_m": 5215.525071068322,
+      "simplified_length_m": 5211.962329070526,
+      "length_delta_m": -3.5627419977963655,
+      "length_delta_pct": -0.0683103225322353
     },
     "polyline_vs_source": {
       "source_points": 146,
@@ -268,13 +273,13 @@
       "rotation_degrees": -1.5641006523303795
     },
     "encoded_polyline": "~o_fF_eysZ_DhE_G~HSDG?q@_@]Ke@E[?u@HYL[RWV{ClEaCxCqBrB}@x@iAz@}CpBmAl@SAKIIWc@iFK]GGYI[AcILEC]_@sCaGWq@kAkFYyAcAmCAY?UFSX[T_@Vk@Nw@FgA@aADw@P}@Ru@b@{@Zi@h@g@r@e@t@Uf@KpG}@Z?b@Bd@N\\P~AxAr@\\^HdG|@dAF`BCn@Gx@Qt@SxAw@~AoAr@}@pCqER_@Vu@Hk@@i@AuDDa@L_@HUnFeJbAgAh@a@~@c@lAa@xFyA|Cw@nAOvCxMDj@A^K^Q`@MRURwDzBmBtAGJCZDLxBfCNPFRJp@Cj@G`@U`@mQ|U",
-    "averaged_fastf1_encoded_polyline": "hp_fFaeysZwIpLg@l@SRc@TYBYAwAYg@?s@Hc@R_@Z]\\mBnCiA|AcBlBoApAaCrByCzBo@\\e@FYCKGOWG_@GsBIo@Qi@SWIGe@MYAiDRaAAe@IWKUQ]]Ye@g@cAy@wBYiA{AuGu@cCKm@@_@F_@p@_BNm@h@oER_AVy@^s@l@s@p@i@n@]b@QxA[~@Mr@G`A@`CP~@PbE|AvBbA~@R~@FtBExASvAe@|Aw@`Au@nAuAxAyB`AgBRi@Ho@?_@GsB?q@Dq@Nk@\\u@`C{DdA_Bx@cAt@q@bAo@z@_@vAe@xHsBfBUXAVFHFNVN~@|@rIDn@?p@E^K\\OX]^_@Za@VaD|Ai@d@MXA^H\\PVt@n@PTNXJZH^@^A`@Kl@K\\OZa@n@}IjL}CdE"
+    "averaged_fastf1_encoded_polyline": "jp_fFieysZwIrLy@`Aa@VYFe@CmAUe@Cg@DYHa@Ra@Z]^kBnC_BrBmAtAgAhA_CrBeChBcAp@e@JK?YGSSEME_@IsBE_@Om@[a@WKe@Gs@BuBNg@@e@CYGe@QUQ[_@Ye@e@cAw@oB[kAsAeGU{@g@uAG_@CO@_@F_@p@_BNm@n@_FP}@Rk@f@aAr@s@v@i@fAe@dB]fBQ`A@bCPp@NvDtAnCnA`AP~@FtBGr@Id@KvAe@|Ay@`Au@lAwAxAyB`AgBPk@D_@@a@IcC?q@Fo@H]d@cApBaDvAyBp@w@|@{@x@g@z@a@bBi@xHsBfBUX?XHNVJn@`AbJFpACp@K\\MXg@j@cAp@{BdAm@^]\\I\\AL@NJZPV~@x@NXPj@F\\@`@C^Kn@Sh@o@`AsI~KyCbE"
   },
   {
     "schema_version": "1.0.0",
     "artifact_kind": "circuit_analysis_row",
     "provenance": {
-      "generated_at": "2026-06-20T07:55:33Z",
+      "generated_at": "2026-06-20T12:50:59Z",
       "generator": "apexline",
       "schema_version": "1.0.0",
       "command": "batch",
@@ -324,25 +329,36 @@
     "circuit_name": "Shanghai International Circuit",
     "repo_location": "Shanghai",
     "declared_length_m": 5451,
-    "fastf1_driver": "GAS",
-    "fastf1_lap": 15,
-    "fastf1_lap_key": "2025-02-chinese-grand-prix-r-gas-lap-15",
-    "fastf1_points": 371,
-    "fastf1_path_length_m": 5381.126722674852,
-    "fastf1_raw_path_length_m": 5381.126722674852,
+    "fastf1_driver": "DOO",
+    "fastf1_lap": 1,
+    "fastf1_lap_key": "2025-02-chinese-grand-prix-r-doo-lap-1",
+    "fastf1_points": 405,
+    "fastf1_path_length_m": 5400.040105074176,
+    "fastf1_raw_path_length_m": 5400.040105074176,
     "fastf1_normalization": null,
     "repo_vs_fastf1": {
       "direction": "forward",
-      "start_offset_samples": 672,
+      "start_offset_samples": 674,
       "sample_count": 720,
-      "rmse_m": 9.46389568699332,
-      "p50_m": 8.785831420028472,
-      "p95_m": 15.874704735616422,
-      "max_m": 17.84177343928439,
-      "scale_m_per_fastf1_unit": 0.0998124728748966,
-      "rotation_degrees": 0.8210770376813067
+      "rmse_m": 9.410870153225703,
+      "p50_m": 8.594153645480288,
+      "p95_m": 16.901190618564602,
+      "max_m": 19.203849680079212,
+      "scale_m_per_fastf1_unit": 0.09993637100935517,
+      "rotation_degrees": 0.6308603155662952
     },
     "averaged_fastf1_laps": [
+      {
+        "driver": "DOO",
+        "lap": 1,
+        "lap_key": "2025-02-chinese-grand-prix-r-doo-lap-1",
+        "path_length_m": 5400.040105074176,
+        "raw_path_length_m": 5400.040105074176,
+        "normalization": null,
+        "length_error_m": 47.82542648303024,
+        "rmse_m": 9.410870153225703,
+        "p95_m": 16.901190618564602
+      },
       {
         "driver": "GAS",
         "lap": 15,
@@ -364,17 +380,6 @@
         "length_error_m": 66.60007741190566,
         "rmse_m": 11.190696888495559,
         "p95_m": 19.091500892958617
-      },
-      {
-        "driver": "SAI",
-        "lap": 31,
-        "lap_key": "2025-02-chinese-grand-prix-r-sai-lap-31",
-        "path_length_m": 5380.943723531935,
-        "raw_path_length_m": 5380.943723531935,
-        "normalization": null,
-        "length_error_m": 66.92180802527128,
-        "rmse_m": 11.231096055583834,
-        "p95_m": 18.913886184476798
       },
       {
         "driver": "ALB",
@@ -401,21 +406,23 @@
     ],
     "repo_vs_fastf1_average": {
       "sample_count": 720,
-      "rmse_m": 10.642150402587138,
-      "p50_m": 8.597470359136274,
-      "p95_m": 18.933551085126442,
-      "max_m": 21.15002762056772
+      "rmse_m": 11.21589095058759,
+      "p50_m": 10.043999698561812,
+      "p95_m": 18.40424114478635,
+      "max_m": 22.563702632515035
     },
     "lap_compliance_summary": {
       "total_laps": 1065,
-      "fitted_laps": 995,
-      "compliant_laps": 995,
-      "non_compliant_laps": 70,
+      "fitted_laps": 1013,
+      "compliant_laps": 1013,
+      "non_compliant_laps": 52,
       "shape_non_compliant_laps": 0,
       "reason_counts": {
-        "compliant": 995,
-        "fastf1_inaccurate": 70,
+        "compliant": 1013,
         "pit_lap": 52
+      },
+      "warning_counts": {
+        "fastf1_inaccurate": 70
       },
       "thresholds": {
         "length_tolerance_pct": 0.05,
@@ -458,6 +465,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 2,
         "event_name": "Chinese Grand Prix",
@@ -492,6 +500,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 2,
         "event_name": "Chinese Grand Prix",
@@ -501,16 +510,16 @@
     },
     "averaged_fastf1_polyline_vs_source": {
       "source_points": 720,
-      "simplified_points": 145,
+      "simplified_points": 146,
       "encoded_chars": 400,
       "tolerance_m": 1.0,
-      "rmse_m": 0.3798778368577506,
-      "p95_m": 0.7805045472243065,
-      "max_m": 0.9887929705271207,
-      "source_length_m": 5353.351294831869,
-      "simplified_length_m": 5348.888169220437,
-      "length_delta_m": -4.463125611432588,
-      "length_delta_pct": -0.0833706843737547
+      "rmse_m": 0.36338731227926635,
+      "p95_m": 0.7345088332972454,
+      "max_m": 0.9779295457704646,
+      "source_length_m": 5349.921872231227,
+      "simplified_length_m": 5345.4455979792165,
+      "length_delta_m": -4.476274252010626,
+      "length_delta_pct": -0.08366989946609744
     },
     "polyline_vs_source": {
       "source_points": 141,
@@ -527,23 +536,23 @@
     },
     "polyline_vs_fastf1": {
       "direction": "forward",
-      "start_offset_samples": 672,
+      "start_offset_samples": 674,
       "sample_count": 720,
-      "rmse_m": 9.423890530631837,
-      "p50_m": 8.785732157273431,
-      "p95_m": 15.927107170428348,
-      "max_m": 17.70286180517806,
-      "scale_m_per_fastf1_unit": 0.09981303770645153,
-      "rotation_degrees": 0.8179563574469324
+      "rmse_m": 9.424787523626035,
+      "p50_m": 8.611664442201072,
+      "p95_m": 16.982450496009534,
+      "max_m": 19.292827185846097,
+      "scale_m_per_fastf1_unit": 0.09993668043709454,
+      "rotation_degrees": 0.6277227576447005
     },
     "encoded_polyline": "gng~D{mzbVh@`EBlAS~@S`@QXUPq@X{@?m@KSOOUQm@?k@Ja@JMLIRAxAXNIRSJa@Ge@ISe@WYK[G_@A[Do@^i@f@}AfByAnAmCrCe@ZYJuGnB_AVO?KIGUDc@Re@V_@bAmAp@e@nFaDf@[\\]Xa@Pe@Li@Fi@?q@Gk@Mi@Uk@[g@_@_@_DwA[USWO[Ok@Ai@@c@H_@N[^e@pCwAPSF[CWGUaBwASKQ?QFwHtEgKvGERDRLRj@j@HRFVCXSX]^ULUH_@By@GYI_@[Q[Me@IgA?g@Jq@ZcAd@m@p@i@jQaMdPiLhD_CzL}IPKR@JNAVSr@e@|@uKxIENAZnGdi@",
-    "averaged_fastf1_encoded_polyline": "kng~DcozbVb@vDD|@?l@E^G\\Sh@Wb@_@ZWJYH[@YCWIWOSSGKI]?_@@MNYHIVKX?f@DZCTOFMBM?OG[OYUQWIYE[?YBq@Tm@`@s@p@yDjEs@p@k@b@eAl@aBr@cDdAUHY@KAWOGKC]@OH]^q@n@s@v@k@xE{B`@W^[d@k@NYRi@Lk@Dm@?}@M{@Yw@Yc@i@e@kB_Am@a@QUOYQi@E]A_@Dm@J[Ve@\\]hAe@VOXa@H]@]G]MYSUWOe@OYCY@s@Ry@b@oGhEkGtD[^K\\?NFZh@|@D\\A^IZGLQRWNg@Hg@AWIWM_@]We@Oi@Gm@@_AL{@Xu@b@o@r@q@t^aWhLiIhGsE`@WZAJBHHBL@NANKZ_@p@e@j@aAv@mErCkA|@STMXELE\\@n@Dl@lAlKnDvW"
+    "averaged_fastf1_encoded_polyline": "kng~D_ozbV`@fDF|@?l@Gn@GZKZWd@_@\\UNYHYD[Ac@MWOSUK[C]D]NYHGXI`ADXERSHY@OI[QWUQ[IYC[@YBq@Vk@`@}@|@oD`Es@p@k@`@gAl@mBv@aDbAYDKAWKIKG]@MF]L[Xc@f@i@v@k@n@[hD_B`@W^[\\_@Vc@Tg@Lk@Fm@?_AM{@Ww@Yc@i@g@m@]iAi@_@YSUOWQi@G]C_@Fm@H[Tg@RSTQ|@]VORSFMH[B]E]M[]]WOYIYCY@s@N{@d@oGhEkGtD]\\IZAND\\h@|@F\\A\\ANMZQTWLYHYBg@Ec@S_@[We@Oi@Im@@_AL{@Vw@`@o@t@o@t^cWhLiIhGsEb@WXCJDHHDL@LANI\\_@n@g@j@_Av@mErCmA~@STMXELE\\@l@Dn@lAlKnDzW"
   },
   {
     "schema_version": "1.0.0",
     "artifact_kind": "circuit_analysis_row",
     "provenance": {
-      "generated_at": "2026-06-20T07:55:33Z",
+      "generated_at": "2026-06-20T12:50:59Z",
       "generator": "apexline",
       "schema_version": "1.0.0",
       "command": "batch",
@@ -677,14 +686,16 @@
     },
     "lap_compliance_summary": {
       "total_laps": 1059,
-      "fitted_laps": 997,
-      "compliant_laps": 997,
-      "non_compliant_laps": 62,
+      "fitted_laps": 1017,
+      "compliant_laps": 1017,
+      "non_compliant_laps": 42,
       "shape_non_compliant_laps": 0,
       "reason_counts": {
-        "compliant": 997,
-        "fastf1_inaccurate": 62,
+        "compliant": 1017,
         "pit_lap": 42
+      },
+      "warning_counts": {
+        "fastf1_inaccurate": 62
       },
       "thresholds": {
         "length_tolerance_pct": 0.05,
@@ -727,6 +738,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 3,
         "event_name": "Japanese Grand Prix",
@@ -761,6 +773,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 3,
         "event_name": "Japanese Grand Prix",
@@ -812,7 +825,7 @@
     "schema_version": "1.0.0",
     "artifact_kind": "circuit_analysis_row",
     "provenance": {
-      "generated_at": "2026-06-20T07:55:33Z",
+      "generated_at": "2026-06-20T12:50:59Z",
       "generator": "apexline",
       "schema_version": "1.0.0",
       "command": "batch",
@@ -863,24 +876,35 @@
     "repo_location": "Sakhir",
     "declared_length_m": 5412,
     "fastf1_driver": "BEA",
-    "fastf1_lap": 37,
-    "fastf1_lap_key": "2025-04-bahrain-grand-prix-r-bea-lap-37",
-    "fastf1_points": 383,
-    "fastf1_path_length_m": 5352.171186670886,
-    "fastf1_raw_path_length_m": 5352.171186670886,
+    "fastf1_lap": 1,
+    "fastf1_lap_key": "2025-04-bahrain-grand-prix-r-bea-lap-1",
+    "fastf1_points": 409,
+    "fastf1_path_length_m": 5355.6139292767675,
+    "fastf1_raw_path_length_m": 5355.6139292767675,
     "fastf1_normalization": null,
     "repo_vs_fastf1": {
       "direction": "forward",
-      "start_offset_samples": 702,
+      "start_offset_samples": 712,
       "sample_count": 720,
-      "rmse_m": 7.200025287459369,
-      "p50_m": 6.192164517307148,
-      "p95_m": 12.183316575016125,
-      "max_m": 14.657080441658524,
-      "scale_m_per_fastf1_unit": 0.10001701871360186,
-      "rotation_degrees": -0.4226688552466363
+      "rmse_m": 7.161329899514046,
+      "p50_m": 5.793371861246653,
+      "p95_m": 12.195941910857073,
+      "max_m": 18.63776586523247,
+      "scale_m_per_fastf1_unit": 0.10014068058519479,
+      "rotation_degrees": -0.5611349965529945
     },
     "averaged_fastf1_laps": [
+      {
+        "driver": "BEA",
+        "lap": 1,
+        "lap_key": "2025-04-bahrain-grand-prix-r-bea-lap-1",
+        "path_length_m": 5355.6139292767675,
+        "raw_path_length_m": 5355.6139292767675,
+        "normalization": null,
+        "length_error_m": 62.81622908150621,
+        "rmse_m": 7.161329899514046,
+        "p95_m": 12.195941910857073
+      },
       {
         "driver": "BEA",
         "lap": 37,
@@ -902,17 +926,6 @@
         "length_error_m": 65.95729863378529,
         "rmse_m": 7.228958773818921,
         "p95_m": 12.215477768375587
-      },
-      {
-        "driver": "LAW",
-        "lap": 28,
-        "lap_key": "2025-04-bahrain-grand-prix-r-law-lap-28",
-        "path_length_m": 5351.269181431311,
-        "raw_path_length_m": 5351.269181431311,
-        "normalization": null,
-        "length_error_m": 67.16097692696258,
-        "rmse_m": 8.1635241219372,
-        "p95_m": 13.697820090047097
       },
       {
         "driver": "LEC",
@@ -939,23 +952,25 @@
     ],
     "repo_vs_fastf1_average": {
       "sample_count": 720,
-      "rmse_m": 9.935772348694945,
-      "p50_m": 8.75200004040942,
-      "p95_m": 18.414556099316464,
-      "max_m": 21.51432648512722
+      "rmse_m": 9.86363162564107,
+      "p50_m": 8.590746668228961,
+      "p95_m": 18.13853203280486,
+      "max_m": 21.37279850508264
     },
     "lap_compliance_summary": {
       "total_laps": 1128,
-      "fitted_laps": 952,
-      "compliant_laps": 952,
-      "non_compliant_laps": 176,
+      "fitted_laps": 1031,
+      "compliant_laps": 1031,
+      "non_compliant_laps": 97,
       "shape_non_compliant_laps": 0,
       "reason_counts": {
-        "compliant": 952,
-        "fastf1_inaccurate": 176,
+        "compliant": 1031,
         "path_length_outlier": 13,
         "pit_lap": 84,
         "too_few_position_samples": 12
+      },
+      "warning_counts": {
+        "fastf1_inaccurate": 176
       },
       "thresholds": {
         "length_tolerance_pct": 0.05,
@@ -998,6 +1013,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 4,
         "event_name": "Bahrain Grand Prix",
@@ -1032,6 +1048,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 4,
         "event_name": "Bahrain Grand Prix",
@@ -1041,16 +1058,16 @@
     },
     "averaged_fastf1_polyline_vs_source": {
       "source_points": 720,
-      "simplified_points": 123,
-      "encoded_chars": 340,
+      "simplified_points": 122,
+      "encoded_chars": 342,
       "tolerance_m": 1.0,
-      "rmse_m": 0.3677133051402037,
-      "p95_m": 0.7452384743666612,
-      "max_m": 0.9887224011368386,
-      "source_length_m": 5330.032948285578,
-      "simplified_length_m": 5327.035485704315,
-      "length_delta_m": -2.99746258126288,
-      "length_delta_pct": -0.05623722424130649
+      "rmse_m": 0.3722990133273958,
+      "p95_m": 0.7563355450584067,
+      "max_m": 0.9906672032663352,
+      "source_length_m": 5330.911661889492,
+      "simplified_length_m": 5327.689358168636,
+      "length_delta_m": -3.2223037208559617,
+      "length_delta_pct": -0.06044564091902146
     },
     "polyline_vs_source": {
       "source_points": 94,
@@ -1067,23 +1084,23 @@
     },
     "polyline_vs_fastf1": {
       "direction": "forward",
-      "start_offset_samples": 702,
+      "start_offset_samples": 712,
       "sample_count": 720,
-      "rmse_m": 7.218086532109669,
-      "p50_m": 6.18786773257707,
-      "p95_m": 12.35374403025377,
-      "max_m": 14.748461454250055,
-      "scale_m_per_fastf1_unit": 0.10000735507189736,
-      "rotation_degrees": -0.42150806510535355
+      "rmse_m": 7.186046784081914,
+      "p50_m": 5.778842310847754,
+      "p95_m": 12.269288211778656,
+      "max_m": 18.592586290205933,
+      "scale_m_per_fastf1_unit": 0.10013097760457243,
+      "rotation_degrees": -0.5599520205874171
     },
     "encoded_polyline": "qi{}C{ihsH}QQkKQQGAQBSFMrAyAFYAYm@_DCe@@a@tDo_@Fc@PQVETBVJVTRXjB`DrBzB^RzAl@PNXl@Bd@OpB?^D^JXX\\fGfFPTB^MR[Fk@AiHw@_Fc@a@DWFYNiA~AEJBLLFdFb@lLXfPVh@EXQL]Fi@Ci@Gu@Wu@]m@g@m@i@YuBs@q@[]YYc@Wk@Ky@AaAHm@`B_FT_@X[p@_@V?VLVZXf@tR`f@?b@KNgBt@i@ByNOwMc@",
-    "averaged_fastf1_encoded_polyline": "ii{}CoihsHuTg@}FEYCYGKGGKCM?MDKPWj@q@LYF[?]C[WeBGi@A{@DcAbBsO|@_JJi@JYNWJGVGX?XF`@V^d@tAdCj@t@r@n@~AfA\\\\Tb@FZB\\?xA@j@Jh@Vt@V`@\\\\j@`@zA~@h@b@Z^FX?NCLUNWJg@@oAKoEu@{ASoAKu@Be@Jc@PULSRQVGZ?LBLHHVJXFpCP~Z|@r@?f@Af@IVKRSJYH[B]?]E[Mi@MYa@k@i@c@c@UmBu@a@W_@YYa@Uc@Uw@Ky@?k@Hy@Tu@hA_DVa@TSVIJCf@?XF`@VX`@Td@dDbJzJbWTt@Dj@?LEZOVUPUNYHYFg@Ds@AoFYaSe@"
+    "averaged_fastf1_encoded_polyline": "gi{}CoihsHwTg@}FCYCYGKGGKCM?MDMPUl@u@Pg@@[A]Ky@Oy@Gk@?k@FqA`BuO|@}IJi@J[PUJEVGZ@VH^T`@h@tAbCb@j@l@j@hBpA\\\\Tb@HZB\\?vA@j@Nx@Pf@X`@\\\\h@`@zA|@h@b@Z^HZ?LCLSPYJg@BmAM}Ew@oAQmAIu@@g@HWJa@VSPOVIZ?LBLHHTLXDrCR|Zz@t@@f@Cf@IVKPSLYH[B[?]C]Og@KYc@m@i@c@c@UmBs@k@a@][Ya@Ys@Mi@Gk@@{@Jy@dA_DRe@Xc@RQd@Of@?VF`@VX`@Td@fDbJzJ`WTt@Dj@?NEZOVSPWLWJg@Hg@Bu@AaFYaSc@"
   },
   {
     "schema_version": "1.0.0",
     "artifact_kind": "circuit_analysis_row",
     "provenance": {
-      "generated_at": "2026-06-20T07:55:33Z",
+      "generated_at": "2026-06-20T12:50:59Z",
       "generator": "apexline",
       "schema_version": "1.0.0",
       "command": "batch",
@@ -1133,36 +1150,25 @@
     "circuit_name": "Jeddah Corniche Circuit",
     "repo_location": "Jeddah",
     "declared_length_m": 6175,
-    "fastf1_driver": "SAI",
-    "fastf1_lap": 18,
-    "fastf1_lap_key": "2025-05-saudi-arabian-grand-prix-r-sai-lap-18",
-    "fastf1_points": 368,
-    "fastf1_path_length_m": 6116.4478793476555,
-    "fastf1_raw_path_length_m": 6116.4478793476555,
+    "fastf1_driver": "RUS",
+    "fastf1_lap": 6,
+    "fastf1_lap_key": "2025-05-saudi-arabian-grand-prix-r-rus-lap-6",
+    "fastf1_points": 348,
+    "fastf1_path_length_m": 6116.565288700738,
+    "fastf1_raw_path_length_m": 6116.565288700738,
     "fastf1_normalization": null,
     "repo_vs_fastf1": {
       "direction": "forward",
       "start_offset_samples": 716,
       "sample_count": 720,
-      "rmse_m": 5.439267286813073,
-      "p50_m": 4.163969314630165,
-      "p95_m": 10.441659711666567,
-      "max_m": 14.829829164337765,
-      "scale_m_per_fastf1_unit": 0.10028928858212405,
-      "rotation_degrees": -0.0733221672072022
+      "rmse_m": 6.196923466372561,
+      "p50_m": 4.344544327837173,
+      "p95_m": 13.146203109350248,
+      "max_m": 17.432126862772225,
+      "scale_m_per_fastf1_unit": 0.10030598758374089,
+      "rotation_degrees": -0.05121258517635057
     },
     "averaged_fastf1_laps": [
-      {
-        "driver": "SAI",
-        "lap": 18,
-        "lap_key": "2025-05-saudi-arabian-grand-prix-r-sai-lap-18",
-        "path_length_m": 6116.4478793476555,
-        "raw_path_length_m": 6116.4478793476555,
-        "normalization": null,
-        "length_error_m": 79.85691407533523,
-        "rmse_m": 5.439267286813073,
-        "p95_m": 10.441659711666567
-      },
       {
         "driver": "RUS",
         "lap": 6,
@@ -1173,6 +1179,17 @@
         "length_error_m": 79.7395047222526,
         "rmse_m": 6.196923466372561,
         "p95_m": 13.146203109350248
+      },
+      {
+        "driver": "BEA",
+        "lap": 1,
+        "lap_key": "2025-05-saudi-arabian-grand-prix-r-bea-lap-1",
+        "path_length_m": 6122.350048847429,
+        "raw_path_length_m": 6122.350048847429,
+        "normalization": null,
+        "length_error_m": 73.95474457556156,
+        "rmse_m": 6.5957113086934855,
+        "p95_m": 12.369145447421717
       },
       {
         "driver": "ANT",
@@ -1210,23 +1227,25 @@
     ],
     "repo_vs_fastf1_average": {
       "sample_count": 720,
-      "rmse_m": 7.517250701593266,
-      "p50_m": 5.997988473784626,
-      "p95_m": 13.71163491229459,
-      "max_m": 17.447993790381467
+      "rmse_m": 6.76941611241112,
+      "p50_m": 5.233520209776815,
+      "p95_m": 12.731176109161336,
+      "max_m": 17.17719245028736
     },
     "lap_compliance_summary": {
       "total_laps": 898,
-      "fitted_laps": 810,
-      "compliant_laps": 810,
-      "non_compliant_laps": 88,
+      "fitted_laps": 858,
+      "compliant_laps": 858,
+      "non_compliant_laps": 40,
       "shape_non_compliant_laps": 0,
       "reason_counts": {
-        "compliant": 810,
-        "fastf1_inaccurate": 88,
+        "compliant": 858,
         "path_length_outlier": 1,
         "pit_lap": 39,
         "too_few_position_samples": 1
+      },
+      "warning_counts": {
+        "fastf1_inaccurate": 88
       },
       "thresholds": {
         "length_tolerance_pct": 0.05,
@@ -1269,6 +1288,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 5,
         "event_name": "Saudi Arabian Grand Prix",
@@ -1303,6 +1323,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 5,
         "event_name": "Saudi Arabian Grand Prix",
@@ -1312,16 +1333,16 @@
     },
     "averaged_fastf1_polyline_vs_source": {
       "source_points": 720,
-      "simplified_points": 159,
-      "encoded_chars": 448,
+      "simplified_points": 158,
+      "encoded_chars": 451,
       "tolerance_m": 1.0,
-      "rmse_m": 0.38633503018480303,
-      "p95_m": 0.8028600032265583,
-      "max_m": 0.9810677281297573,
-      "source_length_m": 6113.858666259223,
-      "simplified_length_m": 6110.471606296737,
-      "length_delta_m": -3.3870599624860915,
-      "length_delta_pct": -0.05539970986209387
+      "rmse_m": 0.39777557715368494,
+      "p95_m": 0.8352081161101823,
+      "max_m": 0.9941579958772007,
+      "source_length_m": 6111.761350920824,
+      "simplified_length_m": 6108.101880796759,
+      "length_delta_m": -3.6594701240646828,
+      "length_delta_pct": -0.05987586742917132
     },
     "polyline_vs_source": {
       "source_points": 152,
@@ -1340,21 +1361,21 @@
       "direction": "forward",
       "start_offset_samples": 716,
       "sample_count": 720,
-      "rmse_m": 5.439842179119981,
-      "p50_m": 4.1297487617677895,
-      "p95_m": 10.473231900774675,
-      "max_m": 14.829202986596675,
-      "scale_m_per_fastf1_unit": 0.1002904508343946,
-      "rotation_degrees": -0.07457456454453301
+      "rmse_m": 6.195455020497037,
+      "p50_m": 4.358797607219637,
+      "p95_m": 13.17608769024199,
+      "max_m": 17.433188598840864,
+      "scale_m_per_fastf1_unit": 0.10030715186814435,
+      "rotation_degrees": -0.05246952856239208
     },
     "encoded_polyline": "ay_cCwutmFcVnGKNALP|@CNENOJSDw@IeCm@QEg@?sLlAcADUJW~@O\\STm@^o@Pw@@m@GYM{@k@a@Mc@Gs@ByATg@Zw@nAONi@JkDCe@Eo@g@S_@YkAISg@YiC[uA[u@UyAO{@CqIJ{ITUF[TQZMh@Fh@JZP\\h@Vx@Hr@Ah@IfB_An@a@fA]j@I~@GfBFz@ThDtA~@JlAAVLTPN^P`Ad@l@^TtARhB@dBK~@WvB{@zAg@lAUdAGjBDvA?`AKfAYl@UzBqAv@a@|@YxA[bAGjACdA@rCVv@RVAVGZSv@gAZWf@WnCa@d@?j@N|FjCz@XdATp@Fj@@dBIdDm@dCi@lAe@|Au@p@e@x@q@hAcAfAwAbD}FPo@G]O[[Q]@{Dj@cKvAsCj@kIrB",
-    "averaged_fastf1_encoded_polyline": "qx_cC_vtmFuJpCyGrAy@RYNKHILCLBp@C^IJMD]@]AyBYkAE{@B_Ij@iBJMDMHGJYz@]d@c@\\k@Pk@H}@A]E[Iu@_@[K]G]?_@@iAPi@PYR_@t@WT[J]F{@@}@Cm@I[KWSUWo@qASYWSME]IgBWsCi@gDUyBEgDDuEJiBP{@Pe@ZQXENCL?`@DLNZVRZL\\F\\B\\?|@Gj@MvBgAh@S\\Gl@GjAEl@@l@DhAT|Bx@h@Pl@JhAL\\JVRFLDLHn@J\\VTXNj@L\\BjBBzAGhAOx@U|CcAvAYjAMdEMxAQx@Sj@QvBiAt@[x@Uz@OxAOzAEjBDvCRX?NCJEXQx@kAVUf@Uj@KzACl@Bj@Hx@VfChAdA`@j@Px@Nl@F|@Dz@A|@Gz@MfBYrCm@v@Wh@Ud@Yp@e@pAkA|AkBx@kArCqEJ]@OAQEMGMWS]G]@_Gx@oLfBsCl@cD|@"
+    "averaged_fastf1_encoded_polyline": "qx_cC_vtmFwJpCwGrAy@RYNKJGJENDp@ANCLKJKD_@@]AwBYkAEkAD{Kv@MDSTYz@]d@e@Zi@Pm@H{@Ak@KcAe@]Kk@Em@@kARi@PWR_@t@KJYNk@J}@@}@Ck@I[MWSUWy@_BUUYO]IiBUcCg@wCUyBG{B@cGLm@BkALy@Ng@VKHQXI^?NF^FLHJVRZJ\\F\\B\\?|@Gj@MvBiAh@Q\\Gj@GlAEz@Bl@FhAVhBr@j@Nj@JjANZHVRHLH\\D^L\\TTXNx@P|@D|@?zAGhAOx@SzCcAxAYxAOxBG|@Ej@Ez@Oj@Mh@SxBgAt@]x@Uz@OxAOzAEjBDvCRX?NCJCXSx@kATUh@Uj@KzAEl@Bj@Jx@VtCnAv@Zj@Nx@Pl@F|@Bz@A|@ErCc@bDq@v@Wh@Ud@Yp@e@pAkA|AkBz@kApCqEL]?OAOCOIMWS[G_@@oFt@}LjBsCl@eD|@"
   },
   {
     "schema_version": "1.0.0",
     "artifact_kind": "circuit_analysis_row",
     "provenance": {
-      "generated_at": "2026-06-20T07:55:33Z",
+      "generated_at": "2026-06-20T12:50:59Z",
       "generator": "apexline",
       "schema_version": "1.0.0",
       "command": "batch",
@@ -1404,100 +1425,102 @@
     "circuit_name": "Miami International Autodrome",
     "repo_location": "Miami",
     "declared_length_m": 5412,
-    "fastf1_driver": "LEC",
-    "fastf1_lap": 13,
-    "fastf1_lap_key": "2025-06-miami-grand-prix-r-lec-lap-13",
-    "fastf1_points": 358,
-    "fastf1_path_length_m": 5355.880831581302,
-    "fastf1_raw_path_length_m": 5355.880831581302,
+    "fastf1_driver": "STR",
+    "fastf1_lap": 17,
+    "fastf1_lap_key": "2025-06-miami-grand-prix-r-str-lap-17",
+    "fastf1_points": 355,
+    "fastf1_path_length_m": 5365.476219199214,
+    "fastf1_raw_path_length_m": 5365.476219199214,
     "fastf1_normalization": null,
     "repo_vs_fastf1": {
       "direction": "forward",
-      "start_offset_samples": 705,
+      "start_offset_samples": 704,
       "sample_count": 720,
-      "rmse_m": 5.462014061153654,
-      "p50_m": 4.159413417286196,
-      "p95_m": 10.173044336687058,
-      "max_m": 15.373206247329357,
-      "scale_m_per_fastf1_unit": 0.10016396172895094,
-      "rotation_degrees": -0.30579870064271264
+      "rmse_m": 6.9369229818225575,
+      "p50_m": 5.891534946200958,
+      "p95_m": 12.874259222123635,
+      "max_m": 16.742338417571865,
+      "scale_m_per_fastf1_unit": 0.10012298827425761,
+      "rotation_degrees": -0.019420083675866947
     },
     "averaged_fastf1_laps": [
       {
-        "driver": "LEC",
-        "lap": 13,
-        "lap_key": "2025-06-miami-grand-prix-r-lec-lap-13",
-        "path_length_m": 5355.880831581302,
-        "raw_path_length_m": 5355.880831581302,
+        "driver": "STR",
+        "lap": 17,
+        "lap_key": "2025-06-miami-grand-prix-r-str-lap-17",
+        "path_length_m": 5365.476219199214,
+        "raw_path_length_m": 5365.476219199214,
         "normalization": null,
-        "length_error_m": 59.542381150093206,
-        "rmse_m": 5.462014061153654,
-        "p95_m": 10.173044336687058
+        "length_error_m": 49.946993532181295,
+        "rmse_m": 6.9369229818225575,
+        "p95_m": 12.874259222123635
       },
       {
-        "driver": "STR",
-        "lap": 18,
-        "lap_key": "2025-06-miami-grand-prix-r-str-lap-18",
-        "path_length_m": 5358.902373971145,
-        "raw_path_length_m": 5358.902373971145,
+        "driver": "LAW",
+        "lap": 13,
+        "lap_key": "2025-06-miami-grand-prix-r-law-lap-13",
+        "path_length_m": 5361.438484667986,
+        "raw_path_length_m": 5361.438484667986,
         "normalization": null,
-        "length_error_m": 56.520838760250626,
-        "rmse_m": 5.492656599805312,
-        "p95_m": 10.430282221441331
+        "length_error_m": 53.98472806340942,
+        "rmse_m": 7.234367775097406,
+        "p95_m": 13.056710418028414
       },
       {
         "driver": "SAI",
-        "lap": 14,
-        "lap_key": "2025-06-miami-grand-prix-r-sai-lap-14",
-        "path_length_m": 5355.485339141738,
-        "raw_path_length_m": 5355.485339141738,
-        "normalization": null,
-        "length_error_m": 59.9378735896571,
-        "rmse_m": 5.4961694242802,
-        "p95_m": 11.059713000520215
-      },
-      {
-        "driver": "GAS",
         "lap": 38,
-        "lap_key": "2025-06-miami-grand-prix-r-gas-lap-38",
-        "path_length_m": 5359.059683962209,
-        "raw_path_length_m": 5359.059683962209,
+        "lap_key": "2025-06-miami-grand-prix-r-sai-lap-38",
+        "path_length_m": 5361.3889474859025,
+        "raw_path_length_m": 5361.3889474859025,
         "normalization": null,
-        "length_error_m": 56.363528769185905,
-        "rmse_m": 5.966330755126941,
-        "p95_m": 10.728216250123891
+        "length_error_m": 54.03426524549286,
+        "rmse_m": 7.310886168996004,
+        "p95_m": 12.881087692824474
       },
       {
-        "driver": "ALO",
-        "lap": 12,
-        "lap_key": "2025-06-miami-grand-prix-r-alo-lap-12",
-        "path_length_m": 5358.287098893718,
-        "raw_path_length_m": 5358.287098893718,
+        "driver": "PIA",
+        "lap": 5,
+        "lap_key": "2025-06-miami-grand-prix-r-pia-lap-5",
+        "path_length_m": 5361.290590877132,
+        "raw_path_length_m": 5361.290590877132,
         "normalization": null,
-        "length_error_m": 57.13611383767693,
-        "rmse_m": 6.1275272001051055,
-        "p95_m": 11.668175481349305
+        "length_error_m": 54.13262185426356,
+        "rmse_m": 7.660728039226819,
+        "p95_m": 13.17169293705316
+      },
+      {
+        "driver": "RUS",
+        "lap": 3,
+        "lap_key": "2025-06-miami-grand-prix-r-rus-lap-3",
+        "path_length_m": 5362.646397554076,
+        "raw_path_length_m": 5362.646397554076,
+        "normalization": null,
+        "length_error_m": 52.776815177318895,
+        "rmse_m": 7.820428836177681,
+        "p95_m": 13.237337415863587
       }
     ],
     "repo_vs_fastf1_average": {
       "sample_count": 720,
-      "rmse_m": 6.4542001492435865,
-      "p50_m": 4.74640507236512,
-      "p95_m": 12.499346560635223,
-      "max_m": 18.825497365343374
+      "rmse_m": 6.979161217490924,
+      "p50_m": 5.15807617175583,
+      "p95_m": 12.76113336451883,
+      "max_m": 16.674618286268846
     },
     "lap_compliance_summary": {
       "total_laps": 1005,
-      "fitted_laps": 861,
-      "compliant_laps": 861,
-      "non_compliant_laps": 144,
+      "fitted_laps": 963,
+      "compliant_laps": 963,
+      "non_compliant_laps": 42,
       "shape_non_compliant_laps": 0,
       "reason_counts": {
-        "compliant": 861,
-        "fastf1_inaccurate": 144,
+        "compliant": 963,
         "path_length_outlier": 4,
         "pit_lap": 38,
         "too_few_position_samples": 1
+      },
+      "warning_counts": {
+        "fastf1_inaccurate": 144
       },
       "thresholds": {
         "length_tolerance_pct": 0.05,
@@ -1540,6 +1563,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 6,
         "event_name": "Miami Grand Prix",
@@ -1574,6 +1598,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 6,
         "event_name": "Miami Grand Prix",
@@ -1583,16 +1608,16 @@
     },
     "averaged_fastf1_polyline_vs_source": {
       "source_points": 720,
-      "simplified_points": 138,
-      "encoded_chars": 384,
+      "simplified_points": 135,
+      "encoded_chars": 377,
       "tolerance_m": 1.0,
-      "rmse_m": 0.36967004339222814,
-      "p95_m": 0.7555097068122705,
-      "max_m": 0.9991461436478618,
-      "source_length_m": 5340.944173831862,
-      "simplified_length_m": 5337.491181758806,
-      "length_delta_m": -3.4529920730556114,
-      "length_delta_pct": -0.06465134179783537
+      "rmse_m": 0.3722041088769161,
+      "p95_m": 0.7586494368168044,
+      "max_m": 0.9827972351694299,
+      "source_length_m": 5354.674525959405,
+      "simplified_length_m": 5343.111626555834,
+      "length_delta_m": -11.562899403571464,
+      "length_delta_pct": -0.2159402844657439
     },
     "polyline_vs_source": {
       "source_points": 103,
@@ -1609,23 +1634,23 @@
     },
     "polyline_vs_fastf1": {
       "direction": "forward",
-      "start_offset_samples": 705,
+      "start_offset_samples": 704,
       "sample_count": 720,
-      "rmse_m": 5.454400872838834,
-      "p50_m": 4.15246467601489,
-      "p95_m": 10.149016476293058,
-      "max_m": 15.338301507026673,
-      "scale_m_per_fastf1_unit": 0.10015851274406977,
-      "rotation_degrees": -0.3066848821955512
+      "rmse_m": 6.9461128034075665,
+      "p50_m": 5.909863762849783,
+      "p95_m": 12.965935842083358,
+      "max_m": 16.73350514342376,
+      "scale_m_per_fastf1_unit": 0.10011749300764611,
+      "rotation_degrees": -0.020347877023379073
     },
     "encoded_polyline": "icm}CpjvhNdFyKNGNBTJx@vAXXn@Hp@I|@Hf@Rx@nAZxAJx@@tAKbA_@nAwFjMG~@B`@Jj@Rb@Xb@Vf@Fp@Cl@Up@iAvAUl@Gp@Fx@Nt@Pl@Z^l@^n@Jd@?ZIPONa@?g@Io@?w@z@_IQ_PXyA~@iEb@wBP_C@}BScCaCoKu@_D_@mA}AeE}@kBYSUDORYn@W`@a@Ra@Bi@KWYK]D{AEm@KS[_@kAo@OBIVMR[@mBe@Q@MPG|Ak@dj@k@ja@F^TFZK^e@f@{@\\_AJs@Ak@Sy@u@aCQgAGyAJyA^sAxDkI",
-    "averaged_fastf1_encoded_polyline": "kcm}CvjvhNrAyC~AcETc@RSJELCJ@LDRPx@|@`@Tf@Ht@@XDXFb@RRPPTTd@Nf@RfAFhAEhAMx@Of@Yr@kDlHc@nAMh@Ez@Bx@Lh@^`AHXD\\@j@A\\Of@Ud@i@r@OZMh@C\\@j@Lx@Nf@Vb@\\\\b@Rd@FZ?JC`@WNWBMB[FuCJwAXqCBiAEaEA_FDgBNgAn@yCZcBNgAJiAByACuBGyAQuAQgAgAoFy@gDo@yBy@eCg@mAa@o@QOUKKCMBUPk@t@SRWJM@YAMEUOOUEME[AiAE]Qe@]_@a@SYGM@Y^K@g@GkA[M@IFOXIh@Cj@WrX[dWKvOWhHDx@DLFJJFL?VGHGPW~@qBHYD]@MC]Ik@w@eCOy@Gk@AiABk@Fk@ReAZcAtCiG"
+    "averaged_fastf1_encoded_polyline": "qcm}CbkvhNzAeDdBqEXa@TOX?JBTPx@|@`@VXFbABXDXFb@RRRPTTb@Nh@RdADjAChAMv@Oh@Yr@gD`Hi@zAMh@Gz@@\\BZLh@^`AHZHh@?\\E\\Of@Ud@a@l@S\\Mh@EZ?l@Jx@Vr@Xb@^Xb@Rf@Bd@GTOHIDMH[HcDJwAXqCByAEqD?_FBiBNgAn@yCb@aCJy@HiABwACiBGwAQwAUuAgAqFs@wCcBuFg@mA]o@QUUOMEK?WJu@`AUPWHM@YCc@UOWIi@AiAE]Se@]]c@SYEKBQTIFK@g@I}@WMAKBIFMXIj@Cj@WtX]fWKhOChAS~E@j@D\\DJHHJBL?VKZ_@|@sBH[B[?]Ik@}@uCMy@Ek@A{@@k@Fk@VsA\\cAjCuF"
   },
   {
     "schema_version": "1.0.0",
     "artifact_kind": "circuit_analysis_row",
     "provenance": {
-      "generated_at": "2026-06-20T07:55:33Z",
+      "generated_at": "2026-06-20T12:50:59Z",
       "generator": "apexline",
       "schema_version": "1.0.0",
       "command": "batch",
@@ -1675,25 +1700,36 @@
     "circuit_name": "Autodromo Enzo e Dino Ferrari",
     "repo_location": "Imola",
     "declared_length_m": 4909,
-    "fastf1_driver": "ALO",
-    "fastf1_lap": 10,
-    "fastf1_lap_key": "2025-07-emilia-romagna-grand-prix-r-alo-lap-10",
-    "fastf1_points": 313,
-    "fastf1_path_length_m": 4878.442294978162,
-    "fastf1_raw_path_length_m": 4878.442294978162,
+    "fastf1_driver": "BOR",
+    "fastf1_lap": 51,
+    "fastf1_lap_key": "2025-07-emilia-romagna-grand-prix-r-bor-lap-51",
+    "fastf1_points": 462,
+    "fastf1_path_length_m": 4874.486904286515,
+    "fastf1_raw_path_length_m": 4874.486904286515,
     "fastf1_normalization": null,
     "repo_vs_fastf1": {
       "direction": "forward",
-      "start_offset_samples": 692,
+      "start_offset_samples": 690,
       "sample_count": 720,
-      "rmse_m": 4.503542865471488,
-      "p50_m": 4.065530197523826,
-      "p95_m": 7.395395633891372,
-      "max_m": 9.477148366453747,
-      "scale_m_per_fastf1_unit": 0.09994693082893433,
-      "rotation_degrees": -1.580162506112068
+      "rmse_m": 4.2339660579884315,
+      "p50_m": 3.896360198453829,
+      "p95_m": 6.768836238098609,
+      "max_m": 8.566468391836791,
+      "scale_m_per_fastf1_unit": 0.0998515216338949,
+      "rotation_degrees": -1.760404787273421
     },
     "averaged_fastf1_laps": [
+      {
+        "driver": "BOR",
+        "lap": 51,
+        "lap_key": "2025-07-emilia-romagna-grand-prix-r-bor-lap-51",
+        "path_length_m": 4874.486904286515,
+        "raw_path_length_m": 4874.486904286515,
+        "normalization": null,
+        "length_error_m": 23.674520819659847,
+        "rmse_m": 4.2339660579884315,
+        "p95_m": 6.768836238098609
+      },
       {
         "driver": "ALO",
         "lap": 10,
@@ -1707,39 +1743,6 @@
       },
       {
         "driver": "PIA",
-        "lap": 38,
-        "lap_key": "2025-07-emilia-romagna-grand-prix-r-pia-lap-38",
-        "path_length_m": 4872.11265503856,
-        "raw_path_length_m": 4872.11265503856,
-        "normalization": null,
-        "length_error_m": 26.048770067614896,
-        "rmse_m": 4.757747263823029,
-        "p95_m": 7.352019481091761
-      },
-      {
-        "driver": "OCO",
-        "lap": 3,
-        "lap_key": "2025-07-emilia-romagna-grand-prix-r-oco-lap-3",
-        "path_length_m": 4872.304298428378,
-        "raw_path_length_m": 4872.304298428378,
-        "normalization": null,
-        "length_error_m": 25.85712667779626,
-        "rmse_m": 5.0006053297322595,
-        "p95_m": 8.253048195307931
-      },
-      {
-        "driver": "HUL",
-        "lap": 41,
-        "lap_key": "2025-07-emilia-romagna-grand-prix-r-hul-lap-41",
-        "path_length_m": 4873.551784548544,
-        "raw_path_length_m": 4873.551784548544,
-        "normalization": null,
-        "length_error_m": 24.609640557630883,
-        "rmse_m": 5.088638008727745,
-        "p95_m": 7.6759023110037115
-      },
-      {
-        "driver": "PIA",
         "lap": 61,
         "lap_key": "2025-07-emilia-romagna-grand-prix-r-pia-lap-61",
         "path_length_m": 4874.565829015236,
@@ -1748,26 +1751,50 @@
         "length_error_m": 23.59559609093867,
         "rmse_m": 5.5582091808522645,
         "p95_m": 9.851996505840523
+      },
+      {
+        "driver": "BEA",
+        "lap": 62,
+        "lap_key": "2025-07-emilia-romagna-grand-prix-r-bea-lap-62",
+        "path_length_m": 4875.636773043252,
+        "raw_path_length_m": 4875.636773043252,
+        "normalization": null,
+        "length_error_m": 22.52465206292254,
+        "rmse_m": 5.5736658622576645,
+        "p95_m": 8.679624366666147
+      },
+      {
+        "driver": "HAD",
+        "lap": 48,
+        "lap_key": "2025-07-emilia-romagna-grand-prix-r-had-lap-48",
+        "path_length_m": 4874.95270883382,
+        "raw_path_length_m": 4874.95270883382,
+        "normalization": null,
+        "length_error_m": 23.20871627235465,
+        "rmse_m": 5.7907383907284125,
+        "p95_m": 10.45474037022728
       }
     ],
     "repo_vs_fastf1_average": {
       "sample_count": 720,
-      "rmse_m": 4.841297642614741,
-      "p50_m": 4.3959702410835995,
-      "p95_m": 7.5327691121393165,
-      "max_m": 9.113151510855962
+      "rmse_m": 5.018145439710051,
+      "p50_m": 4.583470988581643,
+      "p95_m": 7.852742525094146,
+      "max_m": 9.225675976894243
     },
     "lap_compliance_summary": {
       "total_laps": 1207,
-      "fitted_laps": 956,
-      "compliant_laps": 956,
-      "non_compliant_laps": 251,
+      "fitted_laps": 1130,
+      "compliant_laps": 1130,
+      "non_compliant_laps": 77,
       "shape_non_compliant_laps": 0,
       "reason_counts": {
-        "compliant": 956,
-        "fastf1_inaccurate": 251,
+        "compliant": 1130,
         "path_length_outlier": 2,
         "pit_lap": 75
+      },
+      "warning_counts": {
+        "fastf1_inaccurate": 251
       },
       "thresholds": {
         "length_tolerance_pct": 0.05,
@@ -1810,6 +1837,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 7,
         "event_name": "Emilia Romagna Grand Prix",
@@ -1844,6 +1872,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 7,
         "event_name": "Emilia Romagna Grand Prix",
@@ -1853,16 +1882,16 @@
     },
     "averaged_fastf1_polyline_vs_source": {
       "source_points": 720,
-      "simplified_points": 107,
-      "encoded_chars": 327,
+      "simplified_points": 109,
+      "encoded_chars": 330,
       "tolerance_m": 1.0,
-      "rmse_m": 0.3742782743649848,
-      "p95_m": 0.7865107209807984,
-      "max_m": 0.9715737931533799,
-      "source_length_m": 4850.31243102661,
-      "simplified_length_m": 4847.4715179096165,
-      "length_delta_m": -2.840913116993761,
-      "length_delta_pct": -0.05857175506511561
+      "rmse_m": 0.3665384524673247,
+      "p95_m": 0.7680443812806378,
+      "max_m": 0.9852883659536609,
+      "source_length_m": 4849.7848760107945,
+      "simplified_length_m": 4846.9521789871305,
+      "length_delta_m": -2.832697023663968,
+      "length_delta_pct": -0.05840871494477527
     },
     "polyline_vs_source": {
       "source_points": 84,
@@ -1879,23 +1908,23 @@
     },
     "polyline_vs_fastf1": {
       "direction": "forward",
-      "start_offset_samples": 692,
+      "start_offset_samples": 690,
       "sample_count": 720,
-      "rmse_m": 4.502404757428359,
-      "p50_m": 4.079192128942539,
-      "p95_m": 7.381515061679622,
-      "max_m": 9.46303670495617,
-      "scale_m_per_fastf1_unit": 0.09994804029420452,
-      "rotation_degrees": -1.5801757979351398
+      "rmse_m": 4.235755515022247,
+      "p50_m": 3.89928505389559,
+      "p95_m": 6.746292047491743,
+      "max_m": 8.571280316774725,
+      "scale_m_per_fastf1_unit": 0.09985262677748837,
+      "rotation_degrees": -1.760436635435209
     },
     "encoded_polyline": "k}smGklofA?pAmA~NMtDAhB`@tOl@dGL`@LLhAVPLN`@vAnF\\b@nTdKRBT?hBi@P?RLLLzGlMNJPDTEVQJUDW?e@eAgVCsAD}BHyAh@{HEg@K_@[g@s@i@oB}@q@Mu@Ey@JqHzASAUKgCyBESC[b@wBB_@Em`@BMj@WBK?U}BkLSu@wAqDcAeBoFsIWq@Ss@cB{HOWYCSFoC|AMTEX?`@BXpDpSJfADn@A~T",
-    "averaged_fastf1_encoded_polyline": "_}smGolofAAbAIrA}@fIKrAItBChDDzEXpIPrB\\rCH\\NVbAd@Z`@Rh@fAnDVf@\\Zj@ZtLzFzC|Ab@JV@b@ErAUJ?VDZ\\`C~EzBzDPTTLVBJCJGFIL[F_@@a@CaAUyDSyEMiDEgC?eBBsA^oI?s@Io@Si@[_@iAw@y@[gAK{@@iALaF|@{@Dc@Kk@]q@m@We@EMCa@PaBDs@D_HCcLIaIF_@`@o@H]?a@E_@Q_Ay@gDo@{CWy@g@uAq@_Bq@kAgEoGq@iAUi@Ok@eA}FOm@GMQSKEWAc@Hm@Tu@d@OVM\\En@A`@B`@F^xAhH`AlFPpAFn@FdBDfR"
+    "averaged_fastf1_encoded_polyline": "_}smGolofAAbAIrA}@fIKrAItBChDDzEXpILbB`@bDH\\NVbAd@Z`@Rh@fApDVd@\\Zj@\\jLrFdDdBb@HV@vB[b@DZ^`C~EzBzDRRTNV@TKFIL[F_@@a@CcAUwDSkEMyDGeC?eBDuAZ}GBcAAo@G_@Si@QUSQkAw@y@W{@IgAD{@JcF|@o@Dc@Ek@[s@k@SUMYEMCa@PaBDq@DaHCcLIaIF_@`@o@DMBa@Eo@Q_Ay@gDo@{CW{@a@eAi@sAm@mAkF_I_@s@[w@I]eA}FOm@QWIGIEWAc@Hm@Ta@TSPQVKZE`@A`@@^Jp@vAhHx@lERnAJ`ADp@BbADdR"
   },
   {
     "schema_version": "1.0.0",
     "artifact_kind": "circuit_analysis_row",
     "provenance": {
-      "generated_at": "2026-06-20T07:55:33Z",
+      "generated_at": "2026-06-20T12:50:59Z",
       "generator": "apexline",
       "schema_version": "1.0.0",
       "command": "batch",
@@ -1976,28 +2005,6 @@
         "p95_m": 14.467415873744645
       },
       {
-        "driver": "LAW",
-        "lap": 52,
-        "lap_key": "2025-08-monaco-grand-prix-r-law-lap-52",
-        "path_length_m": 3286.422768262655,
-        "raw_path_length_m": 3286.422768262655,
-        "normalization": null,
-        "length_error_m": 37.8520331190648,
-        "rmse_m": 7.190318527135895,
-        "p95_m": 11.596238186930368
-      },
-      {
-        "driver": "SAI",
-        "lap": 32,
-        "lap_key": "2025-08-monaco-grand-prix-r-sai-lap-32",
-        "path_length_m": 3291.254927735198,
-        "raw_path_length_m": 3291.254927735198,
-        "normalization": null,
-        "length_error_m": 33.01987364652177,
-        "rmse_m": 7.731800269820828,
-        "p95_m": 12.871585117155268
-      },
-      {
         "driver": "COL",
         "lap": 6,
         "lap_key": "2025-08-monaco-grand-prix-r-col-lap-6",
@@ -2018,26 +2025,51 @@
         "length_error_m": 27.910208900320413,
         "rmse_m": 8.196247963041886,
         "p95_m": 16.109171350168772
+      },
+      {
+        "driver": "ANT",
+        "lap": 8,
+        "lap_key": "2025-08-monaco-grand-prix-r-ant-lap-8",
+        "path_length_m": 3297.434589230903,
+        "raw_path_length_m": 3297.434589230903,
+        "normalization": null,
+        "length_error_m": 26.840212150817024,
+        "rmse_m": 9.118356453198398,
+        "p95_m": 16.29476964165869
+      },
+      {
+        "driver": "HAD",
+        "lap": 72,
+        "lap_key": "2025-08-monaco-grand-prix-r-had-lap-72",
+        "path_length_m": 3295.2582434364813,
+        "raw_path_length_m": 3295.2582434364813,
+        "normalization": null,
+        "length_error_m": 29.016557945238674,
+        "rmse_m": 9.154737022459049,
+        "p95_m": 14.55596743282348
       }
     ],
     "repo_vs_fastf1_average": {
       "sample_count": 720,
-      "rmse_m": 6.093959216661325,
-      "p50_m": 4.349216817216723,
-      "p95_m": 10.943329056733532,
-      "max_m": 18.273516233311593
+      "rmse_m": 6.597429482115562,
+      "p50_m": 3.5132917294145565,
+      "p95_m": 13.788676078186144,
+      "max_m": 20.795696991981238
     },
     "lap_compliance_summary": {
       "total_laps": 1425,
-      "fitted_laps": 1271,
-      "compliant_laps": 1271,
-      "non_compliant_laps": 154,
-      "shape_non_compliant_laps": 0,
+      "fitted_laps": 1341,
+      "compliant_laps": 1340,
+      "non_compliant_laps": 85,
+      "shape_non_compliant_laps": 1,
       "reason_counts": {
-        "compliant": 1271,
-        "fastf1_inaccurate": 154,
+        "compliant": 1340,
         "path_length_outlier": 4,
-        "pit_lap": 81
+        "pit_lap": 81,
+        "shape_p95_over_threshold": 1
+      },
+      "warning_counts": {
+        "fastf1_inaccurate": 154
       },
       "thresholds": {
         "length_tolerance_pct": 0.05,
@@ -2080,6 +2112,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 8,
         "event_name": "Monaco Grand Prix",
@@ -2114,6 +2147,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 8,
         "event_name": "Monaco Grand Prix",
@@ -2123,16 +2157,16 @@
     },
     "averaged_fastf1_polyline_vs_source": {
       "source_points": 720,
-      "simplified_points": 122,
-      "encoded_chars": 336,
+      "simplified_points": 117,
+      "encoded_chars": 330,
       "tolerance_m": 1.0,
-      "rmse_m": 0.42047035460826837,
-      "p95_m": 0.8476527843340461,
-      "max_m": 0.9747028050282638,
-      "source_length_m": 3260.8974212354674,
-      "simplified_length_m": 3254.3434414179783,
-      "length_delta_m": -6.5539798174891075,
-      "length_delta_pct": -0.20098699746911938
+      "rmse_m": 0.41432828687240314,
+      "p95_m": 0.8174461086671668,
+      "max_m": 0.9910768241614062,
+      "source_length_m": 3251.5215013935967,
+      "simplified_length_m": 3247.000342986214,
+      "length_delta_m": -4.5211584073827,
+      "length_delta_pct": -0.1390474707131704
     },
     "polyline_vs_source": {
       "source_points": 160,
@@ -2159,13 +2193,13 @@
       "rotation_degrees": 1.3795646815166867
     },
     "encoded_polyline": "gz}iG}ril@QBQEc@[iGoGCUB[JQPMp@ENKb@c@`@WFGBKCOGIKCIFIPs@v@KFK?QIIYGg@SmAAa@DQREvBDxBXlAXv@\\~@p@t@x@`ArAt@vBfApETzAVhCNdCHFPBHDDR@ZK\\?Pr@~N@TJL`Aj@^N~@LdA@NAJEJO\\q@LIfDe@b@KH?FHPf@HBRCrAk@\\Sb@c@`@m@^wAFITIJBFPLhADh@Cr@MVO?]Je@h@}@t@s@XyDdAwBX{AH}@?}AI}@Yc@Ig@@GGEOGi@EyAMgCs@}FIsACy@Kk@{@yDMqAMeCIe@Sk@]g@WUYI[@YD[LYRu@pASL",
-    "averaged_fastf1_encoded_polyline": "gz}iGqsil@UFO?WG]UsA{AcB_Bg@i@OWGU@IDUHOjAg@b@WX]FS?ICIECO@UPc@l@UHOGKMIQWgAEm@DSBILINGp@CbDPv@LtAd@xAt@t@r@`@p@Xx@nApEh@|B\\`CPfDD^HPZVDR@VEv@?`@X~EPtEBTJ\\HPXXb@Zf@Pv@Hp@@VENGf@g@ROv@Wv@Sv@Ih@CTHLLLHN?^Gt@[ZUX[Zi@h@aBJMLEVFDFFPD`@@l@?`@E^GPGFeA^{@x@q@`@cC|@gBb@wCTqA@aAEq@I_ASe@SSQI]U_Eu@}GUgDMs@a@{AOs@KaAS{CIk@K]Sc@Y[e@Q_@A_@H]P[Xs@t@"
+    "averaged_fastf1_encoded_polyline": "iz}iGmsil@WDOA_@MSOsA{AeBaBq@y@I]BUHQLKt@Yj@[X[HQ?I?IEEMAULi@r@WDOGIOIQWiACk@FSDGLINEn@CbDPv@N|Ah@jAl@n@h@h@v@\\bAhBzGVrAPvAV|DDR^b@FP@TCv@?l@ThETlFH\\FRd@h@\\Tl@Rp@Hn@?^Gv@o@TOt@Wv@Qp@If@ANB`@XN@`@Et@[ZUX[Zi@h@_BJOLEF?NDHNDRFlAA`@CTOVcAb@eA|@i@\\u@ZmA`@gBb@{CVqA?y@Cw@K_ASg@SQSI]U_Eu@}GS{CIk@i@oBMs@KaAQqCGa@Mg@Wm@YY_@O_@C_@F]P[V{@|@"
   },
   {
     "schema_version": "1.0.0",
     "artifact_kind": "circuit_analysis_row",
     "provenance": {
-      "generated_at": "2026-06-20T07:55:33Z",
+      "generated_at": "2026-06-20T12:50:59Z",
       "generator": "apexline",
       "schema_version": "1.0.0",
       "command": "batch",
@@ -2215,68 +2249,57 @@
     "circuit_name": "Circuit de Barcelona-Catalunya",
     "repo_location": "Barcelona",
     "declared_length_m": 4655,
-    "fastf1_driver": "PIA",
-    "fastf1_lap": 66,
-    "fastf1_lap_key": "2025-09-spanish-grand-prix-r-pia-lap-66",
-    "fastf1_points": 298,
-    "fastf1_path_length_m": 4617.792694255192,
-    "fastf1_raw_path_length_m": 4617.792694255192,
+    "fastf1_driver": "ALB",
+    "fastf1_lap": 1,
+    "fastf1_lap_key": "2025-09-spanish-grand-prix-r-alb-lap-1",
+    "fastf1_points": 343,
+    "fastf1_path_length_m": 4637.013161771492,
+    "fastf1_raw_path_length_m": 4637.013161771492,
     "fastf1_normalization": null,
     "repo_vs_fastf1": {
       "direction": "forward",
-      "start_offset_samples": 706,
+      "start_offset_samples": 709,
       "sample_count": 720,
-      "rmse_m": 4.731474346526308,
-      "p50_m": 4.207079347769541,
-      "p95_m": 7.869217384696894,
-      "max_m": 9.698301302021246,
-      "scale_m_per_fastf1_unit": 0.10029382497218979,
-      "rotation_degrees": 0.539393175367744
+      "rmse_m": 4.600110539579256,
+      "p50_m": 3.961933359578419,
+      "p95_m": 8.342016246175366,
+      "max_m": 9.424889258929925,
+      "scale_m_per_fastf1_unit": 0.10010912993556113,
+      "rotation_degrees": 0.5664935125854829
     },
     "averaged_fastf1_laps": [
       {
-        "driver": "PIA",
-        "lap": 66,
-        "lap_key": "2025-09-spanish-grand-prix-r-pia-lap-66",
-        "path_length_m": 4617.792694255192,
-        "raw_path_length_m": 4617.792694255192,
+        "driver": "ALB",
+        "lap": 1,
+        "lap_key": "2025-09-spanish-grand-prix-r-alb-lap-1",
+        "path_length_m": 4637.013161771492,
+        "raw_path_length_m": 4637.013161771492,
         "normalization": null,
-        "length_error_m": 46.51686075881753,
-        "rmse_m": 4.731474346526308,
-        "p95_m": 7.869217384696894
+        "length_error_m": 27.296393242517297,
+        "rmse_m": 4.600110539579256,
+        "p95_m": 8.342016246175366
       },
       {
-        "driver": "NOR",
-        "lap": 27,
-        "lap_key": "2025-09-spanish-grand-prix-r-nor-lap-27",
-        "path_length_m": 4618.226498687508,
-        "raw_path_length_m": 4618.226498687508,
+        "driver": "COL",
+        "lap": 1,
+        "lap_key": "2025-09-spanish-grand-prix-r-col-lap-1",
+        "path_length_m": 4624.950579152804,
+        "raw_path_length_m": 4624.950579152804,
         "normalization": null,
-        "length_error_m": 46.08305632650172,
-        "rmse_m": 4.73345389617111,
-        "p95_m": 7.705957771736215
+        "length_error_m": 39.35897586120609,
+        "rmse_m": 4.619423393680741,
+        "p95_m": 7.18881858922246
       },
       {
-        "driver": "ALO",
-        "lap": 27,
-        "lap_key": "2025-09-spanish-grand-prix-r-alo-lap-27",
-        "path_length_m": 4617.05792843554,
-        "raw_path_length_m": 4617.05792843554,
+        "driver": "SAI",
+        "lap": 1,
+        "lap_key": "2025-09-spanish-grand-prix-r-sai-lap-1",
+        "path_length_m": 4621.471720339561,
+        "raw_path_length_m": 4621.471720339561,
         "normalization": null,
-        "length_error_m": 47.25162657846977,
-        "rmse_m": 5.323774728520231,
-        "p95_m": 8.94019503198283
-      },
-      {
-        "driver": "HUL",
-        "lap": 2,
-        "lap_key": "2025-09-spanish-grand-prix-r-hul-lap-2",
-        "path_length_m": 4618.4557544158615,
-        "raw_path_length_m": 4618.4557544158615,
-        "normalization": null,
-        "length_error_m": 45.853800598148155,
-        "rmse_m": 5.503861325078083,
-        "p95_m": 8.618544534202885
+        "length_error_m": 42.83783467444846,
+        "rmse_m": 5.540756092396202,
+        "p95_m": 9.138163707993785
       },
       {
         "driver": "ALO",
@@ -2288,26 +2311,39 @@
         "length_error_m": 30.696115107883998,
         "rmse_m": 5.659881836899615,
         "p95_m": 10.121498172224703
+      },
+      {
+        "driver": "BEA",
+        "lap": 37,
+        "lap_key": "2025-09-spanish-grand-prix-r-bea-lap-37",
+        "path_length_m": 4623.168163786965,
+        "raw_path_length_m": 4623.168163786965,
+        "normalization": null,
+        "length_error_m": 41.14139122704455,
+        "rmse_m": 5.801832505699872,
+        "p95_m": 9.090608630720016
       }
     ],
     "repo_vs_fastf1_average": {
       "sample_count": 720,
-      "rmse_m": 4.240192943539021,
-      "p50_m": 3.362820951411474,
-      "p95_m": 7.351632716005201,
-      "max_m": 9.738756592650875
+      "rmse_m": 4.3585240963844845,
+      "p50_m": 3.386065088212166,
+      "p95_m": 7.667751006371457,
+      "max_m": 10.474675230872103
     },
     "lap_compliance_summary": {
       "total_laps": 1203,
-      "fitted_laps": 990,
-      "compliant_laps": 990,
-      "non_compliant_laps": 213,
+      "fitted_laps": 1093,
+      "compliant_laps": 1093,
+      "non_compliant_laps": 110,
       "shape_non_compliant_laps": 0,
       "reason_counts": {
-        "compliant": 990,
-        "fastf1_inaccurate": 213,
+        "compliant": 1093,
         "path_length_outlier": 1,
         "pit_lap": 109
+      },
+      "warning_counts": {
+        "fastf1_inaccurate": 213
       },
       "thresholds": {
         "length_tolerance_pct": 0.05,
@@ -2350,6 +2386,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 9,
         "event_name": "Spanish Grand Prix",
@@ -2384,6 +2421,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 9,
         "event_name": "Spanish Grand Prix",
@@ -2393,16 +2431,16 @@
     },
     "averaged_fastf1_polyline_vs_source": {
       "source_points": 720,
-      "simplified_points": 130,
-      "encoded_chars": 385,
+      "simplified_points": 132,
+      "encoded_chars": 390,
       "tolerance_m": 1.0,
-      "rmse_m": 0.3859764380936332,
-      "p95_m": 0.7741579489070052,
-      "max_m": 0.9974322766789181,
-      "source_length_m": 4611.45728462623,
-      "simplified_length_m": 4607.126012492689,
-      "length_delta_m": -4.331272133540551,
-      "length_delta_pct": -0.09392415165549152
+      "rmse_m": 0.35979323285897075,
+      "p95_m": 0.7441344634797764,
+      "max_m": 0.9721797326053092,
+      "source_length_m": 4609.974583036421,
+      "simplified_length_m": 4606.059281407928,
+      "length_delta_m": -3.9153016284926707,
+      "length_delta_pct": -0.08493108927107805
     },
     "polyline_vs_source": {
       "source_points": 150,
@@ -2419,23 +2457,23 @@
     },
     "polyline_vs_fastf1": {
       "direction": "forward",
-      "start_offset_samples": 706,
+      "start_offset_samples": 709,
       "sample_count": 720,
-      "rmse_m": 4.688181275837679,
-      "p50_m": 4.185963179567214,
-      "p95_m": 7.891308225558744,
-      "max_m": 9.607122378573125,
-      "scale_m_per_fastf1_unit": 0.1002854631832022,
-      "rotation_degrees": 0.5377344999209096
+      "rmse_m": 4.561436941052305,
+      "p50_m": 3.913631439397011,
+      "p95_m": 8.282598257934723,
+      "max_m": 9.490014461035896,
+      "scale_m_per_fastf1_unit": 0.10010077014502858,
+      "rotation_degrees": 0.564887874230651
     },
     "encoded_polyline": "ucv|FssxLt_@jZZd@BNBXAXCPi@bBE`@?ZDh@HT~AjDXpA@^CxAG^Mf@a@t@k@j@_@Te@Ny@F_@Ac@Eu@Qm@Ua@U_KaIKQKWGo@Fu@JYP_@NSb@WZGh@AX@ZFdAl@|FvEPDL@PEVUFOFe@C[qBqIUm@Wk@_@m@]_@wCaCe@SYDUNQXYx@S`@a@`@aIvD[F]?k@Ig@_@Y]O]oKm_@Mc@OSMGQASDOJYj@Mh@CVE`A@^D^^lAZl@Vj@H\\@l@CZK`@QXi@\\a@D_@IWOQWgDoGM_@E[Ee@?e@Dc@F[pDqJ^c@RMr@Q`@?^Fr@`@pO~L",
-    "averaged_fastf1_encoded_polyline": "wcv|FysxLnH|F`LhJpFtDn@j@h@t@Pd@Dl@El@]bBA\\@\\Px@x@pBVt@Nx@Fz@ElAOx@Wr@a@h@]T_@Pa@Hm@DoAGs@Ki@O_@Oi@]_BuAiCoBkAgAW_@MWI[Em@Fk@Ng@X_@ZW`@Ml@ET@VDr@`@x@p@lCdCZV^RTFV?\\ONUBOB]C]E]_AcDo@kCWu@c@{@a@k@m@m@kAcA_@UUEa@?WDIBQPs@rAa@f@]VoEdCk@Vk@Lm@Am@Is@_@[[MWOi@i@}BkBcHsCoJcAcEKYOUIIUGU@UHSPOTIXE\\C|@Hz@Pv@r@fBJh@Dl@Al@GZMV]Va@Da@G_@Sc@e@mC_FUu@G]A]?]Bm@Hm@Li@`AqC~@_Cf@w@ZWj@U`@CV@`@F^N\\TtNbL"
+    "averaged_fastf1_encoded_polyline": "wcv|FysxLdHrFlKzIdAv@rE|Cn@l@^j@Pf@B\\@NGj@[dBA\\B\\Px@x@pBTt@Px@Bl@?|@Kz@St@MVY^[X_@Ra@Jm@Dm@?m@Es@Mc@M_@O_@UsBeBwB_BsAoAY_@KWMi@C]Dm@Pg@T]d@]^Mb@Cl@Fh@Tf@^hD~C\\X\\R`@JTATINUDMD]A]E]Mi@q@{Bk@}BUu@i@iA_@k@m@o@kAcA_@UUGa@Aa@F[Zq@rAc@f@oFzCi@Tm@Hm@Am@M_@O[YOUSe@o@mCiBcHuCoJaAcEK[OUSOKAU?UHSPOTKXE\\Cz@F|@Rv@p@dBLh@Dl@Al@GZMV[Xa@Da@E_@Qe@e@kC_FWu@E]C]?]Bk@Hm@Ji@`@oAvAwD\\m@b@g@h@Wl@I`@@TD`@N\\TvNdL"
   },
   {
     "schema_version": "1.0.0",
     "artifact_kind": "circuit_analysis_row",
     "provenance": {
-      "generated_at": "2026-06-20T07:55:33Z",
+      "generated_at": "2026-06-20T12:50:59Z",
       "generator": "apexline",
       "schema_version": "1.0.0",
       "command": "batch",
@@ -2569,16 +2607,18 @@
     },
     "lap_compliance_summary": {
       "total_laps": 1349,
-      "fitted_laps": 1197,
-      "compliant_laps": 1197,
-      "non_compliant_laps": 152,
+      "fitted_laps": 1217,
+      "compliant_laps": 1217,
+      "non_compliant_laps": 132,
       "shape_non_compliant_laps": 0,
       "reason_counts": {
-        "compliant": 1197,
-        "fastf1_inaccurate": 152,
+        "compliant": 1217,
         "path_length_outlier": 2,
         "pit_lap": 131,
         "too_few_position_samples": 1
+      },
+      "warning_counts": {
+        "fastf1_inaccurate": 152
       },
       "thresholds": {
         "length_tolerance_pct": 0.05,
@@ -2621,6 +2661,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 10,
         "event_name": "Canadian Grand Prix",
@@ -2655,6 +2696,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 10,
         "event_name": "Canadian Grand Prix",
@@ -2706,7 +2748,7 @@
     "schema_version": "1.0.0",
     "artifact_kind": "circuit_analysis_row",
     "provenance": {
-      "generated_at": "2026-06-20T07:55:33Z",
+      "generated_at": "2026-06-20T12:50:59Z",
       "generator": "apexline",
       "schema_version": "1.0.0",
       "command": "batch",
@@ -2756,68 +2798,35 @@
     "circuit_name": "Red Bull Ring",
     "repo_location": "Spielberg",
     "declared_length_m": 4318,
-    "fastf1_driver": "HAD",
-    "fastf1_lap": 14,
-    "fastf1_lap_key": "2025-11-austrian-grand-prix-r-had-lap-14",
-    "fastf1_points": 279,
-    "fastf1_path_length_m": 4293.020415430884,
-    "fastf1_raw_path_length_m": 4293.020415430884,
+    "fastf1_driver": "GAS",
+    "fastf1_lap": 3,
+    "fastf1_lap_key": "2025-11-austrian-grand-prix-r-gas-lap-3",
+    "fastf1_points": 412,
+    "fastf1_path_length_m": 4294.727840654946,
+    "fastf1_raw_path_length_m": 4294.727840654946,
     "fastf1_normalization": null,
     "repo_vs_fastf1": {
       "direction": "forward",
-      "start_offset_samples": 704,
+      "start_offset_samples": 702,
       "sample_count": 720,
-      "rmse_m": 3.8954542171701685,
-      "p50_m": 3.2527558138934705,
-      "p95_m": 6.709026759689797,
-      "max_m": 9.687859647630543,
-      "scale_m_per_fastf1_unit": 0.09968264604535651,
-      "rotation_degrees": 0.20831807232400826
+      "rmse_m": 4.15541081385863,
+      "p50_m": 3.5035424371878134,
+      "p95_m": 7.002906258620549,
+      "max_m": 8.149896362751422,
+      "scale_m_per_fastf1_unit": 0.09964463099510959,
+      "rotation_degrees": 0.13622206453039623
     },
     "averaged_fastf1_laps": [
       {
-        "driver": "HAD",
-        "lap": 14,
-        "lap_key": "2025-11-austrian-grand-prix-r-had-lap-14",
-        "path_length_m": 4293.020415430884,
-        "raw_path_length_m": 4293.020415430884,
+        "driver": "GAS",
+        "lap": 3,
+        "lap_key": "2025-11-austrian-grand-prix-r-gas-lap-3",
+        "path_length_m": 4294.727840654946,
+        "raw_path_length_m": 4294.727840654946,
         "normalization": null,
-        "length_error_m": 9.209892789975129,
-        "rmse_m": 3.8954542171701685,
-        "p95_m": 6.709026759689797
-      },
-      {
-        "driver": "TSU",
-        "lap": 17,
-        "lap_key": "2025-11-austrian-grand-prix-r-tsu-lap-17",
-        "path_length_m": 4293.723996103353,
-        "raw_path_length_m": 4293.723996103353,
-        "normalization": null,
-        "length_error_m": 8.50631211750624,
-        "rmse_m": 4.0201679934207615,
-        "p95_m": 6.508642138539298
-      },
-      {
-        "driver": "PIA",
-        "lap": 40,
-        "lap_key": "2025-11-austrian-grand-prix-r-pia-lap-40",
-        "path_length_m": 4294.158580926384,
-        "raw_path_length_m": 4294.158580926384,
-        "normalization": null,
-        "length_error_m": 8.07172729447484,
-        "rmse_m": 4.140204921700354,
-        "p95_m": 6.763213714860776
-      },
-      {
-        "driver": "TSU",
-        "lap": 4,
-        "lap_key": "2025-11-austrian-grand-prix-r-tsu-lap-4",
-        "path_length_m": 4294.374237381391,
-        "raw_path_length_m": 4294.374237381391,
-        "normalization": null,
-        "length_error_m": 7.856070839467975,
-        "rmse_m": 4.147791842987404,
-        "p95_m": 7.8290488926480855
+        "length_error_m": 7.502467565913321,
+        "rmse_m": 4.15541081385863,
+        "p95_m": 7.002906258620549
       },
       {
         "driver": "TSU",
@@ -2829,26 +2838,61 @@
         "length_error_m": 6.739602278690654,
         "rmse_m": 4.325536179153622,
         "p95_m": 6.597037133528161
+      },
+      {
+        "driver": "LEC",
+        "lap": 10,
+        "lap_key": "2025-11-austrian-grand-prix-r-lec-lap-10",
+        "path_length_m": 4300.876208147033,
+        "raw_path_length_m": 4300.876208147033,
+        "normalization": null,
+        "length_error_m": 1.3541000738259754,
+        "rmse_m": 4.471159530751793,
+        "p95_m": 8.610804240271108
+      },
+      {
+        "driver": "HAD",
+        "lap": 9,
+        "lap_key": "2025-11-austrian-grand-prix-r-had-lap-9",
+        "path_length_m": 4301.4275383823515,
+        "raw_path_length_m": 4301.4275383823515,
+        "normalization": null,
+        "length_error_m": 0.8027698385076292,
+        "rmse_m": 4.522569972231644,
+        "p95_m": 8.652709667880014
+      },
+      {
+        "driver": "ALO",
+        "lap": 13,
+        "lap_key": "2025-11-austrian-grand-prix-r-alo-lap-13",
+        "path_length_m": 4297.8919222632785,
+        "raw_path_length_m": 4297.8919222632785,
+        "normalization": null,
+        "length_error_m": 4.338385957580613,
+        "rmse_m": 4.605230613529392,
+        "p95_m": 8.928765157406112
       }
     ],
     "repo_vs_fastf1_average": {
       "sample_count": 720,
-      "rmse_m": 3.579045020675143,
-      "p50_m": 2.9727593129074528,
-      "p95_m": 6.047215794154107,
-      "max_m": 7.960175086422783
+      "rmse_m": 4.069204615825381,
+      "p50_m": 3.4209132373955926,
+      "p95_m": 7.143420036784102,
+      "max_m": 7.819242105821295
     },
     "lap_compliance_summary": {
       "total_laps": 1126,
-      "fitted_laps": 1010,
-      "compliant_laps": 1010,
-      "non_compliant_laps": 116,
+      "fitted_laps": 1059,
+      "compliant_laps": 1059,
+      "non_compliant_laps": 67,
       "shape_non_compliant_laps": 0,
       "reason_counts": {
-        "compliant": 1010,
-        "fastf1_inaccurate": 116,
+        "compliant": 1059,
         "path_length_outlier": 2,
         "pit_lap": 65
+      },
+      "warning_counts": {
+        "fastf1_inaccurate": 116
       },
       "thresholds": {
         "length_tolerance_pct": 0.05,
@@ -2891,6 +2935,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 11,
         "event_name": "Austrian Grand Prix",
@@ -2925,6 +2970,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 11,
         "event_name": "Austrian Grand Prix",
@@ -2934,16 +2980,16 @@
     },
     "averaged_fastf1_polyline_vs_source": {
       "source_points": 720,
-      "simplified_points": 92,
-      "encoded_chars": 284,
+      "simplified_points": 90,
+      "encoded_chars": 276,
       "tolerance_m": 1.0,
-      "rmse_m": 0.34827954585985954,
-      "p95_m": 0.7279190011679362,
-      "max_m": 0.9861322342876493,
-      "source_length_m": 4267.207758502769,
-      "simplified_length_m": 4264.912697043655,
-      "length_delta_m": -2.2950614591145495,
-      "length_delta_pct": -0.05378368218752525
+      "rmse_m": 0.40219586542710184,
+      "p95_m": 0.8046127744872169,
+      "max_m": 0.9704977103307282,
+      "source_length_m": 4266.327894722098,
+      "simplified_length_m": 4263.904524180148,
+      "length_delta_m": -2.423370541950135,
+      "length_delta_pct": -0.05680225715768595
     },
     "polyline_vs_source": {
       "source_points": 81,
@@ -2960,23 +3006,23 @@
     },
     "polyline_vs_fastf1": {
       "direction": "forward",
-      "start_offset_samples": 704,
+      "start_offset_samples": 702,
       "sample_count": 720,
-      "rmse_m": 3.869100250236206,
-      "p50_m": 3.13064025405586,
-      "p95_m": 6.679927530977987,
-      "max_m": 9.660922307576667,
-      "scale_m_per_fastf1_unit": 0.0996856443362265,
-      "rotation_degrees": 0.21282803856201646
+      "rmse_m": 4.132719974923874,
+      "p50_m": 3.478189375521959,
+      "p95_m": 6.959366158754242,
+      "max_m": 8.158980734443299,
+      "scale_m_per_fastf1_unit": 0.0996476232261326,
+      "rotation_degrees": 0.14072098324823448
     },
     "encoded_polyline": "cte_H_ybyApCxW@f@OXy@j@_ChCoCtCaCtB}BjBiI`FqAhA_BpByFnJOHOAGSEm@KoCCoC@uCFmCPcD`AuNTeFLoNFi@RWRITBTJn@p@^f@h@fA\\lAT~AHfBClBm@dLBv@Jl@Ph@X`@\\V`@J\\@^GVKrFmEXa@Vu@F_AA{@S_ASe@cAmA[g@Uq@Ww@QoAMqAQgc@@u@Js@Ti@Za@f@YjFgBRENDLJTf@Rt@l@pCTzAjCrV",
-    "averaged_fastf1_encoded_polyline": "ate_H}xbyAdCfUBl@An@E\\Of@QR_At@mHhHyArAiDdCeFbDiA~@eAhAo@|@kAnBwCjF[VS?IEMUG]K}BCkCBmDRiFv@oLN{CRiGHwKDm@Ng@PQHC^A\\Nb@`@f@r@Xp@Tt@RfAJz@Dn@B|AIzB]fGA|AB|@Hl@Nf@\\l@PNRJh@Fr@Er@Wd@[fAcAlAoAVa@Rc@Pw@B_@?]Em@Kk@Ws@cBcD_@_AWeAI{@Co@EkCCyLIgJ@}BDmAH}@Rw@Zm@X[RKjDoAh@K^@RFRJV\\Rd@Lh@b@bCvClX"
+    "averaged_fastf1_encoded_polyline": "cte_HaybyAfCvUBn@Cl@G\\KXORiA~@cH`HyArA_DzByFrDiA~@{@`A_ArAwEdIYVU@GEMWG[KmBEyCB{CRiFz@qMNiDRyFDiKFm@Ng@PQHE\\A\\Lb@`@`@h@`@z@Tt@RfAPjBB|AKjC[xFC|AD|@Hj@Lh@Tb@NPRLRF^Dt@Ep@WhA{@jBiBl@aANg@F]Bm@A]C_@Ki@Wu@}AwC_@}@YcAIm@G}@E{CCiLGgK?_BBmAJkALi@Zq@`@e@PKxCeAr@Q^CRB\\RV^JVNh@d@`CxCtX"
   },
   {
     "schema_version": "1.0.0",
     "artifact_kind": "circuit_analysis_row",
     "provenance": {
-      "generated_at": "2026-06-20T07:55:33Z",
+      "generated_at": "2026-06-20T12:50:59Z",
       "generator": "apexline",
       "schema_version": "1.0.0",
       "command": "batch",
@@ -3027,98 +3073,100 @@
     "repo_location": "Silverstone",
     "declared_length_m": 5891,
     "fastf1_driver": "RUS",
-    "fastf1_lap": 29,
-    "fastf1_lap_key": "2025-12-british-grand-prix-r-rus-lap-29",
-    "fastf1_points": 387,
-    "fastf1_path_length_m": 5842.428286913662,
-    "fastf1_raw_path_length_m": 5842.428286913662,
+    "fastf1_lap": 17,
+    "fastf1_lap_key": "2025-12-british-grand-prix-r-rus-lap-17",
+    "fastf1_points": 658,
+    "fastf1_path_length_m": 5880.459613066975,
+    "fastf1_raw_path_length_m": 5880.459613066975,
     "fastf1_normalization": null,
     "repo_vs_fastf1": {
       "direction": "forward",
-      "start_offset_samples": 374,
+      "start_offset_samples": 375,
       "sample_count": 720,
-      "rmse_m": 7.099875880103427,
-      "p50_m": 5.667192570508128,
-      "p95_m": 12.303672136746378,
-      "max_m": 18.751698872819862,
-      "scale_m_per_fastf1_unit": 0.0996831285889615,
-      "rotation_degrees": -0.8713091148485795
+      "rmse_m": 9.553314935904563,
+      "p50_m": 7.368414406664751,
+      "p95_m": 18.530485269433726,
+      "max_m": 31.611109646855674,
+      "scale_m_per_fastf1_unit": 0.09960312341445939,
+      "rotation_degrees": -0.8970872550853758
     },
     "averaged_fastf1_laps": [
       {
         "driver": "RUS",
-        "lap": 29,
-        "lap_key": "2025-12-british-grand-prix-r-rus-lap-29",
-        "path_length_m": 5842.428286913662,
-        "raw_path_length_m": 5842.428286913662,
+        "lap": 17,
+        "lap_key": "2025-12-british-grand-prix-r-rus-lap-17",
+        "path_length_m": 5880.459613066975,
+        "raw_path_length_m": 5880.459613066975,
         "normalization": null,
-        "length_error_m": 35.39628540308604,
-        "rmse_m": 7.099875880103427,
-        "p95_m": 12.303672136746378
-      },
-      {
-        "driver": "RUS",
-        "lap": 31,
-        "lap_key": "2025-12-british-grand-prix-r-rus-lap-31",
-        "path_length_m": 5847.82769445669,
-        "raw_path_length_m": 5847.82769445669,
-        "normalization": null,
-        "length_error_m": 29.996877860058703,
-        "rmse_m": 7.4512639975195745,
-        "p95_m": 12.49359908747854
-      },
-      {
-        "driver": "STR",
-        "lap": 9,
-        "lap_key": "2025-12-british-grand-prix-r-str-lap-9",
-        "path_length_m": 5858.064070918881,
-        "raw_path_length_m": 5858.064070918881,
-        "normalization": null,
-        "length_error_m": 19.7605013978673,
-        "rmse_m": 8.496257658023064,
-        "p95_m": 16.396597827994675
-      },
-      {
-        "driver": "RUS",
-        "lap": 12,
-        "lap_key": "2025-12-british-grand-prix-r-rus-lap-12",
-        "path_length_m": 5859.607672474241,
-        "raw_path_length_m": 5859.607672474241,
-        "normalization": null,
-        "length_error_m": 18.2168998425077,
-        "rmse_m": 8.853004080955216,
-        "p95_m": 16.21530848016654
+        "length_error_m": 2.6350407502268354,
+        "rmse_m": 9.553314935904563,
+        "p95_m": 18.530485269433726
       },
       {
         "driver": "ALO",
-        "lap": 25,
-        "lap_key": "2025-12-british-grand-prix-r-alo-lap-25",
-        "path_length_m": 5857.363369298451,
-        "raw_path_length_m": 5857.363369298451,
+        "lap": 17,
+        "lap_key": "2025-12-british-grand-prix-r-alo-lap-17",
+        "path_length_m": 5865.081312455266,
+        "raw_path_length_m": 5865.081312455266,
         "normalization": null,
-        "length_error_m": 20.461203018297056,
-        "rmse_m": 9.079874507289746,
-        "p95_m": 13.587020607062483
+        "length_error_m": 12.74325986148233,
+        "rmse_m": 9.570288821288107,
+        "p95_m": 16.984429795641695
+      },
+      {
+        "driver": "ALO",
+        "lap": 16,
+        "lap_key": "2025-12-british-grand-prix-r-alo-lap-16",
+        "path_length_m": 5869.596587425917,
+        "raw_path_length_m": 5869.596587425917,
+        "normalization": null,
+        "length_error_m": 8.227984890831067,
+        "rmse_m": 9.683767822995359,
+        "p95_m": 17.17621333798264
+      },
+      {
+        "driver": "ALO",
+        "lap": 28,
+        "lap_key": "2025-12-british-grand-prix-r-alo-lap-28",
+        "path_length_m": 5865.002438817225,
+        "raw_path_length_m": 5865.002438817225,
+        "normalization": null,
+        "length_error_m": 12.822133499523261,
+        "rmse_m": 9.801283810154267,
+        "p95_m": 18.774969218586048
+      },
+      {
+        "driver": "STR",
+        "lap": 5,
+        "lap_key": "2025-12-british-grand-prix-r-str-lap-5",
+        "path_length_m": 5862.299308716827,
+        "raw_path_length_m": 5862.299308716827,
+        "normalization": null,
+        "length_error_m": 15.525263599921345,
+        "rmse_m": 10.615226468366414,
+        "p95_m": 18.028454646204576
       }
     ],
     "repo_vs_fastf1_average": {
       "sample_count": 720,
-      "rmse_m": 7.575692311339213,
-      "p50_m": 6.310606738726539,
-      "p95_m": 14.36415216409407,
-      "max_m": 16.6930134427887
+      "rmse_m": 9.538929660676132,
+      "p50_m": 7.503545854351405,
+      "p95_m": 19.180821790961808,
+      "max_m": 20.94648844616381
     },
     "lap_compliance_summary": {
       "total_laps": 825,
-      "fitted_laps": 496,
-      "compliant_laps": 496,
-      "non_compliant_laps": 329,
+      "fitted_laps": 746,
+      "compliant_laps": 746,
+      "non_compliant_laps": 79,
       "shape_non_compliant_laps": 0,
       "reason_counts": {
-        "compliant": 496,
-        "fastf1_inaccurate": 329,
+        "compliant": 746,
         "path_length_outlier": 3,
         "pit_lap": 76
+      },
+      "warning_counts": {
+        "fastf1_inaccurate": 329
       },
       "thresholds": {
         "length_tolerance_pct": 0.05,
@@ -3161,6 +3209,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 12,
         "event_name": "British Grand Prix",
@@ -3195,6 +3244,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 12,
         "event_name": "British Grand Prix",
@@ -3204,16 +3254,16 @@
     },
     "averaged_fastf1_polyline_vs_source": {
       "source_points": 720,
-      "simplified_points": 158,
-      "encoded_chars": 493,
+      "simplified_points": 155,
+      "encoded_chars": 478,
       "tolerance_m": 1.0,
-      "rmse_m": 0.4010274228032871,
-      "p95_m": 0.7710612424936392,
-      "max_m": 0.9884457941829333,
-      "source_length_m": 5784.959702423172,
-      "simplified_length_m": 5780.9943423806,
-      "length_delta_m": -3.965360042571774,
-      "length_delta_pct": -0.06854602705202573
+      "rmse_m": 0.4149606772392796,
+      "p95_m": 0.8132833977158416,
+      "max_m": 0.9907953291154337,
+      "source_length_m": 5774.527073245819,
+      "simplified_length_m": 5770.384741494221,
+      "length_delta_m": -4.142331751598249,
+      "length_delta_pct": -0.07173456283182468
     },
     "polyline_vs_source": {
       "source_points": 135,
@@ -3230,23 +3280,23 @@
     },
     "polyline_vs_fastf1": {
       "direction": "forward",
-      "start_offset_samples": 374,
+      "start_offset_samples": 375,
       "sample_count": 720,
-      "rmse_m": 7.1238181167803,
-      "p50_m": 5.684509460589386,
-      "p95_m": 12.402636218570773,
-      "max_m": 18.806040828867573,
-      "scale_m_per_fastf1_unit": 0.09968028280488823,
-      "rotation_degrees": -0.8696312740548627
+      "rmse_m": 9.582998540991499,
+      "p50_m": 7.334612698161926,
+      "p95_m": 18.662541515177747,
+      "max_m": 31.674006470050216,
+      "scale_m_per_fastf1_unit": 0.09960024719833473,
+      "rotation_degrees": -0.8953988741637624
     },
     "encoded_polyline": "msz|H|heE]aPB_BNkARo@f@y@n@c@z@]fEsAjBYdAIdDMlCEv@Ir@a@fA_Ah@[^?b@JtC|Az@Dj@Ob@_@lA{Ab@Sj@Cd@Nh@v@^dA|@lD^r@|@|@zZpWnExEp@z@Zp@Px@Hz@Cv@G|@Mr@Ul@c@f@}AdAeA`A}AvBaBtC}CtEGTA\\F\\p@xAF\\A\\GXSd@Yd@g@p@i@`@i@Xq@RSBSE{@{@_SaXU]Uu@G_AAs@BgAVkG@cAEmAKgAU}@kEaLU{@Aa@DYLWLMxCgATSJ]@a@Ie@SWeAk@sAi@qAOk@DSLYb@uVdi@]vAE|@B`AR`APVXNhCZZNV^Lp@Dt@Iz@Qj@SXYRYB[Im@_@sEmDg@w@a@u@i@mA[_ASqAMcAKsC[sN",
-    "averaged_fastf1_encoded_polyline": "usz|H|heE[_M?eAFeAPyA^mARc@T]p@o@t@_@v@YfAYfASnCUjEIfAMbBg@xBgAx@Qx@FlCr@h@F\\AZIXOlAcAXQZK\\AZDZNXRVZZr@j@zBXv@r@pAz@dAvAnApTrPdDpCbBbBv@hAd@fALf@Hj@Dn@?l@En@O~@Wx@U`@m@v@qBdBcCtC_BzBaA|A_@n@Of@ETCj@Dl@\\nABl@?TGj@GTQb@m@x@q@b@q@Nk@Ai@K[Om@c@_@e@oCuDwCyDyCqDy@gA_A_Ba@kASwAGeA?uBJcD@_BAeAM{AS_AW{@Yu@gAwBo@yAa@iAIk@AWBm@BUPc@JMZOtAUXSRa@FSBUCUESSa@e@c@g@Yy@Wi@E]@i@Hi@Te@`@c@f@s@tAwBjFyCzGcI`Qc@hA[pAMbAAdA@VFj@Lh@HNd@b@ZNfAHZHXTR^HRHj@Al@ETQb@KLYRk@Hy@Ku@]s@i@_A{@y@gAs@qAm@{AWy@S_AYmBIeAQaDUyJ"
+    "averaged_fastf1_encoded_polyline": "usz|H`ieE[_M?gADeAPyA^oAPc@T]p@o@t@c@x@WdAYfASpCWzDEvAQtA_@xBeAx@WZAj@FzCv@\\BZCZIZOfBsAZKZA\\DXNXTVX\\r@h@zBZx@|@~A|@bAxAlAvS~OdDrCnBlBv@jAR`@Pd@Jh@Hl@Dl@An@IbAKh@Yx@U^a@h@_CrBwBfCeBbCcA|A]r@Ml@Ef@?TDh@PtAB~@CTKf@[t@a@f@m@`@s@Ni@?k@Mk@W{@_A_HgJuEyF_A}Ac@kAUuAI}A?_BJcDB}AAgAM{AQ_AU}@[u@yA{Cm@{AYy@Gm@@m@DUDUT_@XQfAOZMVWRc@BU?WES_@q@e@a@w@]i@M]Ci@@k@L[Ne@^c@f@i@`AcC|FyCzGcIbQc@hA]pAKbAAdA?VFl@Nf@HNb@d@ZLfAJ\\HPLT\\FPLh@@l@CTOf@KNWTk@Ni@Cy@Ys@e@kAeAy@gAu@qAm@yAYy@YsASyAKcAK}AIuBQiI"
   },
   {
     "schema_version": "1.0.0",
     "artifact_kind": "circuit_analysis_row",
     "provenance": {
-      "generated_at": "2026-06-20T07:55:33Z",
+      "generated_at": "2026-06-20T12:50:59Z",
       "generator": "apexline",
       "schema_version": "1.0.0",
       "command": "batch",
@@ -3297,34 +3347,34 @@
     "repo_location": "Spa Francorchamps",
     "declared_length_m": 7004,
     "fastf1_driver": "ALO",
-    "fastf1_lap": 25,
-    "fastf1_lap_key": "2025-13-belgian-grand-prix-r-alo-lap-25",
-    "fastf1_points": 414,
-    "fastf1_path_length_m": 6967.953821300602,
-    "fastf1_raw_path_length_m": 6967.953821300602,
+    "fastf1_lap": 4,
+    "fastf1_lap_key": "2025-13-belgian-grand-prix-r-alo-lap-4",
+    "fastf1_points": 629,
+    "fastf1_path_length_m": 6969.92685686949,
+    "fastf1_raw_path_length_m": 6969.92685686949,
     "fastf1_normalization": null,
     "repo_vs_fastf1": {
       "direction": "forward",
-      "start_offset_samples": 708,
+      "start_offset_samples": 707,
       "sample_count": 720,
-      "rmse_m": 7.1673590642785365,
-      "p50_m": 4.700257388575407,
-      "p95_m": 14.569288668641791,
-      "max_m": 16.63893731104692,
-      "scale_m_per_fastf1_unit": 0.10007601089250952,
-      "rotation_degrees": -2.297280463843671
+      "rmse_m": 7.449939602135837,
+      "p50_m": 6.6607436452462245,
+      "p95_m": 13.013138300556776,
+      "max_m": 14.379733981935534,
+      "scale_m_per_fastf1_unit": 0.09982482108856341,
+      "rotation_degrees": -2.295839898146168
     },
     "averaged_fastf1_laps": [
       {
         "driver": "ALO",
-        "lap": 25,
-        "lap_key": "2025-13-belgian-grand-prix-r-alo-lap-25",
-        "path_length_m": 6967.953821300602,
-        "raw_path_length_m": 6967.953821300602,
+        "lap": 4,
+        "lap_key": "2025-13-belgian-grand-prix-r-alo-lap-4",
+        "path_length_m": 6969.92685686949,
+        "raw_path_length_m": 6969.92685686949,
         "normalization": null,
-        "length_error_m": 10.401710066429587,
-        "rmse_m": 7.1673590642785365,
-        "p95_m": 14.569288668641791
+        "length_error_m": 8.428674497541579,
+        "rmse_m": 7.449939602135837,
+        "p95_m": 13.013138300556776
       },
       {
         "driver": "ANT",
@@ -3338,28 +3388,6 @@
         "p95_m": 23.002636942030648
       },
       {
-        "driver": "ALO",
-        "lap": 42,
-        "lap_key": "2025-13-belgian-grand-prix-r-alo-lap-42",
-        "path_length_m": 6968.209176018848,
-        "raw_path_length_m": 6968.209176018848,
-        "normalization": null,
-        "length_error_m": 10.146355348183533,
-        "rmse_m": 8.101683884032486,
-        "p95_m": 15.921317365064398
-      },
-      {
-        "driver": "TSU",
-        "lap": 5,
-        "lap_key": "2025-13-belgian-grand-prix-r-tsu-lap-5",
-        "path_length_m": 6968.289007483113,
-        "raw_path_length_m": 6968.289007483113,
-        "normalization": null,
-        "length_error_m": 10.066523883918308,
-        "rmse_m": 8.32716587998441,
-        "p95_m": 14.20092879532812
-      },
-      {
         "driver": "ANT",
         "lap": 6,
         "lap_key": "2025-13-belgian-grand-prix-r-ant-lap-6",
@@ -3369,25 +3397,49 @@
         "length_error_m": 9.040133498107025,
         "rmse_m": 8.385453633965753,
         "p95_m": 13.743200568093634
+      },
+      {
+        "driver": "LAW",
+        "lap": 3,
+        "lap_key": "2025-13-belgian-grand-prix-r-law-lap-3",
+        "path_length_m": 6979.373082142284,
+        "raw_path_length_m": 6979.373082142284,
+        "normalization": null,
+        "length_error_m": 1.0175507752528574,
+        "rmse_m": 8.429781218489284,
+        "p95_m": 13.756914423784869
+      },
+      {
+        "driver": "COL",
+        "lap": 7,
+        "lap_key": "2025-13-belgian-grand-prix-r-col-lap-7",
+        "path_length_m": 6987.0002438293195,
+        "raw_path_length_m": 6987.0002438293195,
+        "normalization": null,
+        "length_error_m": 8.644712462288226,
+        "rmse_m": 8.785504226218912,
+        "p95_m": 19.662074308397433
       }
     ],
     "repo_vs_fastf1_average": {
       "sample_count": 720,
-      "rmse_m": 6.508573338408571,
-      "p50_m": 5.191263280899527,
-      "p95_m": 10.90673031502688,
-      "max_m": 12.699250106128943
+      "rmse_m": 7.1880502136876245,
+      "p50_m": 5.421152000764543,
+      "p95_m": 12.217253451917184,
+      "max_m": 15.130031824943082
     },
     "lap_compliance_summary": {
       "total_laps": 879,
-      "fitted_laps": 747,
-      "compliant_laps": 747,
-      "non_compliant_laps": 132,
+      "fitted_laps": 807,
+      "compliant_laps": 807,
+      "non_compliant_laps": 72,
       "shape_non_compliant_laps": 0,
       "reason_counts": {
-        "compliant": 747,
-        "fastf1_inaccurate": 132,
+        "compliant": 807,
         "pit_lap": 72
+      },
+      "warning_counts": {
+        "fastf1_inaccurate": 132
       },
       "thresholds": {
         "length_tolerance_pct": 0.05,
@@ -3430,6 +3482,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 13,
         "event_name": "Belgian Grand Prix",
@@ -3464,6 +3517,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 13,
         "event_name": "Belgian Grand Prix",
@@ -3474,15 +3528,15 @@
     "averaged_fastf1_polyline_vs_source": {
       "source_points": 720,
       "simplified_points": 170,
-      "encoded_chars": 556,
+      "encoded_chars": 543,
       "tolerance_m": 1.0,
-      "rmse_m": 0.356058214113521,
-      "p95_m": 0.7806628516853424,
-      "max_m": 0.9951944691567283,
-      "source_length_m": 6921.808880374792,
-      "simplified_length_m": 6918.2532803011245,
-      "length_delta_m": -3.555600073667847,
-      "length_delta_pct": -0.05136807639617064
+      "rmse_m": 0.3619478435964914,
+      "p95_m": 0.7506136808491408,
+      "max_m": 0.9963629314837973,
+      "source_length_m": 6915.009058429078,
+      "simplified_length_m": 6911.5398779360985,
+      "length_delta_m": -3.469180492979831,
+      "length_delta_pct": -0.05016884958019049
     },
     "polyline_vs_source": {
       "source_points": 153,
@@ -3499,23 +3553,23 @@
     },
     "polyline_vs_fastf1": {
       "direction": "forward",
-      "start_offset_samples": 708,
+      "start_offset_samples": 707,
       "sample_count": 720,
-      "rmse_m": 7.157492786924332,
-      "p50_m": 4.6167534651835584,
-      "p95_m": 14.54618907328667,
-      "max_m": 16.602198530004827,
-      "scale_m_per_fastf1_unit": 0.10007748924991205,
-      "rotation_degrees": -2.298644341684732
+      "rmse_m": 7.436879670411287,
+      "p50_m": 6.632430940791631,
+      "p95_m": 13.03042032563579,
+      "max_m": 14.30288898613013,
+      "scale_m_per_fastf1_unit": 0.09982630111567256,
+      "rotation_degrees": -2.2972066342237065
     },
     "encoded_polyline": "qk{rHk`lc@cJ~HOBMMG]Da@nBgJn@{B|@_Cz@qB~@{ApJgNTa@`AeD\\m@f@e@b@Yf@ObBUVM^[rKiKdBeA|b@iOzCcAXCZFTTRb@Lh@NZRNZNZCfDy@\\?XH\\^Rd@fH`TJj@?h@Gj@Od@YXWHY@WKYWQa@sBgHS_@UOWG]BcFxB}Ad@_HtA_Er@]TYZYh@Sn@Kr@Et@GnDBbAJ|@P|@Rr@b@x@`@d@p@h@vNzHb@^Xd@Pr@Hr@?n@En@Kh@[dAKj@Et@Bt@Hp@Pj@r@z@nGpGNXJ`@Df@Aj@Kf@gCdHq@t@YP_@J_@@e@GkCqAgA}@_AgAkAiBmBqDs@gBa@wAwCgMYcA]}@c@y@kA_BiA}@eFaDc@Sc@Ko@Ci@J_KdF{Bj@qBTsFXOEKMCWBg@?i@C[MSMCSJwCpCqIlH",
-    "averaged_fastf1_encoded_polyline": "uk{rH_`lc@mF`F}@r@_@PQ?OCKMGUAYBYJq@ViAfB{Gf@yAj@sAx@eB|@}AbDaFlDcFd@w@Tg@l@uB^}@h@o@n@_@p@StAUp@YhB{AhEuExAuAlAy@`By@hc@sObAU`@A`@LLJ~@zALN^Rb@@NAbBm@b@IN?`@Hl@d@LNVf@fBzFvBjGb@|APjABZEr@Sj@KPOLODQ@a@M[]Wg@[cAo@qC_@_AMQ]Wa@Ia@Bs@RqCrAsAb@wBf@aHnAcAVo@`@i@n@a@|@GVKp@Gt@CjB?v@Bt@Fr@Nn@d@zATf@f@t@\\\\l@d@n@^vJvEl@`@j@l@Vf@Pl@Fr@@ZEt@Mp@WfAEVGt@?XBt@Lr@\\~@f@t@j@l@xBfBx@v@f@t@Rj@Hr@AZEr@Mr@c@xAk@tAc@x@i@n@o@^a@Js@As@Mq@W_@S}@q@k@m@u@aAs@gAs@qAo@oAk@uAe@yAk@uBkCyKg@wAm@qA{@qAyAuAkCiB_Ag@q@Wa@Ic@Ea@Bs@Hq@Tq@XcFdCqAj@s@PwB^kD^a@Bc@A_@MMOGUCu@EWISOI_@Bo@`@_LlK"
+    "averaged_fastf1_encoded_polyline": "{k{rHw_lc@mF`F}@p@a@LOAOIKQAY@[Jq@ViAdBwGd@{Aj@uAx@eBhAqBvDyFpC_Ed@w@`@_Aj@sBb@y@l@g@n@]vBc@^M^UzAqAhEsEvAuA|AeApAm@hc@qObAW`@?PD\\T`AxA\\XNFN@b@AbBm@`@GP?^J^TLLXd@Th@rAnEdCjHXfAThA@ZAr@EXUf@_@VOBa@I][MQUi@Qm@o@qC]_A[a@OKa@Ka@@q@PcDzAcAZgCl@aHnAcAZm@b@g@r@Uh@Ql@EXEt@EjB@lBFr@Lp@d@zAVf@d@t@\\\\l@f@n@^dK`Fn@d@Z\\Vf@Pl@Hr@@XCt@EX_@~AKr@AXAZBt@Jp@HVTh@d@t@x@z@zAlAdA~@f@p@Tj@Jp@?t@CXKr@YdAo@fBo@lAk@l@o@^a@Hs@Cs@Mo@Yo@_@m@g@k@k@u@cAq@eA}@_By@gB]_AiAyDkCyKg@wAm@sAe@u@[_@wAuAmCiBaBw@a@Is@Ga@@s@JsAf@sFnCqAh@cAVgBXkD^a@@c@COEOKKQCYCu@EWMOOCQ@_@R_@X_LlK"
   },
   {
     "schema_version": "1.0.0",
     "artifact_kind": "circuit_analysis_row",
     "provenance": {
-      "generated_at": "2026-06-20T07:55:33Z",
+      "generated_at": "2026-06-20T12:50:59Z",
       "generator": "apexline",
       "schema_version": "1.0.0",
       "command": "batch",
@@ -3565,47 +3619,25 @@
     "circuit_name": "Hungaroring",
     "repo_location": "Budapest",
     "declared_length_m": 4381,
-    "fastf1_driver": "COL",
-    "fastf1_lap": 29,
-    "fastf1_lap_key": "2025-14-hungarian-grand-prix-r-col-lap-29",
-    "fastf1_points": 309,
-    "fastf1_path_length_m": 4334.949645329702,
-    "fastf1_raw_path_length_m": 4334.949645329702,
+    "fastf1_driver": "RUS",
+    "fastf1_lap": 10,
+    "fastf1_lap_key": "2025-14-hungarian-grand-prix-r-rus-lap-10",
+    "fastf1_points": 322,
+    "fastf1_path_length_m": 4336.744294097853,
+    "fastf1_raw_path_length_m": 4336.744294097853,
     "fastf1_normalization": null,
     "repo_vs_fastf1": {
       "direction": "forward",
-      "start_offset_samples": 678,
+      "start_offset_samples": 677,
       "sample_count": 720,
-      "rmse_m": 4.391556751516769,
-      "p50_m": 3.4730745386949575,
-      "p95_m": 9.031708939423476,
-      "max_m": 12.980453650262314,
-      "scale_m_per_fastf1_unit": 0.09992853795896064,
-      "rotation_degrees": 1.3678124851894204
+      "rmse_m": 4.437118708008689,
+      "p50_m": 3.454758161097666,
+      "p95_m": 8.788393933043436,
+      "max_m": 13.539666102896163,
+      "scale_m_per_fastf1_unit": 0.09991935753150592,
+      "rotation_degrees": 1.329445253713678
     },
     "averaged_fastf1_laps": [
-      {
-        "driver": "COL",
-        "lap": 29,
-        "lap_key": "2025-14-hungarian-grand-prix-r-col-lap-29",
-        "path_length_m": 4334.949645329702,
-        "raw_path_length_m": 4334.949645329702,
-        "normalization": null,
-        "length_error_m": 41.09840427235031,
-        "rmse_m": 4.391556751516769,
-        "p95_m": 9.031708939423476
-      },
-      {
-        "driver": "GAS",
-        "lap": 57,
-        "lap_key": "2025-14-hungarian-grand-prix-r-gas-lap-57",
-        "path_length_m": 4334.757626824283,
-        "raw_path_length_m": 4334.757626824283,
-        "normalization": null,
-        "length_error_m": 41.29042277776989,
-        "rmse_m": 4.402600466948408,
-        "p95_m": 9.206184672824143
-      },
       {
         "driver": "RUS",
         "lap": 10,
@@ -3629,35 +3661,59 @@
         "p95_m": 7.580450922587026
       },
       {
-        "driver": "GAS",
-        "lap": 12,
-        "lap_key": "2025-14-hungarian-grand-prix-r-gas-lap-12",
-        "path_length_m": 4335.897766624593,
-        "raw_path_length_m": 4335.897766624593,
+        "driver": "RUS",
+        "lap": 2,
+        "lap_key": "2025-14-hungarian-grand-prix-r-rus-lap-2",
+        "path_length_m": 4343.73228179951,
+        "raw_path_length_m": 4343.73228179951,
         "normalization": null,
-        "length_error_m": 40.15028297745994,
-        "rmse_m": 4.569957915093541,
-        "p95_m": 7.416916429145648
+        "length_error_m": 32.31576780254272,
+        "rmse_m": 4.736932856441374,
+        "p95_m": 8.452382079438259
+      },
+      {
+        "driver": "RUS",
+        "lap": 3,
+        "lap_key": "2025-14-hungarian-grand-prix-r-rus-lap-3",
+        "path_length_m": 4337.139975971118,
+        "raw_path_length_m": 4337.139975971118,
+        "normalization": null,
+        "length_error_m": 38.90807363093518,
+        "rmse_m": 4.972623500124987,
+        "p95_m": 9.587291445647601
+      },
+      {
+        "driver": "VER",
+        "lap": 31,
+        "lap_key": "2025-14-hungarian-grand-prix-r-ver-lap-31",
+        "path_length_m": 4347.929189799975,
+        "raw_path_length_m": 4347.929189799975,
+        "normalization": null,
+        "length_error_m": 28.118859802078077,
+        "rmse_m": 5.192482461360158,
+        "p95_m": 10.575322484769522
       }
     ],
     "repo_vs_fastf1_average": {
       "sample_count": 720,
-      "rmse_m": 5.575279664702912,
-      "p50_m": 5.025395908137591,
-      "p95_m": 8.733436647439516,
-      "max_m": 11.494523515799608
+      "rmse_m": 7.033702791652882,
+      "p50_m": 6.292306380072834,
+      "p95_m": 11.543601808682569,
+      "max_m": 14.218687867949935
     },
     "lap_compliance_summary": {
       "total_laps": 1368,
-      "fitted_laps": 1288,
-      "compliant_laps": 1288,
-      "non_compliant_laps": 80,
+      "fitted_laps": 1307,
+      "compliant_laps": 1307,
+      "non_compliant_laps": 61,
       "shape_non_compliant_laps": 0,
       "reason_counts": {
-        "compliant": 1288,
-        "fastf1_inaccurate": 79,
+        "compliant": 1307,
         "path_length_outlier": 1,
         "pit_lap": 60
+      },
+      "warning_counts": {
+        "fastf1_inaccurate": 79
       },
       "thresholds": {
         "length_tolerance_pct": 0.05,
@@ -3700,6 +3756,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 14,
         "event_name": "Hungarian Grand Prix",
@@ -3734,6 +3791,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 14,
         "event_name": "Hungarian Grand Prix",
@@ -3743,16 +3801,16 @@
     },
     "averaged_fastf1_polyline_vs_source": {
       "source_points": 720,
-      "simplified_points": 131,
-      "encoded_chars": 382,
+      "simplified_points": 135,
+      "encoded_chars": 385,
       "tolerance_m": 1.0,
-      "rmse_m": 0.40834946687179385,
-      "p95_m": 0.8273933145737199,
-      "max_m": 0.9969511840344856,
-      "source_length_m": 4315.141648086451,
-      "simplified_length_m": 4309.539709306654,
-      "length_delta_m": -5.60193877979691,
-      "length_delta_pct": -0.12982050733563033
+      "rmse_m": 0.3860412714910173,
+      "p95_m": 0.7692906666713997,
+      "max_m": 0.9979686461522651,
+      "source_length_m": 4313.384240086691,
+      "simplified_length_m": 4309.717438017871,
+      "length_delta_m": -3.666802068819379,
+      "length_delta_pct": -0.08500986382668481
     },
     "polyline_vs_source": {
       "source_points": 141,
@@ -3769,23 +3827,23 @@
     },
     "polyline_vs_fastf1": {
       "direction": "forward",
-      "start_offset_samples": 678,
+      "start_offset_samples": 677,
       "sample_count": 720,
-      "rmse_m": 4.321156196666931,
-      "p50_m": 3.418889150962907,
-      "p95_m": 8.928401271329685,
-      "max_m": 12.885874577526122,
-      "scale_m_per_fastf1_unit": 0.09993365096721164,
-      "rotation_degrees": 1.3666450885060302
+      "rmse_m": 4.371751700898718,
+      "p50_m": 3.422651757489029,
+      "p95_m": 8.684166041164298,
+      "max_m": 13.445200453737746,
+      "scale_m_per_fastf1_unit": 0.09992446039657836,
+      "rotation_degrees": 1.3282739244168087
     },
     "encoded_polyline": "s_laHy}mtBqJpT_@TQAMIIOESC]@eDHoANkARmAj@gBfFqLH_@D]?_@Ms@ISY]OKe@Ac@PmCzBYLS@QGk@SeO}Js@k@m@q@q@_A[UOCmHvBU@g@KSMOUM]K]A[?e@Da@Jk@b@qAj@sAhEwGNIXA`@l@HDNAdFwAZQJMR]BUTsEHa@Ri@POb@MR?`Fn@b@@TCl@UtDgDXQRAPAb@HPJNPzE`HfE~F`AvAFT@RAPENoC~DQZiAdCOn@AZ@XH^NR\\VP@RCNKNOlCgG\\o@NMVIXEVBf@XPTNd@Hd@Bf@Cj@If@Qb@yNp\\",
-    "averaged_fastf1_encoded_polyline": "s_laH{}mtBeG~N}@nB]j@[V_@HSIOUG[C_@Ao@B_AF_AXyBXwAf@}At@eBzB}Eh@}ALk@Dm@Co@Qg@OQSKUCU@g@RuAfAq@\\]Ha@Bs@M{@g@}AmA{HuFw@q@aBcBe@]SKi@IU@_@FmClAs@Rk@Bi@MYWOUK[E]C]?a@Dm@Jk@\\cAn@uAtCqEh@o@RKTAfAb@h@AdDeAd@]^k@Lk@Dm@D_BB_@F]Xq@b@a@^K^A^FrA\\h@H^Bt@Et@Ud@YvA}AZY\\Q^I^A^D\\NPNj@n@tFpIjCnDT`@Ph@B\\?NG\\KXUb@aCjDc@x@Sd@Kj@An@Fl@LVPNTFTCZSNSTc@bAqC`@}@V_@d@]^GT@TFPLPPLVLj@D\\@n@Ir@Mj@Wt@mDpHkHvP"
+    "averaged_fastf1_encoded_polyline": "s_laH{}mtBqGxOo@tA_@l@[V]HUIMUI]A]Ao@B_AF_AV{BXwAh@}Ar@eBtBqEp@iBN{@@o@C]Qg@QQSKUCSBi@R}AlAg@VUF_@@i@EUESIg@]}AmAsHkFw@q@sBuB[UUIi@Ii@Fi@PoB~@s@Ri@Bi@O[YMUK[E]C_@@_@LmAZcAn@uArCsEX_@XYTIRA|@`@RB`@CzCcARKZWTa@Ng@Fo@DoBHm@H[LWNUPO^M^Ah@FtBd@h@Bt@Gh@Op@a@tA}An@c@^K^Cj@F\\NZX^h@rFlIlCnDT`@Nh@B\\ANG\\KXUb@}BfDe@x@Qd@Mj@An@B\\Pf@PNTFRA\\SNSTc@bAqCZq@Ta@PSZSTETA\\FRLX\\JZFZFl@?d@Gl@Mj@Wt@gDdHqHdQ"
   },
   {
     "schema_version": "1.0.0",
     "artifact_kind": "circuit_analysis_row",
     "provenance": {
-      "generated_at": "2026-06-20T07:55:33Z",
+      "generated_at": "2026-06-20T12:50:59Z",
       "generator": "apexline",
       "schema_version": "1.0.0",
       "command": "batch",
@@ -3919,16 +3977,18 @@
     },
     "lap_compliance_summary": {
       "total_laps": 1364,
-      "fitted_laps": 1041,
-      "compliant_laps": 1041,
-      "non_compliant_laps": 323,
+      "fitted_laps": 1282,
+      "compliant_laps": 1282,
+      "non_compliant_laps": 82,
       "shape_non_compliant_laps": 0,
       "reason_counts": {
-        "compliant": 1041,
-        "fastf1_inaccurate": 323,
+        "compliant": 1282,
         "path_length_outlier": 2,
         "pit_lap": 80,
         "too_few_position_samples": 1
+      },
+      "warning_counts": {
+        "fastf1_inaccurate": 323
       },
       "thresholds": {
         "length_tolerance_pct": 0.05,
@@ -3971,6 +4031,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 15,
         "event_name": "Dutch Grand Prix",
@@ -4005,6 +4066,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 15,
         "event_name": "Dutch Grand Prix",
@@ -4056,7 +4118,7 @@
     "schema_version": "1.0.0",
     "artifact_kind": "circuit_analysis_row",
     "provenance": {
-      "generated_at": "2026-06-20T07:55:33Z",
+      "generated_at": "2026-06-20T12:50:59Z",
       "generator": "apexline",
       "schema_version": "1.0.0",
       "command": "batch",
@@ -4106,36 +4168,25 @@
     "circuit_name": "Autodromo Nazionale Monza",
     "repo_location": "Monza",
     "declared_length_m": 5793,
-    "fastf1_driver": "OCO",
-    "fastf1_lap": 9,
-    "fastf1_lap_key": "2025-16-italian-grand-prix-r-oco-lap-9",
-    "fastf1_points": 329,
-    "fastf1_path_length_m": 5778.656833246714,
-    "fastf1_raw_path_length_m": 5778.656833246714,
+    "fastf1_driver": "HAM",
+    "fastf1_lap": 6,
+    "fastf1_lap_key": "2025-16-italian-grand-prix-r-ham-lap-6",
+    "fastf1_points": 331,
+    "fastf1_path_length_m": 5778.972206569091,
+    "fastf1_raw_path_length_m": 5778.972206569091,
     "fastf1_normalization": null,
     "repo_vs_fastf1": {
       "direction": "forward",
-      "start_offset_samples": 686,
+      "start_offset_samples": 684,
       "sample_count": 720,
-      "rmse_m": 5.965844095479735,
-      "p50_m": 3.3239397289696226,
-      "p95_m": 10.73648880838106,
-      "max_m": 11.182461023798723,
-      "scale_m_per_fastf1_unit": 0.09986112045398726,
-      "rotation_degrees": -0.1645903858373386
+      "rmse_m": 6.110502879628145,
+      "p50_m": 3.946652858610215,
+      "p95_m": 13.261304359805276,
+      "max_m": 13.748474431028678,
+      "scale_m_per_fastf1_unit": 0.09996545996542619,
+      "rotation_degrees": -0.1756515757243963
     },
     "averaged_fastf1_laps": [
-      {
-        "driver": "OCO",
-        "lap": 9,
-        "lap_key": "2025-16-italian-grand-prix-r-oco-lap-9",
-        "path_length_m": 5778.656833246714,
-        "raw_path_length_m": 5778.656833246714,
-        "normalization": null,
-        "length_error_m": 7.87857712182813,
-        "rmse_m": 5.965844095479735,
-        "p95_m": 10.73648880838106
-      },
       {
         "driver": "HAM",
         "lap": 6,
@@ -4146,6 +4197,17 @@
         "length_error_m": 7.563203799451003,
         "rmse_m": 6.110502879628145,
         "p95_m": 13.261304359805276
+      },
+      {
+        "driver": "STR",
+        "lap": 1,
+        "lap_key": "2025-16-italian-grand-prix-r-str-lap-1",
+        "path_length_m": 5781.485130941321,
+        "raw_path_length_m": 5781.485130941321,
+        "normalization": null,
+        "length_error_m": 5.05027942722154,
+        "rmse_m": 6.379444274002973,
+        "p95_m": 11.674047113973714
       },
       {
         "driver": "LAW",
@@ -4183,21 +4245,23 @@
     ],
     "repo_vs_fastf1_average": {
       "sample_count": 720,
-      "rmse_m": 6.61282784285562,
-      "p50_m": 5.652087386955953,
-      "p95_m": 10.55356989397872,
-      "max_m": 11.935977556881452
+      "rmse_m": 10.18998290865111,
+      "p50_m": 9.696154781247097,
+      "p95_m": 14.117813970217632,
+      "max_m": 14.999382669492617
     },
     "lap_compliance_summary": {
       "total_laps": 974,
-      "fitted_laps": 916,
-      "compliant_laps": 916,
-      "non_compliant_laps": 58,
+      "fitted_laps": 933,
+      "compliant_laps": 933,
+      "non_compliant_laps": 41,
       "shape_non_compliant_laps": 0,
       "reason_counts": {
-        "compliant": 916,
-        "fastf1_inaccurate": 58,
+        "compliant": 933,
         "pit_lap": 41
+      },
+      "warning_counts": {
+        "fastf1_inaccurate": 58
       },
       "thresholds": {
         "length_tolerance_pct": 0.05,
@@ -4240,6 +4304,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 16,
         "event_name": "Italian Grand Prix",
@@ -4274,6 +4339,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 16,
         "event_name": "Italian Grand Prix",
@@ -4283,16 +4349,16 @@
     },
     "averaged_fastf1_polyline_vs_source": {
       "source_points": 720,
-      "simplified_points": 96,
-      "encoded_chars": 301,
+      "simplified_points": 95,
+      "encoded_chars": 296,
       "tolerance_m": 1.0,
-      "rmse_m": 0.35460422303083483,
-      "p95_m": 0.7870722791830786,
-      "max_m": 0.9991057184291495,
-      "source_length_m": 5742.589405655314,
-      "simplified_length_m": 5740.247434622062,
-      "length_delta_m": -2.341971033251866,
-      "length_delta_pct": -0.04078249144794312
+      "rmse_m": 0.358696157257031,
+      "p95_m": 0.8065446088998722,
+      "max_m": 0.984586699494973,
+      "source_length_m": 5740.855773717548,
+      "simplified_length_m": 5738.513715268372,
+      "length_delta_m": -2.3420584491759655,
+      "length_delta_pct": -0.04079632970224128
     },
     "polyline_vs_source": {
       "source_points": 125,
@@ -4309,23 +4375,23 @@
     },
     "polyline_vs_fastf1": {
       "direction": "forward",
-      "start_offset_samples": 686,
+      "start_offset_samples": 684,
       "sample_count": 720,
-      "rmse_m": 5.95957896535252,
-      "p50_m": 3.354534571087269,
-      "p95_m": 10.74001969652396,
-      "max_m": 11.112472386258403,
-      "scale_m_per_fastf1_unit": 0.09985745172647634,
-      "rotation_degrees": -0.16797766949838583
+      "rmse_m": 6.11575864138583,
+      "p50_m": 3.989540453866822,
+      "p95_m": 13.33230229283329,
+      "max_m": 13.677231343715897,
+      "scale_m_per_fastf1_unit": 0.09996177590417173,
+      "rotation_degrees": -0.17904790177966923
     },
     "encoded_polyline": "s}luGsvsw@ea@gCMEEKAQ@w@OUIAG?oD`Ao@Hk@BuG]gAUmAg@g@[k@g@c@i@i@w@e@{@_@cA]gA[qASoAQyAKeB_@}NUoOEMIMg@OKGEKY_DcCyPEg@?e@Bc@FYTq@T[PQTKVE`Ly@V@ZNTj@nG~T\\jAh@rA^z@`E`IxB~DlKfSV`@NJ^@f@Gr@Af@LVLXTX^d@bAJLPJ\\JfHp@`k@pETFVNb@p@Nb@Hf@Dl@Af@Eb@Ih@Mh@a@bA_@f@y@t@kAh@g@LwAN_HF}AAaOiAgD[",
-    "averaged_fastf1_encoded_polyline": "w}luGkvsw@q_@aC[IWQIMQw@GMKIMCi@DkCn@gALsB@_CMcB]oAi@_Ao@c@c@m@q@o@kAc@_AWs@g@mBOy@OmASmCOwDOsHMqLC}@Ge@Mc@IMc@a@IMSu@Y_DOoAcAoGYuBG{@@}@Ny@Vq@T[d@[h@OdAK~G_@\\BZFJFVTR\\Vr@lBlHxBpHh@hBp@dBxA~ChQd]p@jATXJHh@LdBDh@NXPVT~@pAVTf@Vv@N~j@|DrBPdAPv@VXNVVR\\L`@Lx@?|@Ef@Gf@]dAe@|@o@n@q@d@cA`@w@Py@HuABwEEeFW_O_A"
+    "averaged_fastf1_encoded_polyline": "{}luGkvsw@c_@_C[GYMQ]Ss@IKKGMAi@F}Bj@gANsB@_CMcB[qAg@_Am@eAgAs@gAeAaCm@_COy@OoASmCMwDOgHMqLC}@Ge@Mc@IMc@a@IMUu@Gg@OwBOoA}AeKG{@@}@Ly@Vq@T[d@[h@OdAM~G_@\\BZFJFVTR\\Vp@nBlHhBlGx@nCn@dBzA~ChQd]p@hATXJHh@NbBBh@NXPXT~@pAVTf@Vv@Nbj@xD~BRfALdAZXPVTR\\N`@Jx@?|@Cf@If@[dAg@|@m@n@s@d@u@\\eATw@HgADsBAsBEeFUeO_A"
   },
   {
     "schema_version": "1.0.0",
     "artifact_kind": "circuit_analysis_row",
     "provenance": {
-      "generated_at": "2026-06-20T07:55:33Z",
+      "generated_at": "2026-06-20T12:50:59Z",
       "generator": "apexline",
       "schema_version": "1.0.0",
       "command": "batch",
@@ -4406,17 +4472,6 @@
         "p95_m": 8.321425858879657
       },
       {
-        "driver": "ANT",
-        "lap": 41,
-        "lap_key": "2025-17-azerbaijan-grand-prix-r-ant-lap-41",
-        "path_length_m": 5955.911379407704,
-        "raw_path_length_m": 5955.911379407704,
-        "normalization": null,
-        "length_error_m": 13.914929174677127,
-        "rmse_m": 4.8302299203093915,
-        "p95_m": 7.753648884181798
-      },
-      {
         "driver": "COL",
         "lap": 24,
         "lap_key": "2025-17-azerbaijan-grand-prix-r-col-lap-24",
@@ -4439,35 +4494,48 @@
         "p95_m": 9.213365841218696
       },
       {
-        "driver": "BEA",
-        "lap": 15,
-        "lap_key": "2025-17-azerbaijan-grand-prix-r-bea-lap-15",
-        "path_length_m": 5955.83403880364,
-        "raw_path_length_m": 5955.83403880364,
+        "driver": "ALB",
+        "lap": 3,
+        "lap_key": "2025-17-azerbaijan-grand-prix-r-alb-lap-3",
+        "path_length_m": 5955.190857662761,
+        "raw_path_length_m": 5955.190857662761,
         "normalization": null,
-        "length_error_m": 13.837588570613661,
-        "rmse_m": 4.983035893910025,
-        "p95_m": 9.777371553120833
+        "length_error_m": 13.194407429734383,
+        "rmse_m": 4.948210790416052,
+        "p95_m": 8.065904134913563
+      },
+      {
+        "driver": "ALB",
+        "lap": 8,
+        "lap_key": "2025-17-azerbaijan-grand-prix-r-alb-lap-8",
+        "path_length_m": 5955.398998867195,
+        "raw_path_length_m": 5955.398998867195,
+        "normalization": null,
+        "length_error_m": 13.402548634167943,
+        "rmse_m": 5.070896944937315,
+        "p95_m": 9.46903537337361
       }
     ],
     "repo_vs_fastf1_average": {
       "sample_count": 720,
-      "rmse_m": 4.62320166229048,
-      "p50_m": 3.401713733514095,
-      "p95_m": 8.013275151794815,
-      "max_m": 15.026655171548063
+      "rmse_m": 4.609959368676854,
+      "p50_m": 3.420714755501,
+      "p95_m": 7.925322380512877,
+      "max_m": 15.08814324987673
     },
     "lap_compliance_summary": {
       "total_laps": 968,
-      "fitted_laps": 855,
-      "compliant_laps": 855,
-      "non_compliant_laps": 113,
+      "fitted_laps": 926,
+      "compliant_laps": 926,
+      "non_compliant_laps": 42,
       "shape_non_compliant_laps": 0,
       "reason_counts": {
-        "compliant": 855,
-        "fastf1_inaccurate": 113,
+        "compliant": 926,
         "path_length_outlier": 1,
         "pit_lap": 41
+      },
+      "warning_counts": {
+        "fastf1_inaccurate": 113
       },
       "thresholds": {
         "length_tolerance_pct": 0.05,
@@ -4510,6 +4578,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 17,
         "event_name": "Azerbaijan Grand Prix",
@@ -4544,6 +4613,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 17,
         "event_name": "Azerbaijan Grand Prix",
@@ -4553,16 +4623,16 @@
     },
     "averaged_fastf1_polyline_vs_source": {
       "source_points": 720,
-      "simplified_points": 107,
-      "encoded_chars": 319,
+      "simplified_points": 109,
+      "encoded_chars": 322,
       "tolerance_m": 1.0,
-      "rmse_m": 0.3213522628110769,
-      "p95_m": 0.6676753188722692,
-      "max_m": 0.9812959520098153,
-      "source_length_m": 5941.364452088683,
-      "simplified_length_m": 5939.072851803083,
-      "length_delta_m": -2.2916002855999977,
-      "length_delta_pct": -0.038570269574935555
+      "rmse_m": 0.33178484493616606,
+      "p95_m": 0.6937763462673016,
+      "max_m": 0.9940078481836035,
+      "source_length_m": 5940.510874149854,
+      "simplified_length_m": 5938.320808722934,
+      "length_delta_m": -2.1900654269202278,
+      "length_delta_pct": -0.03686661759092644
     },
     "polyline_vs_source": {
       "source_points": 86,
@@ -4589,13 +4659,13 @@
       "rotation_degrees": 0.881671475723485
     },
     "encoded_polyline": "ihluFy}goHsBaJISQKOAWDmCfAsDxBmDdBGNCR`FrVlJ~_@X^`@?zH_DV?TVbBtG`A|CfBrEJJRCx@c@P@`A`B|G`Nv@pAP`@?`@W\\_H~BKLCV?^Sl@EZ@x@G\\SNaAXMLGPA\\t@hEvBdIbBtEXh@`@`@n@\\nGhBb@DvJa@VIVYnDwLf@yBRcABe@Ek@O]OSeFcDc@c@eGyJ_@]_@OmD_@_@M_@]W_@_I_Pe@iA}@_DmAsFmAyEmDsOiAuEeHq[",
-    "averaged_fastf1_encoded_polyline": "ehluF_~goHiBaIQ_@IK[OMA]FYLcL|FYPILEPBf@Hb@hE~S`ExPnDnNN`@HJLFL?ZKt@c@`Bm@|Ay@f@U\\CLDJJTp@ZxAbAbExBjGRZJJLHLBZGh@WL@VRz@nBjIfPDNBRAPILKJw@ZsEvA[LKJM^Ib@Ef@EjAId@GLMJi@FMFILCR@x@Hv@Nv@v@~CfB`GlAdDXl@`@d@f@XbFxAx@NhABnEUvBFZEJKFOfBwGdCgIJc@Fc@?SIc@S[KI{DwBq@e@q@m@k@s@eBmC_CaDe@]i@SoCo@g@WWWi@u@mH{NWq@YeA{D}PcFgTyC{NyCqM"
+    "averaged_fastf1_encoded_polyline": "ehluF}}goHiBcIO]KM[OMA[F[LcL|FYPILEPBd@Hd@bElS`ExPtD`ON^HLLFL?ZKt@c@~Am@~Ay@f@U\\CLDJJFNL`@ZxAbAbExBjGRZJJLHLBLAv@[L?VTz@lBbIvOL`@BPAPILKHw@\\sEvA[LKJM`@Kb@Ed@ClAIb@INKHk@FKFGLCR?x@Hx@Nt@v@~C~ApFdAtC^~@^h@r@b@tErAfARhADnEUvBDZCJKFOfBwGdCgIJc@Fe@Ae@EQIMWU{DwBq@e@q@m@_AoA{A_CiBgCWWYQi@SoCo@g@WWWi@u@mH{N]cAYeAuDkPcFgTyC{NyCoM"
   },
   {
     "schema_version": "1.0.0",
     "artifact_kind": "circuit_analysis_row",
     "provenance": {
-      "generated_at": "2026-06-20T07:55:33Z",
+      "generated_at": "2026-06-20T12:50:59Z",
       "generator": "apexline",
       "schema_version": "1.0.0",
       "command": "batch",
@@ -4688,6 +4758,17 @@
       },
       {
         "driver": "ALO",
+        "lap": 1,
+        "lap_key": "2025-18-singapore-grand-prix-r-alo-lap-1",
+        "path_length_m": 4943.977089936771,
+        "raw_path_length_m": 4943.977089936771,
+        "normalization": null,
+        "length_error_m": 1.3526067120128573,
+        "rmse_m": 18.710652729291265,
+        "p95_m": 32.170322893586906
+      },
+      {
+        "driver": "ALO",
         "lap": 26,
         "lap_key": "2025-18-singapore-grand-prix-r-alo-lap-26",
         "path_length_m": 4917.909287486394,
@@ -4707,36 +4788,27 @@
         "length_error_m": 19.90760837549442,
         "rmse_m": 20.16118251223333,
         "p95_m": 31.082412157265612
-      },
-      {
-        "driver": "GAS",
-        "lap": 12,
-        "lap_key": "2025-18-singapore-grand-prix-r-gas-lap-12",
-        "path_length_m": 4919.690566755813,
-        "raw_path_length_m": 4919.690566755813,
-        "normalization": null,
-        "length_error_m": 22.933916468945426,
-        "rmse_m": 20.438192618397867,
-        "p95_m": 31.605241925972
       }
     ],
     "repo_vs_fastf1_average": {
       "sample_count": 720,
-      "rmse_m": 10.61737002496692,
-      "p50_m": 9.231881582265798,
-      "p95_m": 17.795419176542808,
-      "max_m": 20.520507643168123
+      "rmse_m": 9.63202932651218,
+      "p50_m": 8.652731880386813,
+      "p95_m": 15.968636803443804,
+      "max_m": 19.318931971664185
     },
     "lap_compliance_summary": {
       "total_laps": 1229,
-      "fitted_laps": 1163,
-      "compliant_laps": 1163,
-      "non_compliant_laps": 66,
+      "fitted_laps": 1181,
+      "compliant_laps": 1181,
+      "non_compliant_laps": 48,
       "shape_non_compliant_laps": 0,
       "reason_counts": {
-        "compliant": 1163,
-        "fastf1_inaccurate": 66,
+        "compliant": 1181,
         "pit_lap": 48
+      },
+      "warning_counts": {
+        "fastf1_inaccurate": 66
       },
       "thresholds": {
         "length_tolerance_pct": 0.05,
@@ -4779,6 +4851,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 18,
         "event_name": "Singapore Grand Prix",
@@ -4813,6 +4886,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 18,
         "event_name": "Singapore Grand Prix",
@@ -4822,16 +4896,16 @@
     },
     "averaged_fastf1_polyline_vs_source": {
       "source_points": 720,
-      "simplified_points": 129,
-      "encoded_chars": 359,
+      "simplified_points": 124,
+      "encoded_chars": 350,
       "tolerance_m": 1.0,
-      "rmse_m": 0.3885866671779788,
-      "p95_m": 0.7852650423633877,
-      "max_m": 0.9881499752706404,
-      "source_length_m": 4838.526619021685,
-      "simplified_length_m": 4826.393418910133,
-      "length_delta_m": -12.133200111552469,
-      "length_delta_pct": -0.2507622891616067
+      "rmse_m": 0.40374300766424076,
+      "p95_m": 0.8074676584535274,
+      "max_m": 0.9869866343229228,
+      "source_length_m": 4833.651553752938,
+      "simplified_length_m": 4826.213951926487,
+      "length_delta_m": -7.437601826450191,
+      "length_delta_pct": -0.15387128641235004
     },
     "polyline_vs_source": {
       "source_points": 116,
@@ -4858,13 +4932,13 @@
       "rotation_degrees": 1.1057629259790431
     },
     "encoded_polyline": "ih{F{}|xRxLw@VBTLpBhADJ?NIbEYtFG^KRQNa@Js@@KDg@|VG~@Kh@Ul@kFnGCRBTV\\bB^hAPlTdCPJHJ@L?PCFYT]Ra@NOP_AlA{@~@SNs@Lk@EUIMDQv@S^[d@Y\\UJ{@D}QsI_@c@Gc@n@gAlDeDFMCKsCmAsCuAWOEOJ[tG_N\\kAHs@d@mSEYM_@S[_@Q]CgADaBP{Cv@}@Xa@Dk@?_BIg@OUWAQBQp@g@NQRg@Hc@Ci@FWNIXGvEQnGc@",
-    "averaged_fastf1_encoded_polyline": "yg{Fg~|xRfHq@|@Cz@Fb@H^N^TPNLPJTDTDb@E~HG|@M`@UZ[Rm@RQLSXI`@ChAC`GO~HEhAGn@Wv@_@r@c@p@oB`C]f@KRETATBHBHPN^N|A^zA\\rAPdCVxEb@~CRVDTHLP@HCJEHQNq@b@[VeBzB_@PsAPa@LON[bA[h@[Tm@PW@KAc@KsBcAkEqB{D{A_@S[UQQMa@AWBWTk@p@u@|AoANQFU@KCIGISMoCaAgAo@QOOSIUAWFc@Rm@dBaDlB_EXw@Py@Hq@FsA^wN?q@Ac@Gc@Ka@S]_@Qc@G}@@o@H{@Pw@TuBp@m@No@Jc@@o@Cc@ISKEIGS?KDSd@{@JUPy@FWVY\\Q`@Kb@G|K{@"
+    "averaged_fastf1_encoded_polyline": "{g{Fe~|xRfHq@|@Cz@Db@HTH^PZVNPJTFTDb@E~HCb@Gb@M`@WX]Rm@RQLKPI`@EhAClGMtHEhAIn@Uv@_@r@e@p@oB`C]f@KRET?T@HBHPN^N|A`@zAZfANpCXxEb@~CTVDTHLP@HKT}AlAgBxB_@PsAP_@LQN[dAKROR[Tm@Nc@@c@KsBeAkEqB{D{A_@S[WOQO_@?YBWHUJSr@u@zAoANSHU?IEKOOa@QyBw@gAo@QOOSCIEWDc@Pm@jBmD|A_Dd@kATeAFe@HaB^wN?o@Cc@Gc@Kc@U[_@Oc@E}@@o@H{@PsEtAo@Jc@Bq@Ca@IUKEGIS?KBSp@qAZqAR[ZQ`@Kb@G|K{@"
   },
   {
     "schema_version": "1.0.0",
     "artifact_kind": "circuit_analysis_row",
     "provenance": {
-      "generated_at": "2026-06-20T07:55:33Z",
+      "generated_at": "2026-06-20T12:50:59Z",
       "generator": "apexline",
       "schema_version": "1.0.0",
       "command": "batch",
@@ -4915,56 +4989,34 @@
     "repo_location": "Austin",
     "declared_length_m": 5514,
     "fastf1_driver": "ALO",
-    "fastf1_lap": 6,
-    "fastf1_lap_key": "2025-19-united-states-grand-prix-r-alo-lap-6",
-    "fastf1_points": 401,
-    "fastf1_path_length_m": 5438.56666001313,
-    "fastf1_raw_path_length_m": 5438.56666001313,
+    "fastf1_lap": 1,
+    "fastf1_lap_key": "2025-19-united-states-grand-prix-r-alo-lap-1",
+    "fastf1_points": 409,
+    "fastf1_path_length_m": 5462.338033415202,
+    "fastf1_raw_path_length_m": 5462.338033415202,
     "fastf1_normalization": null,
     "repo_vs_fastf1": {
       "direction": "forward",
-      "start_offset_samples": 682,
+      "start_offset_samples": 707,
       "sample_count": 720,
-      "rmse_m": 6.430894863410408,
-      "p50_m": 4.987249906240541,
-      "p95_m": 12.192230347261662,
-      "max_m": 17.79057313443339,
-      "scale_m_per_fastf1_unit": 0.09974184098314108,
-      "rotation_degrees": -0.4940791199692784
+      "rmse_m": 7.460374890595614,
+      "p50_m": 6.699040862076689,
+      "p95_m": 11.151891911503517,
+      "max_m": 22.063332187469943,
+      "scale_m_per_fastf1_unit": 0.09985916372734065,
+      "rotation_degrees": -0.7025515275940983
     },
     "averaged_fastf1_laps": [
       {
         "driver": "ALO",
-        "lap": 6,
-        "lap_key": "2025-19-united-states-grand-prix-r-alo-lap-6",
-        "path_length_m": 5438.56666001313,
-        "raw_path_length_m": 5438.56666001313,
+        "lap": 1,
+        "lap_key": "2025-19-united-states-grand-prix-r-alo-lap-1",
+        "path_length_m": 5462.338033415202,
+        "raw_path_length_m": 5462.338033415202,
         "normalization": null,
-        "length_error_m": 81.08564491550806,
-        "rmse_m": 6.430894863410408,
-        "p95_m": 12.192230347261662
-      },
-      {
-        "driver": "RUS",
-        "lap": 11,
-        "lap_key": "2025-19-united-states-grand-prix-r-rus-lap-11",
-        "path_length_m": 5441.720162904768,
-        "raw_path_length_m": 5441.720162904768,
-        "normalization": null,
-        "length_error_m": 77.93214202387026,
-        "rmse_m": 6.734547322283277,
-        "p95_m": 10.794038641063059
-      },
-      {
-        "driver": "ANT",
-        "lap": 19,
-        "lap_key": "2025-19-united-states-grand-prix-r-ant-lap-19",
-        "path_length_m": 5441.37189954748,
-        "raw_path_length_m": 5441.37189954748,
-        "normalization": null,
-        "length_error_m": 78.28040538115783,
-        "rmse_m": 7.118702269951716,
-        "p95_m": 11.771827991960812
+        "length_error_m": 57.314271513436324,
+        "rmse_m": 7.460374890595614,
+        "p95_m": 11.151891911503517
       },
       {
         "driver": "STR",
@@ -4987,25 +5039,49 @@
         "length_error_m": 74.06248446003246,
         "rmse_m": 8.388508299142714,
         "p95_m": 16.27600975141548
+      },
+      {
+        "driver": "ALO",
+        "lap": 3,
+        "lap_key": "2025-19-united-states-grand-prix-r-alo-lap-3",
+        "path_length_m": 5453.283287733338,
+        "raw_path_length_m": 5453.283287733338,
+        "normalization": null,
+        "length_error_m": 66.36901719530033,
+        "rmse_m": 9.140047714309988,
+        "p95_m": 14.743425185649148
+      },
+      {
+        "driver": "RUS",
+        "lap": 4,
+        "lap_key": "2025-19-united-states-grand-prix-r-rus-lap-4",
+        "path_length_m": 5456.044116233607,
+        "raw_path_length_m": 5456.044116233607,
+        "normalization": null,
+        "length_error_m": 63.60818869503055,
+        "rmse_m": 9.919869883850863,
+        "p95_m": 15.408592237361805
       }
     ],
     "repo_vs_fastf1_average": {
       "sample_count": 720,
-      "rmse_m": 6.735966052483587,
-      "p50_m": 4.704531677645289,
-      "p95_m": 13.08866932222475,
-      "max_m": 19.571018591654397
+      "rmse_m": 6.9799349374370765,
+      "p50_m": 5.779308463102939,
+      "p95_m": 11.966192671501817,
+      "max_m": 17.955928775945623
     },
     "lap_compliance_summary": {
       "total_laps": 1067,
-      "fitted_laps": 963,
-      "compliant_laps": 963,
-      "non_compliant_laps": 104,
+      "fitted_laps": 1025,
+      "compliant_laps": 1025,
+      "non_compliant_laps": 42,
       "shape_non_compliant_laps": 0,
       "reason_counts": {
-        "compliant": 963,
-        "fastf1_inaccurate": 104,
+        "compliant": 1025,
         "pit_lap": 42
+      },
+      "warning_counts": {
+        "fastf1_inaccurate": 104
       },
       "thresholds": {
         "length_tolerance_pct": 0.05,
@@ -5048,6 +5124,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 19,
         "event_name": "United States Grand Prix",
@@ -5082,6 +5159,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 19,
         "event_name": "United States Grand Prix",
@@ -5091,16 +5169,16 @@
     },
     "averaged_fastf1_polyline_vs_source": {
       "source_points": 720,
-      "simplified_points": 157,
-      "encoded_chars": 438,
+      "simplified_points": 155,
+      "encoded_chars": 437,
       "tolerance_m": 1.0,
-      "rmse_m": 0.3871506438654744,
-      "p95_m": 0.7639882305547757,
-      "max_m": 0.9893291625721371,
-      "source_length_m": 5392.228146338584,
-      "simplified_length_m": 5388.040822950338,
-      "length_delta_m": -4.187323388246114,
-      "length_delta_pct": -0.07765478897789921
+      "rmse_m": 0.39066028311336437,
+      "p95_m": 0.792267572342207,
+      "max_m": 0.9357833870361535,
+      "source_length_m": 5384.413036896514,
+      "simplified_length_m": 5379.647694908506,
+      "length_delta_m": -4.765341988008004,
+      "length_delta_pct": -0.08850253417324513
     },
     "polyline_vs_source": {
       "source_points": 171,
@@ -5117,23 +5195,23 @@
     },
     "polyline_vs_fastf1": {
       "direction": "forward",
-      "start_offset_samples": 682,
+      "start_offset_samples": 707,
       "sample_count": 720,
-      "rmse_m": 6.398514544163906,
-      "p50_m": 4.9533978605071525,
-      "p95_m": 12.1421230910437,
-      "max_m": 17.747369385353608,
-      "scale_m_per_fastf1_unit": 0.099743517796812,
-      "rotation_degrees": -0.4928379616412269
+      "rmse_m": 7.397732867148939,
+      "p50_m": 6.656274949172552,
+      "p95_m": 11.00265751065306,
+      "max_m": 22.02405629685195,
+      "scale_m_per_fastf1_unit": 0.0998609251408108,
+      "rotation_degrees": -0.7013240288613403
     },
     "encoded_polyline": "ob|vDxf}rQjFuIx@_Bd@iALe@AIEKIEGCI?oGjBYDo@?w@Oq@a@YWO[kD}HMQa@[yAi@c@_@Ui@Oo@Oc@MSMMSKuAOYESIe@[QOQWQ][}@E]?i@F]tAwE?S[u@_@m@[a@_Ay@OUGYCQ?[D]JWZ]\\SJMDO?OcAcJEUOWwKeKkAeAm@[KAIBKPAJ?JjBlK~@fG|@`Hz@zIv@bLx@nQH`ABHH@F?n@o@~CeCpA{@LCPBJFFNBL@VGlBCHORMFiA^QNgApAEXEfA?LDFFFJBJElEgCxAw@VCV?f@Hb@Nh@TNLLVv@hCBV@TGnAWnAc@|@WN{C~BmBdBIJIb@?PDVPv@zC|KLVLHLBHCRUvCyE|IeO",
-    "averaged_fastf1_encoded_polyline": "sb|vD`g}rQpFgJrAsBJ[@M@OCOGKIIKC[?g@De@LoBv@g@Jg@F[Ag@Gq@Um@_@]_@OYc@aAs@mB}@eB]a@gBgA_@[Yc@_@eAOWUSc@SmAWe@Qa@YQUYe@Ww@G]Cm@B_@Lk@h@aBH]Fm@C]Oi@We@cBiBM[E]?]D]Tg@b@m@J[B_@C}@Em@]gCYiAQi@MYm@y@yGmGeBeBa@[WMYAKDIHI\\?\\Fl@hBjJh@dDdA|Hx@bIXhDXfEt@nSJl@LVHHXDXGVMTS~AmBh@e@VMZEJAXFTNLXBL?^E\\CLOX]^}A|@]\\Yb@MZC\\B\\LXHFJBXCb@SnBcBb@WVKf@MXCf@AZBd@Jd@RTPPTNXRh@Lj@Fz@An@El@G\\Oj@[t@Y`@k@d@sBnAu@n@QTOXMXG\\Al@B^F\\|@zC|@lDPh@PVRPXDLAVM\\_@`@o@hAcClImN"
+    "averaged_fastf1_encoded_polyline": "qb|vDxf}rQbFmIxA_CL[BOA]EKIKKEKAu@Dg@LoBt@s@P[BY?g@Gg@MWMk@c@c@m@e@aAq@oB]s@i@}@]_@}A_A_@[Yc@_@cAOYUSWMe@Os@Oe@QWO]_@]q@Si@E]Co@B]F]Nk@^cAF]Fm@A_@Oi@We@cBkBMYE]?]F]Tg@b@m@H[B_@A}@Gm@]iCWgASi@MYm@y@yGoGgBeB_@[WK[AIFIHG\\?^D\\Lz@tA`Hl@rDdA~Hx@bIr@bJPjEb@tMB\\HZPVJDV@XGVORS`BmBd@a@VKXEZ@JBTPJVB^Ej@Uf@QTUPqAv@UP[`@Sf@C\\B\\NVTJXCh@Y~AuAl@_@XKf@Kt@EX@r@Nn@^Z^NVPh@Lj@D^@\\GlAIl@IZ[v@Yb@i@d@_CvAk@f@c@l@MXI\\Cl@B\\D\\`AlD|@lDJZNV`@XX@VK^[`@q@jAaCtI{N"
   },
   {
     "schema_version": "1.0.0",
     "artifact_kind": "circuit_analysis_row",
     "provenance": {
-      "generated_at": "2026-06-20T07:55:33Z",
+      "generated_at": "2026-06-20T12:50:59Z",
       "generator": "apexline",
       "schema_version": "1.0.0",
       "command": "batch",
@@ -5183,98 +5261,100 @@
     "circuit_name": "Aut\u00f3dromo Hermanos Rodr\u00edguez",
     "repo_location": "Mexico City",
     "declared_length_m": 4304,
-    "fastf1_driver": "ANT",
-    "fastf1_lap": 41,
-    "fastf1_lap_key": "2025-20-mexico-city-grand-prix-r-ant-lap-41",
-    "fastf1_points": 329,
-    "fastf1_path_length_m": 4248.9100403815955,
-    "fastf1_raw_path_length_m": 4248.9100403815955,
+    "fastf1_driver": "ALB",
+    "fastf1_lap": 1,
+    "fastf1_lap_key": "2025-20-mexico-city-grand-prix-r-alb-lap-1",
+    "fastf1_points": 363,
+    "fastf1_path_length_m": 4257.355626219736,
+    "fastf1_raw_path_length_m": 4257.355626219736,
     "fastf1_normalization": null,
     "repo_vs_fastf1": {
       "direction": "forward",
-      "start_offset_samples": 714,
+      "start_offset_samples": 7,
       "sample_count": 720,
-      "rmse_m": 5.871832920722218,
-      "p50_m": 5.258532981774114,
-      "p95_m": 9.564915950782197,
-      "max_m": 11.647405690927354,
-      "scale_m_per_fastf1_unit": 0.10020310514754555,
-      "rotation_degrees": -0.2708694165008264
+      "rmse_m": 5.305662565308529,
+      "p50_m": 4.416800060092243,
+      "p95_m": 9.107730714770499,
+      "max_m": 11.413918143360439,
+      "scale_m_per_fastf1_unit": 0.10027681820932416,
+      "rotation_degrees": -0.08177598462237488
     },
     "averaged_fastf1_laps": [
       {
-        "driver": "ANT",
-        "lap": 41,
-        "lap_key": "2025-20-mexico-city-grand-prix-r-ant-lap-41",
-        "path_length_m": 4248.9100403815955,
-        "raw_path_length_m": 4248.9100403815955,
+        "driver": "ALB",
+        "lap": 1,
+        "lap_key": "2025-20-mexico-city-grand-prix-r-alb-lap-1",
+        "path_length_m": 4257.355626219736,
+        "raw_path_length_m": 4257.355626219736,
         "normalization": null,
-        "length_error_m": 53.53244376893326,
-        "rmse_m": 5.871832920722218,
-        "p95_m": 9.564915950782197
+        "length_error_m": 45.086857930792576,
+        "rmse_m": 5.305662565308529,
+        "p95_m": 9.107730714770499
       },
       {
-        "driver": "ANT",
-        "lap": 34,
-        "lap_key": "2025-20-mexico-city-grand-prix-r-ant-lap-34",
-        "path_length_m": 4249.926234000047,
-        "raw_path_length_m": 4249.926234000047,
+        "driver": "SAI",
+        "lap": 1,
+        "lap_key": "2025-20-mexico-city-grand-prix-r-sai-lap-1",
+        "path_length_m": 4260.720757857328,
+        "raw_path_length_m": 4260.720757857328,
         "normalization": null,
-        "length_error_m": 52.51625015048194,
-        "rmse_m": 5.926213022339237,
-        "p95_m": 10.132357512298315
+        "length_error_m": 41.721726293200845,
+        "rmse_m": 5.9300017026272585,
+        "p95_m": 11.288182972849908
       },
       {
         "driver": "COL",
-        "lap": 37,
-        "lap_key": "2025-20-mexico-city-grand-prix-r-col-lap-37",
-        "path_length_m": 4252.4827874190705,
-        "raw_path_length_m": 4252.4827874190705,
+        "lap": 1,
+        "lap_key": "2025-20-mexico-city-grand-prix-r-col-lap-1",
+        "path_length_m": 4258.993471793134,
+        "raw_path_length_m": 4258.993471793134,
         "normalization": null,
-        "length_error_m": 49.95969673145828,
-        "rmse_m": 6.129153577363206,
-        "p95_m": 12.067680906017937
+        "length_error_m": 43.44901235739508,
+        "rmse_m": 6.482828666938028,
+        "p95_m": 11.751905979140004
       },
       {
-        "driver": "ALB",
-        "lap": 6,
-        "lap_key": "2025-20-mexico-city-grand-prix-r-alb-lap-6",
-        "path_length_m": 4251.618666713507,
-        "raw_path_length_m": 4251.618666713507,
+        "driver": "TSU",
+        "lap": 70,
+        "lap_key": "2025-20-mexico-city-grand-prix-r-tsu-lap-70",
+        "path_length_m": 4254.550062240046,
+        "raw_path_length_m": 4254.550062240046,
         "normalization": null,
-        "length_error_m": 50.82381743702172,
-        "rmse_m": 6.165023200475453,
-        "p95_m": 11.081756665840178
+        "length_error_m": 47.89242191048288,
+        "rmse_m": 6.604706552662945,
+        "p95_m": 12.850533961265343
       },
       {
-        "driver": "HAM",
-        "lap": 4,
-        "lap_key": "2025-20-mexico-city-grand-prix-r-ham-lap-4",
-        "path_length_m": 4251.231094443545,
-        "raw_path_length_m": 4251.231094443545,
+        "driver": "OCO",
+        "lap": 70,
+        "lap_key": "2025-20-mexico-city-grand-prix-r-oco-lap-70",
+        "path_length_m": 4253.6730248084705,
+        "raw_path_length_m": 4253.6730248084705,
         "normalization": null,
-        "length_error_m": 51.21138970698394,
-        "rmse_m": 6.198201393160695,
-        "p95_m": 11.26035238302483
+        "length_error_m": 48.769459342058326,
+        "rmse_m": 6.611255238080145,
+        "p95_m": 14.39336991318432
       }
     ],
     "repo_vs_fastf1_average": {
       "sample_count": 720,
-      "rmse_m": 5.8683626034494605,
-      "p50_m": 5.553348264696707,
-      "p95_m": 9.035949350455779,
-      "max_m": 11.947319917149928
+      "rmse_m": 6.068808943880554,
+      "p50_m": 5.483501849234379,
+      "p95_m": 10.38221374104638,
+      "max_m": 12.992438142905877
     },
     "lap_compliance_summary": {
       "total_laps": 1263,
-      "fitted_laps": 1153,
-      "compliant_laps": 1153,
-      "non_compliant_laps": 110,
+      "fitted_laps": 1206,
+      "compliant_laps": 1206,
+      "non_compliant_laps": 57,
       "shape_non_compliant_laps": 0,
       "reason_counts": {
-        "compliant": 1153,
-        "fastf1_inaccurate": 110,
+        "compliant": 1206,
         "pit_lap": 57
+      },
+      "warning_counts": {
+        "fastf1_inaccurate": 110
       },
       "thresholds": {
         "length_tolerance_pct": 0.05,
@@ -5317,6 +5397,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 20,
         "event_name": "Mexico City Grand Prix",
@@ -5351,6 +5432,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 20,
         "event_name": "Mexico City Grand Prix",
@@ -5360,16 +5442,16 @@
     },
     "averaged_fastf1_polyline_vs_source": {
       "source_points": 720,
-      "simplified_points": 108,
+      "simplified_points": 106,
       "encoded_chars": 291,
       "tolerance_m": 1.0,
-      "rmse_m": 0.34477693010495747,
-      "p95_m": 0.6769847327689672,
-      "max_m": 0.9686120770531493,
-      "source_length_m": 4244.898167279079,
-      "simplified_length_m": 4241.566039744308,
-      "length_delta_m": -3.332127534770734,
-      "length_delta_pct": -0.07849723134598967
+      "rmse_m": 0.35321464408240477,
+      "p95_m": 0.7411188470007727,
+      "max_m": 0.9893106131001974,
+      "source_length_m": 4240.982706065631,
+      "simplified_length_m": 4237.299309129071,
+      "length_delta_m": -3.6833969365598023,
+      "length_delta_pct": -0.08685243944267101
     },
     "polyline_vs_source": {
       "source_points": 101,
@@ -5386,23 +5468,23 @@
     },
     "polyline_vs_fastf1": {
       "direction": "forward",
-      "start_offset_samples": 714,
+      "start_offset_samples": 7,
       "sample_count": 720,
-      "rmse_m": 5.856669522953707,
-      "p50_m": 5.290081715390395,
-      "p95_m": 9.552893982204814,
-      "max_m": 11.573913225220913,
-      "scale_m_per_fastf1_unit": 0.10020254091562125,
-      "rotation_degrees": -0.2714606528994732
+      "rmse_m": 5.303669417151073,
+      "p50_m": 4.411415908816485,
+      "p95_m": 9.103591370126102,
+      "max_m": 11.37415345602217,
+      "scale_m_per_fastf1_unit": 0.1002762259715645,
+      "rotation_degrees": -0.08235187085906376
     },
     "encoded_polyline": "}gmuBrjy{QtBg[RiFr@qKdAyNRgBDQFGVEtBPHAHE`@cAJGtAH`AN~@Xv@\\rJfFvLfHP@LCHGn@qAFGJAHDxBhDFL@LCJQZIBW?iOeAO?MFMHy@bBk@n@_@Nm@R[PSTMVM^c@~FGZWXMD_B`@SHQPUf@aB|DSt@QnAwAxRCLSJiDJiBLKBGHEJ@PLN^VHJDNAPQj@ETKjBEPEFKDK@]Ee@O_@Sg@]Ya@Sk@Ig@Ag@b@oG",
-    "averaged_fastf1_encoded_polyline": "ehmuBjjy{Qd@uF~@}LbAeQ~AqVDm@H_@N]LONK^IR?r@FJ?REPM^k@XQTCR@r@Jp@Pp@TrAn@zD~B|HjElFjDf@LTAHCNMZo@NMHCT?FDNNhAjBN\\@VCTCHOL]Hk@?wJiAi@Ci@@]H[P[`@]l@[`@_@\\eAp@WTUXSf@Kj@Cj@EdBE^M^SXWR[PmAb@YPONYb@Yn@_@fASr@]jBUlBQdCe@nIMt@IRUXQHSFs@D_BEi@?_@DQJIR?Tb@v@DT@TUnCIREHQHSD_@CSE]MYSUWQ[M]Q_AEoADyAPiC"
+    "averaged_fastf1_encoded_polyline": "ehmuBjjy{Qf@_G|@gL`AsQ|AmVFk@F_@N]LQNK^IR?r@D^EPKf@s@VKRAT@r@JxAb@rAn@dEdCtHdErEvCb@V\\H^CNKd@w@NKT?FBPJhAlBN\\BTCTIPQL]Fi@AoJgAq@Eg@D]HYRUVc@v@WZ_@\\gAp@e@f@Ud@Mh@Ej@EpBG^K^QXYTYPmAb@[PONSXYn@]z@W~@_@jBUlBQdCe@nIC`@I^IRUVQJSFu@D_BEi@?]DQJIR?Tb@v@DT?`@UdCAHKPSHSD_@CSE[MYSUYQYO_@O_AEa@?k@DeBP}B"
   },
   {
     "schema_version": "1.0.0",
     "artifact_kind": "circuit_analysis_row",
     "provenance": {
-      "generated_at": "2026-06-20T07:55:33Z",
+      "generated_at": "2026-06-20T12:50:59Z",
       "generator": "apexline",
       "schema_version": "1.0.0",
       "command": "batch",
@@ -5452,69 +5534,25 @@
     "circuit_name": "Aut\u00f3dromo Jos\u00e9 Carlos Pace - Interlagos",
     "repo_location": "Sao Paulo",
     "declared_length_m": 4309,
-    "fastf1_driver": "RUS",
-    "fastf1_lap": 65,
-    "fastf1_lap_key": "2025-21-s\u00e3o-paulo-grand-prix-r-rus-lap-65",
-    "fastf1_points": 284,
-    "fastf1_path_length_m": 4258.805567565604,
-    "fastf1_raw_path_length_m": 4258.805567565604,
+    "fastf1_driver": "SAI",
+    "fastf1_lap": 13,
+    "fastf1_lap_key": "2025-21-s\u00e3o-paulo-grand-prix-r-sai-lap-13",
+    "fastf1_points": 297,
+    "fastf1_path_length_m": 4272.404654074539,
+    "fastf1_raw_path_length_m": 4272.404654074539,
     "fastf1_normalization": null,
     "repo_vs_fastf1": {
       "direction": "forward",
-      "start_offset_samples": 715,
+      "start_offset_samples": 712,
       "sample_count": 720,
-      "rmse_m": 9.358708164058864,
-      "p50_m": 8.140492104553914,
-      "p95_m": 15.105966778834649,
-      "max_m": 18.767717978901075,
-      "scale_m_per_fastf1_unit": 0.100176709643936,
-      "rotation_degrees": -1.496476967063882
+      "rmse_m": 11.978640426404542,
+      "p50_m": 10.041317495072363,
+      "p95_m": 18.84088656985598,
+      "max_m": 25.606364781655024,
+      "scale_m_per_fastf1_unit": 0.10018692410992351,
+      "rotation_degrees": -1.8118343651702535
     },
     "averaged_fastf1_laps": [
-      {
-        "driver": "RUS",
-        "lap": 65,
-        "lap_key": "2025-21-s\u00e3o-paulo-grand-prix-r-rus-lap-65",
-        "path_length_m": 4258.805567565604,
-        "raw_path_length_m": 4258.805567565604,
-        "normalization": null,
-        "length_error_m": 38.884426103379155,
-        "rmse_m": 9.358708164058864,
-        "p95_m": 15.105966778834649
-      },
-      {
-        "driver": "SAI",
-        "lap": 9,
-        "lap_key": "2025-21-s\u00e3o-paulo-grand-prix-r-sai-lap-9",
-        "path_length_m": 4259.789621846588,
-        "raw_path_length_m": 4259.789621846588,
-        "normalization": null,
-        "length_error_m": 37.900371822395755,
-        "rmse_m": 9.657504962559482,
-        "p95_m": 15.700356899476603
-      },
-      {
-        "driver": "ALO",
-        "lap": 25,
-        "lap_key": "2025-21-s\u00e3o-paulo-grand-prix-r-alo-lap-25",
-        "path_length_m": 4262.9814012704965,
-        "raw_path_length_m": 4262.9814012704965,
-        "normalization": null,
-        "length_error_m": 34.70859239848687,
-        "rmse_m": 10.402094244802615,
-        "p95_m": 16.69364727992007
-      },
-      {
-        "driver": "BEA",
-        "lap": 6,
-        "lap_key": "2025-21-s\u00e3o-paulo-grand-prix-r-bea-lap-6",
-        "path_length_m": 4259.447497595233,
-        "raw_path_length_m": 4259.447497595233,
-        "normalization": null,
-        "length_error_m": 38.24249607375077,
-        "rmse_m": 10.949094638445033,
-        "p95_m": 15.220154516361573
-      },
       {
         "driver": "SAI",
         "lap": 13,
@@ -5525,26 +5563,72 @@
         "length_error_m": 25.28533959444394,
         "rmse_m": 11.978640426404542,
         "p95_m": 18.84088656985598
+      },
+      {
+        "driver": "RUS",
+        "lap": 6,
+        "lap_key": "2025-21-s\u00e3o-paulo-grand-prix-r-rus-lap-6",
+        "path_length_m": 4280.8814768810835,
+        "raw_path_length_m": 4280.8814768810835,
+        "normalization": null,
+        "length_error_m": 16.808516787899862,
+        "rmse_m": 12.001321740346656,
+        "p95_m": 17.452374338614167
+      },
+      {
+        "driver": "SAI",
+        "lap": 14,
+        "lap_key": "2025-21-s\u00e3o-paulo-grand-prix-r-sai-lap-14",
+        "path_length_m": 4273.60984848743,
+        "raw_path_length_m": 4273.60984848743,
+        "normalization": null,
+        "length_error_m": 24.080145181553235,
+        "rmse_m": 12.11548834231038,
+        "p95_m": 18.869625656730047
+      },
+      {
+        "driver": "GAS",
+        "lap": 13,
+        "lap_key": "2025-21-s\u00e3o-paulo-grand-prix-r-gas-lap-13",
+        "path_length_m": 4277.6773729281795,
+        "raw_path_length_m": 4277.6773729281795,
+        "normalization": null,
+        "length_error_m": 20.012620740803868,
+        "rmse_m": 14.796689286251956,
+        "p95_m": 21.683749430691083
+      },
+      {
+        "driver": "ALB",
+        "lap": 11,
+        "lap_key": "2025-21-s\u00e3o-paulo-grand-prix-r-alb-lap-11",
+        "path_length_m": 4284.326418124248,
+        "raw_path_length_m": 4284.326418124248,
+        "normalization": null,
+        "length_error_m": 13.363575544734886,
+        "rmse_m": 16.72653425936743,
+        "p95_m": 25.2206020779495
       }
     ],
     "repo_vs_fastf1_average": {
       "sample_count": 720,
-      "rmse_m": 9.999709873776562,
-      "p50_m": 9.60287659332094,
-      "p95_m": 14.934415505646772,
-      "max_m": 16.097743353081732
+      "rmse_m": 13.764065247537184,
+      "p50_m": 13.338203394445644,
+      "p95_m": 19.761204574082804,
+      "max_m": 21.01384166690488
     },
     "lap_compliance_summary": {
       "total_laps": 1251,
-      "fitted_laps": 1049,
-      "compliant_laps": 1049,
-      "non_compliant_laps": 202,
+      "fitted_laps": 1172,
+      "compliant_laps": 1172,
+      "non_compliant_laps": 79,
       "shape_non_compliant_laps": 0,
       "reason_counts": {
-        "compliant": 1049,
-        "fastf1_inaccurate": 202,
+        "compliant": 1172,
         "path_length_outlier": 2,
         "pit_lap": 77
+      },
+      "warning_counts": {
+        "fastf1_inaccurate": 202
       },
       "thresholds": {
         "length_tolerance_pct": 0.05,
@@ -5587,6 +5671,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 21,
         "event_name": "S\u00e3o Paulo Grand Prix",
@@ -5621,6 +5706,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 21,
         "event_name": "S\u00e3o Paulo Grand Prix",
@@ -5630,16 +5716,16 @@
     },
     "averaged_fastf1_polyline_vs_source": {
       "source_points": 720,
-      "simplified_points": 125,
-      "encoded_chars": 363,
+      "simplified_points": 124,
+      "encoded_chars": 369,
       "tolerance_m": 1.0,
-      "rmse_m": 0.4209452866450065,
-      "p95_m": 0.8228659101286712,
-      "max_m": 0.9941584168877783,
-      "source_length_m": 4229.649719719281,
-      "simplified_length_m": 4225.647124745517,
-      "length_delta_m": -4.002594973763735,
-      "length_delta_pct": -0.09463183097888739
+      "rmse_m": 0.401332321562752,
+      "p95_m": 0.7729687217460378,
+      "max_m": 0.9980212935338049,
+      "source_length_m": 4208.797186061933,
+      "simplified_length_m": 4203.522630689058,
+      "length_delta_m": -5.274555372874602,
+      "length_delta_pct": -0.12532215594379525
     },
     "polyline_vs_source": {
       "source_points": 171,
@@ -5656,23 +5742,23 @@
     },
     "polyline_vs_fastf1": {
       "direction": "forward",
-      "start_offset_samples": 715,
+      "start_offset_samples": 712,
       "sample_count": 720,
-      "rmse_m": 9.265768380468389,
-      "p50_m": 8.204088270233727,
-      "p95_m": 14.982617737924784,
-      "max_m": 18.380507125031173,
-      "scale_m_per_fastf1_unit": 0.10015885424809537,
-      "rotation_degrees": -1.5028523941317575
+      "rmse_m": 11.88892914102925,
+      "p50_m": 10.110725169818867,
+      "p95_m": 18.501097524530234,
+      "max_m": 25.26926976707071,
+      "scale_m_per_fastf1_unit": 0.10016921767373337,
+      "rotation_degrees": -1.818203853225148
     },
     "encoded_polyline": "jstoCja`|GbM}BVKd@[HMFS?SCWCI_@c@c@c@GMEQAQFY^w@Nk@Fa@Dy@IeAMg@Qc@Ya@[]w@e@_@MeDw@sKmB_OsCUCS@MDQJMTGX[rCCj@Dx@F^Zt@RX`Ax@hCnB~CxBpCvBPPHPHZ@\\?l@C\\Ol@Sd@MPMJUJ]FqATgAJ{@@UGOUEYBODOh@}@BMB]AMEUQWSMSGQ?S@i@ZgAlA_@^]Tg@No@Jy@FUAWOEWF[nCkCVc@Lg@Dk@?WEe@G]O]W]SQ_BcAoDuBWCYHKLO^o@nCGh@JzAPzAj@xBb@fAP\\f@n@TRXPbA\\~Cj@rALjEx@`@Bl@@v@Cf@EzLuB",
-    "averaged_fastf1_encoded_polyline": "vstoC`b`|G`HkAfB_@d@Qd@UVWHSBI?UEUGSk@aAGSCUBa@^uAJw@@y@Gy@W_Ae@w@g@g@_Ai@[K}@UyLeCuMuCs@G_@@]HYRSXQh@Mv@Cl@?t@?GBr@Lj@Ph@f@v@TXVThDjChFvDNNXb@Pf@Hl@Ax@Mj@IRSZi@b@e@Rs@N}@Hi@@i@G]OKQCI@WDU`@gABU?WEUKQQKSE_@?g@Pa@XqAjAa@Xe@Ri@N]D_@A]MEICUBUHSd@i@r@g@^]LQN]Jk@By@Em@Mk@]o@m@o@oCcBaAg@SESA_@FWTWf@Sr@Kl@GnA@l@Fx@VdB`@tATf@\\l@\\`@^^j@`@b@Tx@Zp@RzCj@zBXtBHrBAtBMfC[nEq@"
+    "averaged_fastf1_encoded_polyline": "vstoCxa`|G|GmAdB_@f@Qb@WNON[B]CSK_@c@y@GSASBk@XkAJy@@y@Iw@Su@c@y@e@g@}@k@g@Q{@S{LaCyMqCs@E_@B[JYRQXQj@Ij@Ex@@|@D`@Ll@Rf@f@v@d@d@|DvCvDlCh@b@b@h@L\\FTFx@Cl@Oj@Wd@g@d@e@Ri@LiALs@?_@E[MMQCI?WFU^iABU?UEUKSQKSE_@@g@Pa@XoAjAm@^e@Ri@L]B_@EQKGGCUDUHS\\a@x@q@^_@LON_@Jk@@y@Em@Ok@[o@o@m@gC{AkAk@SEU?]HWTO\\Ut@Kj@E`@An@@x@Dl@Jv@Nv@Nj@Vr@\\n@Zb@d@f@`@Z~@h@f@Pz@VnDn@rBTrBFtBC~BQfC]xDo@"
   },
   {
     "schema_version": "1.0.0",
     "artifact_kind": "circuit_analysis_row",
     "provenance": {
-      "generated_at": "2026-06-20T07:55:33Z",
+      "generated_at": "2026-06-20T12:50:59Z",
       "generator": "apexline",
       "schema_version": "1.0.0",
       "command": "batch",
@@ -5722,99 +5808,101 @@
     "circuit_name": "Las Vegas Street Circuit",
     "repo_location": "Las Vegas",
     "declared_length_m": 6201,
-    "fastf1_driver": "TSU",
-    "fastf1_lap": 25,
-    "fastf1_lap_key": "2025-22-las-vegas-grand-prix-r-tsu-lap-25",
-    "fastf1_points": 361,
-    "fastf1_path_length_m": 6179.519486739674,
-    "fastf1_raw_path_length_m": 6179.519486739674,
+    "fastf1_driver": "LEC",
+    "fastf1_lap": 2,
+    "fastf1_lap_key": "2025-22-las-vegas-grand-prix-r-lec-lap-2",
+    "fastf1_points": 431,
+    "fastf1_path_length_m": 6201.178904652855,
+    "fastf1_raw_path_length_m": 6201.178904652855,
     "fastf1_normalization": null,
     "repo_vs_fastf1": {
       "direction": "forward",
-      "start_offset_samples": 704,
+      "start_offset_samples": 701,
       "sample_count": 720,
-      "rmse_m": 7.054356657125097,
-      "p50_m": 5.257671581066269,
-      "p95_m": 12.68998447927928,
-      "max_m": 21.95347977269868,
-      "scale_m_per_fastf1_unit": 0.10027456601276287,
-      "rotation_degrees": -0.7838694861637855
+      "rmse_m": 11.073819180168599,
+      "p50_m": 8.378489358643073,
+      "p95_m": 19.346575233288572,
+      "max_m": 21.39130562353265,
+      "scale_m_per_fastf1_unit": 0.10001271903959597,
+      "rotation_degrees": -1.446994161760893
     },
     "averaged_fastf1_laps": [
       {
-        "driver": "TSU",
-        "lap": 25,
-        "lap_key": "2025-22-las-vegas-grand-prix-r-tsu-lap-25",
-        "path_length_m": 6179.519486739674,
-        "raw_path_length_m": 6179.519486739674,
+        "driver": "LEC",
+        "lap": 2,
+        "lap_key": "2025-22-las-vegas-grand-prix-r-lec-lap-2",
+        "path_length_m": 6201.178904652855,
+        "raw_path_length_m": 6201.178904652855,
         "normalization": null,
-        "length_error_m": 41.09312967311416,
-        "rmse_m": 7.054356657125097,
-        "p95_m": 12.68998447927928
+        "length_error_m": 19.43371175993343,
+        "rmse_m": 11.073819180168599,
+        "p95_m": 19.346575233288572
+      },
+      {
+        "driver": "LEC",
+        "lap": 6,
+        "lap_key": "2025-22-las-vegas-grand-prix-r-lec-lap-6",
+        "path_length_m": 6242.259391770335,
+        "raw_path_length_m": 6242.259391770335,
+        "normalization": null,
+        "length_error_m": 21.646775357547085,
+        "rmse_m": 13.764805971690514,
+        "p95_m": 21.412021396925745
+      },
+      {
+        "driver": "LEC",
+        "lap": 1,
+        "lap_key": "2025-22-las-vegas-grand-prix-r-lec-lap-1",
+        "path_length_m": 6213.853256811853,
+        "raw_path_length_m": 6213.853256811853,
+        "normalization": null,
+        "length_error_m": 6.759359600935568,
+        "rmse_m": 14.262167050823708,
+        "p95_m": 19.653145038055143
       },
       {
         "driver": "BEA",
-        "lap": 15,
-        "lap_key": "2025-22-las-vegas-grand-prix-r-bea-lap-15",
-        "path_length_m": 6175.607193649671,
-        "raw_path_length_m": 6175.607193649671,
+        "lap": 2,
+        "lap_key": "2025-22-las-vegas-grand-prix-r-bea-lap-2",
+        "path_length_m": 6187.299614483483,
+        "raw_path_length_m": 6187.299614483483,
         "normalization": null,
-        "length_error_m": 45.00542276311717,
-        "rmse_m": 9.575000972410873,
-        "p95_m": 18.55412035967497
+        "length_error_m": 33.313001929304846,
+        "rmse_m": 15.092715141562076,
+        "p95_m": 20.891805671061704
       },
       {
-        "driver": "TSU",
-        "lap": 23,
-        "lap_key": "2025-22-las-vegas-grand-prix-r-tsu-lap-23",
-        "path_length_m": 6176.08682578856,
-        "raw_path_length_m": 6176.08682578856,
+        "driver": "COL",
+        "lap": 1,
+        "lap_key": "2025-22-las-vegas-grand-prix-r-col-lap-1",
+        "path_length_m": 6212.168476373597,
+        "raw_path_length_m": 6212.168476373597,
         "normalization": null,
-        "length_error_m": 44.52579062422774,
-        "rmse_m": 11.38944612995862,
-        "p95_m": 19.872998211374412
-      },
-      {
-        "driver": "ALO",
-        "lap": 39,
-        "lap_key": "2025-22-las-vegas-grand-prix-r-alo-lap-39",
-        "path_length_m": 6175.870607557699,
-        "raw_path_length_m": 6175.870607557699,
-        "normalization": null,
-        "length_error_m": 44.7420088550889,
-        "rmse_m": 11.544343335153101,
-        "p95_m": 20.466654061865285
-      },
-      {
-        "driver": "ANT",
-        "lap": 49,
-        "lap_key": "2025-22-las-vegas-grand-prix-r-ant-lap-49",
-        "path_length_m": 6178.331761874433,
-        "raw_path_length_m": 6178.331761874433,
-        "normalization": null,
-        "length_error_m": 42.280854538355015,
-        "rmse_m": 12.371628452762343,
-        "p95_m": 26.07454662235032
+        "length_error_m": 8.444140039191552,
+        "rmse_m": 16.02051944630524,
+        "p95_m": 28.970450758623954
       }
     ],
     "repo_vs_fastf1_average": {
       "sample_count": 720,
-      "rmse_m": 10.942042834641425,
-      "p50_m": 9.49933531226722,
-      "p95_m": 18.216596943331666,
-      "max_m": 20.87463316876317
+      "rmse_m": 14.266319909856644,
+      "p50_m": 13.59227710842489,
+      "p95_m": 21.17277381133917,
+      "max_m": 25.438676013275398
     },
     "lap_compliance_summary": {
       "total_laps": 886,
-      "fitted_laps": 760,
-      "compliant_laps": 760,
-      "non_compliant_laps": 126,
+      "fitted_laps": 840,
+      "compliant_laps": 840,
+      "non_compliant_laps": 46,
       "shape_non_compliant_laps": 0,
       "reason_counts": {
-        "compliant": 760,
-        "fastf1_inaccurate": 126,
+        "compliant": 840,
         "path_length_outlier": 1,
         "pit_lap": 45
+      },
+      "warning_counts": {
+        "fastf1_inaccurate": 126
       },
       "thresholds": {
         "length_tolerance_pct": 0.05,
@@ -5857,6 +5945,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 22,
         "event_name": "Las Vegas Grand Prix",
@@ -5891,6 +5980,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 22,
         "event_name": "Las Vegas Grand Prix",
@@ -5900,16 +5990,16 @@
     },
     "averaged_fastf1_polyline_vs_source": {
       "source_points": 720,
-      "simplified_points": 123,
-      "encoded_chars": 363,
+      "simplified_points": 119,
+      "encoded_chars": 351,
       "tolerance_m": 1.0,
-      "rmse_m": 0.42068512579426626,
-      "p95_m": 0.7906101431337862,
-      "max_m": 0.9893374374651865,
-      "source_length_m": 6136.001164600553,
-      "simplified_length_m": 6133.316961809761,
-      "length_delta_m": -2.6842027907923693,
-      "length_delta_pct": -0.04374514800091483
+      "rmse_m": 0.41861042645514984,
+      "p95_m": 0.7739498534488323,
+      "max_m": 0.9734431373693986,
+      "source_length_m": 6136.8910558415755,
+      "simplified_length_m": 6134.015980318325,
+      "length_delta_m": -2.875075523250416,
+      "length_delta_pct": -0.04684905593221658
     },
     "polyline_vs_source": {
       "source_points": 100,
@@ -5926,23 +6016,23 @@
     },
     "polyline_vs_fastf1": {
       "direction": "forward",
-      "start_offset_samples": 704,
+      "start_offset_samples": 701,
       "sample_count": 720,
-      "rmse_m": 7.04793298790621,
-      "p50_m": 5.223704817400528,
-      "p95_m": 12.697891220113211,
-      "max_m": 21.953017382983727,
-      "scale_m_per_fastf1_unit": 0.10027531651964881,
-      "rotation_degrees": -0.7814015383091889
+      "rmse_m": 11.068264106073952,
+      "p50_m": 8.370726613846394,
+      "p95_m": 19.3247602410099,
+      "max_m": 21.389875706298948,
+      "scale_m_per_fastf1_unit": 0.10001347045088543,
+      "rotation_degrees": -1.4445151180967777
     },
     "encoded_polyline": "{uk{Enl{}TgCsCYQ]EYLQXMn@Ej@@h@Hf@h@tA~@pAP\\JbA?b@SbAOb@U`@}@v@s@Tio@NWKKUDkK?uBK}@gA}Ac@_@gAg@k@Ku@E]@KRCx@IRUPa@DWAmAw@w@a@c@HWj@GrAMpRYdF]lAeArAuBfAqElB{@fAi@hAUhA]tBUdCBPHPd@JVLzI~EpFhDrCpApIxBzAV|ARhCRnDHfOCjQXjHFvC?rDFNKBQ?g@F_@v@cAZ{@JmAD{ICcM@uJAuDQuCU{COg@O_@SYiHgI",
-    "averaged_fastf1_encoded_polyline": "guk{Erl{}T}BoCe@]]COB[NSXM`@Ed@?d@Fb@J`@Xn@|@tAP^J`@BP?d@Cd@Ib@M`@Q\\UZWVYP]J]Fm@FgEJcd@Z_@Ei@SKKIMEOCe@@yHGiASiASq@Yo@k@u@c@c@g@[i@Um@I]@WJUVSp@ILKJMDO@[GcAm@]K]CMBMFKHGNEb@@jJGpHGhAIv@Mv@Qr@Up@[l@UXc@d@aAn@gD|Ai@Zo@l@k@t@m@jAM`@Qt@OfAMjAGn@?b@L`@JJLFhA\\hCrA|IrFzBjApBv@`D|@fCl@vB^jALjBPzAFzADjPFfa@`@l@Aj@MXSHMFQHw@DOv@{AHc@Be@BeCEcRFiMAkDCwCGy@SgASq@c@_A]i@iFgG"
+    "averaged_fastf1_encoded_polyline": "auk{Efm{}T{BoCe@_@]I]DYPS\\K`@Cd@@d@Hb@Nh@P^|@tAP^J`@@x@Cd@Kb@Up@SZe@b@YP]J]F}@DyDH{c@Nm@G[OWWGOCe@BsHCkAKw@YeAa@_A_@g@e@c@e@_@y@[]E_@?MBULOPSr@GLKJODM@]IcAm@[MOC]BMFKJGNCPA~JGlGEjAKjAGb@Ot@[bAQ^]h@c@d@e@^[PyCrAw@`@e@^WVk@v@[j@O`@Sr@Kb@Mt@U~BAd@BPFNXThA\\zBlAjJ`GjCrAbBp@~DhAvBf@lB\\fD\\hDN|PL|`@j@|@A\\IZOR[\\sAp@_BHc@De@BwC?sQF_N?kDCsBCe@OiAYeAWo@q@gAwEwF"
   },
   {
     "schema_version": "1.0.0",
     "artifact_kind": "circuit_analysis_row",
     "provenance": {
-      "generated_at": "2026-06-20T07:55:33Z",
+      "generated_at": "2026-06-20T12:50:59Z",
       "generator": "apexline",
       "schema_version": "1.0.0",
       "command": "batch",
@@ -6023,15 +6113,15 @@
         "p95_m": 9.27644296543202
       },
       {
-        "driver": "BEA",
-        "lap": 17,
-        "lap_key": "2025-23-qatar-grand-prix-r-bea-lap-17",
-        "path_length_m": 5400.179811587475,
-        "raw_path_length_m": 5400.179811587475,
+        "driver": "ALO",
+        "lap": 1,
+        "lap_key": "2025-23-qatar-grand-prix-r-alo-lap-1",
+        "path_length_m": 5406.849428083845,
+        "raw_path_length_m": 5406.849428083845,
         "normalization": null,
-        "length_error_m": 20.52413256982527,
-        "rmse_m": 5.155393937186353,
-        "p95_m": 9.405143608799465
+        "length_error_m": 13.85451607345567,
+        "rmse_m": 6.03898661224321,
+        "p95_m": 11.402330704322301
       },
       {
         "driver": "ALO",
@@ -6069,23 +6159,25 @@
     ],
     "repo_vs_fastf1_average": {
       "sample_count": 720,
-      "rmse_m": 3.9136464436187652,
-      "p50_m": 3.641778421716567,
-      "p95_m": 6.103555430446194,
-      "max_m": 8.148302449970737
+      "rmse_m": 4.518551546079295,
+      "p50_m": 4.4273194701672995,
+      "p95_m": 6.804140117471819,
+      "max_m": 7.744240688294222
     },
     "lap_compliance_summary": {
       "total_laps": 1067,
-      "fitted_laps": 922,
-      "compliant_laps": 922,
-      "non_compliant_laps": 145,
+      "fitted_laps": 982,
+      "compliant_laps": 982,
+      "non_compliant_laps": 85,
       "shape_non_compliant_laps": 0,
       "reason_counts": {
-        "compliant": 922,
-        "fastf1_inaccurate": 145,
+        "compliant": 982,
         "path_length_outlier": 1,
         "pit_lap": 84,
         "too_few_position_samples": 1
+      },
+      "warning_counts": {
+        "fastf1_inaccurate": 145
       },
       "thresholds": {
         "length_tolerance_pct": 0.05,
@@ -6128,6 +6220,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 23,
         "event_name": "Qatar Grand Prix",
@@ -6162,6 +6255,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 23,
         "event_name": "Qatar Grand Prix",
@@ -6171,16 +6265,16 @@
     },
     "averaged_fastf1_polyline_vs_source": {
       "source_points": 720,
-      "simplified_points": 137,
-      "encoded_chars": 382,
+      "simplified_points": 138,
+      "encoded_chars": 389,
       "tolerance_m": 1.0,
-      "rmse_m": 0.4117823981538631,
-      "p95_m": 0.8088553617123005,
-      "max_m": 0.9997210052353893,
-      "source_length_m": 5377.093118128706,
-      "simplified_length_m": 5369.911463559102,
-      "length_delta_m": -7.181654569603779,
-      "length_delta_pct": -0.1335601673958565
+      "rmse_m": 0.38324799115927016,
+      "p95_m": 0.7694504574026642,
+      "max_m": 0.9748759366204635,
+      "source_length_m": 5376.640386136959,
+      "simplified_length_m": 5369.712282333159,
+      "length_delta_m": -6.928103803799786,
+      "length_delta_pct": -0.12885562928223904
     },
     "polyline_vs_source": {
       "source_points": 107,
@@ -6207,13 +6301,13 @@
       "rotation_degrees": -0.025923898566655033
     },
     "encoded_polyline": "wiqzCow_yHaUlLe@Fe@E]OUWSc@Ek@Fg@fDsHF[?g@Kk@]c@a@S_@EsFF_@E[I[MmMmMQWGc@Cc@He@L[pBaCTM`@GZ@ZFVRzGzGRLT?RENMHUB[ES}DkOA_@Bg@La@VY\\O\\EX?XH\\Rh@v@l@h@j@b@n@\\|Ad@bAN\\JVRLVL\\|@zGJVNRXHVBb@Cb@_@n@s@v@qAj@sAZuANwAFsAs@aOFg@Rk@Va@f@_@bDcBZGX?XDb@R|EvCNRJZF\\Ad@wAfN?`@F`@R\\TRpQpI\\ZN\\Dl@A`@M^Y`@m^dR",
-    "averaged_fastf1_encoded_polyline": "wiqzCkw_yHcR~J}@\\e@Lg@Bg@G_@YUc@EMC]Bk@F]Re@tBgEVu@D[?]E]MY[]WMYEi@CiEBYCYGq@Wa@Ws@o@}IaJYa@EKG[C]Fk@Ng@Vc@n@u@^[VMd@KXAf@JTNvCfDfAdA^Xb@TXBLCRQDMB[Gk@u@yCiBgGQw@Ek@?]@MJ[LWRSVMf@GX@b@RRPbAhA^Zl@^fAd@fBd@VJTPX`@Nf@TtAXrCLf@FJTRJDVFZ?JCVK^[\\]`@m@\\q@Xs@Tw@Nw@Jy@FiA?iBKeC]kGBy@Jk@Re@Vc@^[^Yn@]|@]d@Mf@Ad@Hd@PpAr@jBvAPVPf@Bj@Cz@y@bHQzB?\\B\\HZLXZ\\bAn@lGlCnCpApAr@\\XX\\HZBj@Gj@KX[`@_@Xs\\|P"
+    "averaged_fastf1_encoded_polyline": "yiqzCkw_yHcR~Jo@Xs@Pg@Be@Ia@YUe@G[?k@F]Pg@xBoEXu@D[?]E[KYQWUOe@Mg@CoDBg@As@MYKUMa@Ys@o@{IaJQWKYE]?[D]Ng@Vc@l@w@^[VMVIf@Cf@HTLxChDz@z@h@b@b@TXBLCROFKB[C]E[w@yCcByFQy@Gi@?]@OHYNYRSTMf@IXBd@PRP`AhAj@b@`@VhAd@pBj@`@VZ`@Nf@TtAXpCF\\LV^XXHX?LAJETOh@e@Za@Vc@Zq@Xs@Ni@Nw@L{@FwAAyAKeC[kG@{@Ji@Rg@Va@\\]`@Yn@]z@]f@Mf@Cd@Lb@NfAh@vB~APVPf@Dj@Ez@w@bHQ|BA\\BZHZLXPTTPv@f@xGrCzCxAdAl@ZXNVJZ@j@Gj@KXQT_@Z_]fQ"
   },
   {
     "schema_version": "1.0.0",
     "artifact_kind": "circuit_analysis_row",
     "provenance": {
-      "generated_at": "2026-06-20T07:55:33Z",
+      "generated_at": "2026-06-20T12:50:59Z",
       "generator": "apexline",
       "schema_version": "1.0.0",
       "command": "batch",
@@ -6294,6 +6388,17 @@
         "p95_m": 10.774155935470986
       },
       {
+        "driver": "ALO",
+        "lap": 1,
+        "lap_key": "2025-24-abu-dhabi-grand-prix-r-alo-lap-1",
+        "path_length_m": 5300.695028335966,
+        "raw_path_length_m": 5300.695028335966,
+        "normalization": null,
+        "length_error_m": 7.946263641023506,
+        "rmse_m": 8.3119715504862,
+        "p95_m": 14.587953663974425
+      },
+      {
         "driver": "ANT",
         "lap": 12,
         "lap_key": "2025-24-abu-dhabi-grand-prix-r-ant-lap-12",
@@ -6325,36 +6430,27 @@
         "length_error_m": 14.910194215757656,
         "rmse_m": 13.505639005532917,
         "p95_m": 26.32637015192034
-      },
-      {
-        "driver": "RUS",
-        "lap": 22,
-        "lap_key": "2025-24-abu-dhabi-grand-prix-r-rus-lap-22",
-        "path_length_m": 5277.689271394111,
-        "raw_path_length_m": 5277.689271394111,
-        "normalization": null,
-        "length_error_m": 15.059493300831491,
-        "rmse_m": 13.668633060744122,
-        "p95_m": 23.177387705715766
       }
     ],
     "repo_vs_fastf1_average": {
       "sample_count": 720,
-      "rmse_m": 7.503765703809708,
-      "p50_m": 6.217791340917627,
-      "p95_m": 12.72290760067952,
-      "max_m": 16.143804915188653
+      "rmse_m": 5.447487202285681,
+      "p50_m": 4.574386080325734,
+      "p95_m": 9.70680476617855,
+      "max_m": 12.797870848311522
     },
     "lap_compliance_summary": {
       "total_laps": 1156,
-      "fitted_laps": 1082,
-      "compliant_laps": 1082,
-      "non_compliant_laps": 74,
+      "fitted_laps": 1102,
+      "compliant_laps": 1102,
+      "non_compliant_laps": 54,
       "shape_non_compliant_laps": 0,
       "reason_counts": {
-        "compliant": 1082,
-        "fastf1_inaccurate": 74,
+        "compliant": 1102,
         "pit_lap": 54
+      },
+      "warning_counts": {
+        "fastf1_inaccurate": 74
       },
       "thresholds": {
         "length_tolerance_pct": 0.05,
@@ -6397,6 +6493,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 24,
         "event_name": "Abu Dhabi Grand Prix",
@@ -6431,6 +6528,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 24,
         "event_name": "Abu Dhabi Grand Prix",
@@ -6440,16 +6538,16 @@
     },
     "averaged_fastf1_polyline_vs_source": {
       "source_points": 720,
-      "simplified_points": 126,
-      "encoded_chars": 353,
+      "simplified_points": 122,
+      "encoded_chars": 356,
       "tolerance_m": 1.0,
-      "rmse_m": 0.37569598583066305,
-      "p95_m": 0.7664176334760059,
-      "max_m": 0.9719702298539306,
-      "source_length_m": 5219.5056214413235,
-      "simplified_length_m": 5215.568315150629,
-      "length_delta_m": -3.9373062906943233,
-      "length_delta_pct": -0.07543446786454593
+      "rmse_m": 0.3829412932234412,
+      "p95_m": 0.7684372065683363,
+      "max_m": 0.9965535516637742,
+      "source_length_m": 5222.472725196271,
+      "simplified_length_m": 5218.087903467911,
+      "length_delta_m": -4.3848217283602935,
+      "length_delta_pct": -0.08396064391500489
     },
     "polyline_vs_source": {
       "source_points": 133,
@@ -6476,6 +6574,6 @@
       "rotation_degrees": 0.8932932134231989
     },
     "encoded_polyline": "ihjtCcchlIy@yMGYQQWKWC_IrA_@JWPU\\KVc@dCUl@S^Y\\k@f@k@Ra@Fe@?k@GaDo@uAK}@AeIj@_E\\OBQLQVE^H^HL\\PnAZrBZd_@|JhBd@dCf@tFrArFxAN@HAFG@UG{ALKnDs@z@[j@WdAu@~@{@z@kA|GkKpAeCb@aAtC}IT}@?c@Ec@Qa@OQOKUKk@Ka@Bq@PUNQTQZK\\Ch@YrIGz@EPgBtDKROJ]JsDj@MCIICMSwCM[IKSKYC}B?SJMJKp@Cx@@^j@zH?z@C`@GV[^oCtAaAj@QHYDo@BQEMKEMgA{O",
-    "averaged_fastf1_encoded_polyline": "ihjtC{bhlIm@cLGi@CMMWSQWKe@Cg@@g@DgBVeB^c@NUN]ZUb@s@dDKXW^SR_@Ve@Ps@Dg@?_AIkD[aAGiB?wCFyDRs@Fe@JYLUNMVEXDXNT^Xb@NbJxBb]bJtLhDxAXX@X?VKDGBY?i@@MBKPS`@QhCk@z@[hAo@fAaAb@g@j@w@lHuKx@uAv@cBb@mAr@eC~@}DDi@C]IYMW[[c@MSAg@DWHm@\\Y^MVKf@Q~COxEMdA]`Ak@fAa@j@_@Xq@T_ANs@Be@EUMKWC[?y@E[KW[]c@OYCg@?YDUHYVSb@EZCZDx@h@zG@ZEj@St@MVQRu@h@oAr@}@Ze@FY@[ASESQEIG[GgAK_D[uF"
+    "averaged_fastf1_encoded_polyline": "ihjtCcchlIm@cLGe@Qa@SQWKs@CoAHyATeB`@c@NWL]\\Sb@s@dDKXW^SRa@Vc@Ns@Fg@A_Fc@mAIwB?yCHwDRg@Fe@HYNSPMTCZDXNT`@Vb@NhInBf^nJhLbDvAZZ@XATIFGBYAi@@MDKNSb@QxBe@z@[h@Uj@_@fA_Al@s@r@aAbHgK`AgBn@uA`@oAn@wBr@uCNw@@M?[Ki@Ua@UQa@Oa@?e@Fc@R]ZY^KXEZS|COxEMfA[`Ak@fAc@h@_@Xo@V_ANu@Be@ESMKWC[?y@G[Sc@SQc@Os@EYBe@LQNWb@GXA\\Bx@h@~G@j@CZQt@_@l@k@`@yAz@}@ZWFg@Bk@CKESSIg@IwAIqC[uF"
   }
 ]

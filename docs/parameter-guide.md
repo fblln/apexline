@@ -106,13 +106,14 @@ Recommended: `12`
 
 Why this exists:
 
-FastF1's `IsAccurate` flag is useful, but not sufficient for circuit-shape
-validation. Some early laps can include odd position slices while still being
-marked accurate.
+FastF1's `IsAccurate` flag describes timing and track-status integrity, not GPS
+shape quality. Apexline records a false value as a warning and still fits the
+lap when its position data is geometrically usable. Conversely, an accurate lap
+can still contain an invalid position slice.
 
 The script now:
 
-1. collects clean non-pit laps,
+1. collects non-pit laps with position data, regardless of timing-accuracy warnings,
 2. trims repeated lap-boundary overlap when an over-long lap contains one clean loop,
 3. rejects laps whose normalized FastF1 path length is still too far from the oracle length,
 4. ranks remaining laps by path-length closeness,

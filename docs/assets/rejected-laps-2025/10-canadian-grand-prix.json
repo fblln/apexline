@@ -21,7 +21,7 @@
     "effective_p95_threshold_m": 109.12596559185266
   },
   "generation_provenance": {
-    "generated_at": "2026-06-20T08:07:34Z",
+    "generated_at": "2026-06-20T13:35:59Z",
     "generator": "apexline",
     "schema_version": "1.0.0",
     "command": "apexline-rejected-galleries",
@@ -30,16 +30,14 @@
       "session": "R",
       "circuits": [
         "Canada",
-        "Belgian",
-        "Australia",
-        "British"
+        "Belgian"
       ],
-      "fastf1_cache_dir": "/private/tmp/apexline-fastf1-cache",
-      "circuits_repo": "/private/tmp/f1-circuits",
+      "fastf1_cache_dir": "/Users/fabio/Workspace/apexline/data/fastf1-cache",
+      "circuits_repo": "/tmp/f1-circuits",
       "circuits_repo_url": "https://github.com/bacinger/f1-circuits.git",
       "output_dir": "docs/assets/rejected-laps-2025",
       "index_output": "docs/rejected-lap-galleries-2025.md",
-      "max_render_points": 900,
+      "max_render_points": 0,
       "lap_length_tolerance_pct": 0.05,
       "shape_rmse_threshold_m": 32.0,
       "shape_p95_threshold_m": 75.0,
@@ -52,7 +50,7 @@
   },
   "reference_length_m": 4365.038623674106,
   "anchor": "VER lap 63, RMSE 3.6 m",
-  "max_render_points": 900,
+  "max_render_points": 0,
   "rendering_note": "max_render_points <= 0 means raw points are rendered without thinning",
   "rejected_laps": [
     {
@@ -60,9 +58,11 @@
       "lap_number": 67,
       "lap_time_ms": null,
       "reasons": [
-        "fastf1_inaccurate",
         "too_few_position_samples",
         "path_length_outlier"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 307.72629964677253,
       "length_error_pct": -0.929502044271087,
@@ -74,9 +74,11 @@
       "lap_number": 57,
       "lap_time_ms": 93451,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap",
         "path_length_outlier"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4634.741910996624,
       "length_error_pct": 0.06178714796697617,
@@ -85,23 +87,13 @@
     },
     {
       "driver": "ALB",
-      "lap_number": 1,
-      "lap_time_ms": 89443,
-      "reasons": [
-        "fastf1_inaccurate"
-      ],
-      "path_length_m": 4307.128205009994,
-      "length_error_pct": -0.013266874283776143,
-      "fit_rmse_m": null,
-      "fit_p95_m": null
-    },
-    {
-      "driver": "ALB",
       "lap_number": 23,
       "lap_time_ms": 97229,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4444.017373321742,
       "length_error_pct": 0.018093482430897305,
@@ -113,35 +105,13 @@
       "lap_number": 24,
       "lap_time_ms": 80839,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4293.045409283812,
       "length_error_pct": -0.01649314487157887,
-      "fit_rmse_m": null,
-      "fit_p95_m": null
-    },
-    {
-      "driver": "ALB",
-      "lap_number": 47,
-      "lap_time_ms": null,
-      "reasons": [
-        "fastf1_inaccurate"
-      ],
-      "path_length_m": 4295.120044287421,
-      "length_error_pct": -0.0160178604165097,
-      "fit_rmse_m": null,
-      "fit_p95_m": null
-    },
-    {
-      "driver": "ALO",
-      "lap_number": 1,
-      "lap_time_ms": 85331,
-      "reasons": [
-        "fastf1_inaccurate"
-      ],
-      "path_length_m": 4293.717105513137,
-      "length_error_pct": -0.0163392639355244,
       "fit_rmse_m": null,
       "fit_p95_m": null
     },
@@ -150,8 +120,10 @@
       "lap_number": 15,
       "lap_time_ms": 95382,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4368.77923010069,
       "length_error_pct": 0.0008569469251192381,
@@ -163,8 +135,10 @@
       "lap_number": 16,
       "lap_time_ms": 79841,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4308.616876616025,
       "length_error_pct": -0.0129258299690805,
@@ -176,8 +150,10 @@
       "lap_number": 50,
       "lap_time_ms": 92749,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4362.847803106933,
       "length_error_pct": -0.0005019017598816552,
@@ -189,8 +165,10 @@
       "lap_number": 51,
       "lap_time_ms": 78393,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4320.009722957533,
       "length_error_pct": -0.01031580808296985,
@@ -202,8 +180,10 @@
       "lap_number": 66,
       "lap_time_ms": 99524,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4372.6369254965275,
       "length_error_pct": 0.001740718119013093,
@@ -215,8 +195,10 @@
       "lap_number": 67,
       "lap_time_ms": 113748,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4341.569710630139,
       "length_error_pct": -0.0053765648067080184,
@@ -228,8 +210,10 @@
       "lap_number": 68,
       "lap_time_ms": 99322,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4359.77085455914,
       "length_error_pct": -0.001206809279165481,
@@ -241,8 +225,10 @@
       "lap_number": 69,
       "lap_time_ms": 96570,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4376.718358231946,
       "length_error_pct": 0.002675745981832525,
@@ -254,8 +240,10 @@
       "lap_number": 70,
       "lap_time_ms": 87108,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4309.165438418691,
       "length_error_pct": -0.012800158274060253,
@@ -264,23 +252,13 @@
     },
     {
       "driver": "ANT",
-      "lap_number": 1,
-      "lap_time_ms": 83319,
-      "reasons": [
-        "fastf1_inaccurate"
-      ],
-      "path_length_m": 4296.474620132906,
-      "length_error_pct": -0.015707536508231083,
-      "fit_rmse_m": null,
-      "fit_p95_m": null
-    },
-    {
-      "driver": "ANT",
       "lap_number": 14,
       "lap_time_ms": 93110,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4361.713222464331,
       "length_error_pct": -0.000761826296734112,
@@ -292,8 +270,10 @@
       "lap_number": 15,
       "lap_time_ms": 79756,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4305.040434854464,
       "length_error_pct": -0.013745167910826056,
@@ -305,8 +285,10 @@
       "lap_number": 38,
       "lap_time_ms": 91064,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4366.644584441912,
       "length_error_pct": 0.00036791444618523275,
@@ -318,8 +300,10 @@
       "lap_number": 39,
       "lap_time_ms": 79108,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4328.60539648799,
       "length_error_pct": -0.008346599040044578,
@@ -331,8 +315,10 @@
       "lap_number": 67,
       "lap_time_ms": 104172,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4437.732787951953,
       "length_error_pct": 0.01665372761734213,
@@ -344,8 +330,10 @@
       "lap_number": 68,
       "lap_time_ms": 123303,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4353.781038541876,
       "length_error_pct": -0.0025790344834919834,
@@ -357,8 +345,10 @@
       "lap_number": 69,
       "lap_time_ms": 123706,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4361.169221524017,
       "length_error_pct": -0.0008864531298996375,
@@ -370,8 +360,10 @@
       "lap_number": 70,
       "lap_time_ms": 126371,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4291.103462662438,
       "length_error_pct": -0.01693803134081689,
@@ -380,23 +372,13 @@
     },
     {
       "driver": "BEA",
-      "lap_number": 1,
-      "lap_time_ms": 89938,
-      "reasons": [
-        "fastf1_inaccurate"
-      ],
-      "path_length_m": 4317.914578706111,
-      "length_error_pct": -0.010795791064119034,
-      "fit_rmse_m": null,
-      "fit_p95_m": null
-    },
-    {
-      "driver": "BEA",
       "lap_number": 18,
       "lap_time_ms": 95065,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4391.884337056368,
       "length_error_pct": 0.006150166286424697,
@@ -408,8 +390,10 @@
       "lap_number": 19,
       "lap_time_ms": 80046,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4294.477298964169,
       "length_error_pct": -0.016165108901268994,
@@ -421,8 +405,10 @@
       "lap_number": 66,
       "lap_time_ms": 118863,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4360.3768203646805,
       "length_error_pct": -0.0010679867261979977,
@@ -434,8 +420,10 @@
       "lap_number": 67,
       "lap_time_ms": 116832,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4342.741720590929,
       "length_error_pct": -0.005108065473292362,
@@ -447,8 +435,10 @@
       "lap_number": 68,
       "lap_time_ms": 107065,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4374.026228932306,
       "length_error_pct": 0.0020589978767783204,
@@ -460,8 +450,10 @@
       "lap_number": 69,
       "lap_time_ms": 122225,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4318.047370838772,
       "length_error_pct": -0.010765369309786587,
@@ -470,23 +462,13 @@
     },
     {
       "driver": "BOR",
-      "lap_number": 1,
-      "lap_time_ms": 90643,
-      "reasons": [
-        "fastf1_inaccurate"
-      ],
-      "path_length_m": 4301.480528741286,
-      "length_error_pct": -0.014560717650493998,
-      "fit_rmse_m": null,
-      "fit_p95_m": null
-    },
-    {
-      "driver": "BOR",
       "lap_number": 49,
       "lap_time_ms": 93551,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4449.1347184437955,
       "length_error_pct": 0.01926583061913545,
@@ -498,8 +480,10 @@
       "lap_number": 50,
       "lap_time_ms": 80850,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4306.902278689461,
       "length_error_pct": -0.013318632433018616,
@@ -511,8 +495,10 @@
       "lap_number": 66,
       "lap_time_ms": 113764,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4373.779743071683,
       "length_error_pct": 0.0020025296798449085,
@@ -524,8 +510,10 @@
       "lap_number": 67,
       "lap_time_ms": 117562,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4347.749423690259,
       "length_error_pct": -0.003960835510155028,
@@ -537,8 +525,10 @@
       "lap_number": 68,
       "lap_time_ms": 106030,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4356.406061713498,
       "length_error_pct": -0.0019776599257996055,
@@ -550,8 +540,10 @@
       "lap_number": 69,
       "lap_time_ms": 120889,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4297.205666918527,
       "length_error_pct": -0.015540058772374268,
@@ -560,23 +552,13 @@
     },
     {
       "driver": "COL",
-      "lap_number": 1,
-      "lap_time_ms": 88837,
-      "reasons": [
-        "fastf1_inaccurate"
-      ],
-      "path_length_m": 4301.462443762161,
-      "length_error_pct": -0.014564860793472804,
-      "fit_rmse_m": null,
-      "fit_p95_m": null
-    },
-    {
-      "driver": "COL",
       "lap_number": 14,
       "lap_time_ms": 95104,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4397.2016160106095,
       "length_error_pct": 0.007368317925542556,
@@ -588,8 +570,10 @@
       "lap_number": 15,
       "lap_time_ms": 80790,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4307.786752239696,
       "length_error_pct": -0.013116005692114593,
@@ -601,8 +585,10 @@
       "lap_number": 66,
       "lap_time_ms": 114740,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4368.190427576745,
       "length_error_pct": 0.000722056360634391,
@@ -614,8 +600,10 @@
       "lap_number": 67,
       "lap_time_ms": 116920,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4336.280338004565,
       "length_error_pct": -0.006588323299951602,
@@ -627,8 +615,10 @@
       "lap_number": 68,
       "lap_time_ms": 105834,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4399.343576502607,
       "length_error_pct": 0.007859026181909493,
@@ -640,8 +630,10 @@
       "lap_number": 69,
       "lap_time_ms": 121787,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4294.634523713224,
       "length_error_pct": -0.0161290898043927,
@@ -653,8 +645,10 @@
       "lap_number": 1,
       "lap_time_ms": 94327,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4280.381619184154,
       "length_error_pct": -0.01939433113622599,
@@ -666,8 +660,10 @@
       "lap_number": 53,
       "lap_time_ms": 93243,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4340.444972625001,
       "length_error_pct": -0.005634234463750034,
@@ -679,8 +675,10 @@
       "lap_number": 54,
       "lap_time_ms": 79080,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4316.960429299833,
       "length_error_pct": -0.011014380059208996,
@@ -692,8 +690,10 @@
       "lap_number": 66,
       "lap_time_ms": 116515,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4354.930904975335,
       "length_error_pct": -0.0023156080782312898,
@@ -705,8 +705,10 @@
       "lap_number": 67,
       "lap_time_ms": 115427,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4350.455837215423,
       "length_error_pct": -0.0033408149883466937,
@@ -718,8 +720,10 @@
       "lap_number": 68,
       "lap_time_ms": 106730,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4359.286019659254,
       "length_error_pct": -0.0013178815838312695,
@@ -731,8 +735,10 @@
       "lap_number": 69,
       "lap_time_ms": 118960,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4301.323184492281,
       "length_error_pct": -0.014596764123978086,
@@ -741,23 +747,13 @@
     },
     {
       "driver": "HAD",
-      "lap_number": 1,
-      "lap_time_ms": 89263,
-      "reasons": [
-        "fastf1_inaccurate"
-      ],
-      "path_length_m": 4300.2742313435165,
-      "length_error_pct": -0.014837071997332424,
-      "fit_rmse_m": null,
-      "fit_p95_m": null
-    },
-    {
-      "driver": "HAD",
       "lap_number": 13,
       "lap_time_ms": 96665,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4390.419477269333,
       "length_error_pct": 0.005814577093905135,
@@ -769,8 +765,10 @@
       "lap_number": 14,
       "lap_time_ms": 80296,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4336.470151963331,
       "length_error_pct": -0.006544838241712677,
@@ -782,8 +780,10 @@
       "lap_number": 66,
       "lap_time_ms": 121476,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4371.119630594617,
       "length_error_pct": 0.0013931164062398118,
@@ -795,8 +795,10 @@
       "lap_number": 67,
       "lap_time_ms": 115651,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4346.022662395891,
       "length_error_pct": -0.004356424517089252,
@@ -808,8 +810,10 @@
       "lap_number": 68,
       "lap_time_ms": 102898,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4347.789481490002,
       "length_error_pct": -0.0039516585467427815,
@@ -821,8 +825,10 @@
       "lap_number": 69,
       "lap_time_ms": 117112,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4312.758182629679,
       "length_error_pct": -0.011977085554496605,
@@ -831,23 +837,13 @@
     },
     {
       "driver": "HAM",
-      "lap_number": 1,
-      "lap_time_ms": 84695,
-      "reasons": [
-        "fastf1_inaccurate"
-      ],
-      "path_length_m": 4300.515903134291,
-      "length_error_pct": -0.014781706670330788,
-      "fit_rmse_m": null,
-      "fit_p95_m": null
-    },
-    {
-      "driver": "HAM",
       "lap_number": 15,
       "lap_time_ms": 94965,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4368.800084717891,
       "length_error_pct": 0.0008617245729245988,
@@ -859,8 +855,10 @@
       "lap_number": 16,
       "lap_time_ms": 80186,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4305.8500655894795,
       "length_error_pct": -0.01355968713853138,
@@ -872,8 +870,10 @@
       "lap_number": 45,
       "lap_time_ms": 92121,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4370.2540361008905,
       "length_error_pct": 0.0011948147259220859,
@@ -885,8 +885,10 @@
       "lap_number": 46,
       "lap_time_ms": 78649,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4317.528991509953,
       "length_error_pct": -0.010884126409897305,
@@ -895,23 +897,13 @@
     },
     {
       "driver": "HAM",
-      "lap_number": 66,
-      "lap_time_ms": 82408,
-      "reasons": [
-        "fastf1_inaccurate"
-      ],
-      "path_length_m": 4311.6545671381855,
-      "length_error_pct": -0.01222991619052079,
-      "fit_rmse_m": null,
-      "fit_p95_m": null
-    },
-    {
-      "driver": "HAM",
       "lap_number": 67,
       "lap_time_ms": 115724,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4371.204890010736,
       "length_error_pct": 0.0014126487456918334,
@@ -923,8 +915,10 @@
       "lap_number": 68,
       "lap_time_ms": 110618,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4340.3541964576425,
       "length_error_pct": -0.005655030652554991,
@@ -936,8 +930,10 @@
       "lap_number": 69,
       "lap_time_ms": 97731,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4351.289591838681,
       "length_error_pct": -0.003149807600981112,
@@ -949,8 +945,10 @@
       "lap_number": 70,
       "lap_time_ms": 115750,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4296.308701793569,
       "length_error_pct": -0.015745547246197467,
@@ -959,23 +957,13 @@
     },
     {
       "driver": "HUL",
-      "lap_number": 1,
-      "lap_time_ms": 87961,
-      "reasons": [
-        "fastf1_inaccurate"
-      ],
-      "path_length_m": 4300.17697307837,
-      "length_error_pct": -0.01485935318967265,
-      "fit_rmse_m": null,
-      "fit_p95_m": null
-    },
-    {
-      "driver": "HUL",
       "lap_number": 19,
       "lap_time_ms": 94418,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4343.119488785528,
       "length_error_pct": -0.005021521406408152,
@@ -987,8 +975,10 @@
       "lap_number": 20,
       "lap_time_ms": 80241,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4297.429769561025,
       "length_error_pct": -0.015488718415090216,
@@ -1000,8 +990,10 @@
       "lap_number": 66,
       "lap_time_ms": 101808,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4372.288464128379,
       "length_error_pct": 0.0016608880423080242,
@@ -1013,8 +1005,10 @@
       "lap_number": 67,
       "lap_time_ms": 112362,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4394.107006275426,
       "length_error_pct": 0.006659364351019848,
@@ -1026,8 +1020,10 @@
       "lap_number": 68,
       "lap_time_ms": 99180,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4358.609780838718,
       "length_error_pct": -0.001472803195949086,
@@ -1039,8 +1035,10 @@
       "lap_number": 69,
       "lap_time_ms": 96855,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4357.668261219181,
       "length_error_pct": -0.0016884987947074674,
@@ -1052,8 +1050,10 @@
       "lap_number": 70,
       "lap_time_ms": 88571,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4293.598909979514,
       "length_error_pct": -0.016366341710502462,
@@ -1065,8 +1065,10 @@
       "lap_number": 1,
       "lap_time_ms": 93298,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4281.189261296256,
       "length_error_pct": -0.019209305943614627,
@@ -1078,8 +1080,10 @@
       "lap_number": 38,
       "lap_time_ms": 93990,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4381.555703590724,
       "length_error_pct": 0.003783948171050874,
@@ -1091,8 +1095,10 @@
       "lap_number": 39,
       "lap_time_ms": 80771,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4300.437919869475,
       "length_error_pct": -0.014799572094108012,
@@ -1104,8 +1110,10 @@
       "lap_number": 54,
       "lap_time_ms": null,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4366.003419121405,
       "length_error_pct": 0.00022102792906956824,
@@ -1114,23 +1122,13 @@
     },
     {
       "driver": "LEC",
-      "lap_number": 1,
-      "lap_time_ms": 86330,
-      "reasons": [
-        "fastf1_inaccurate"
-      ],
-      "path_length_m": 4301.3779993015005,
-      "length_error_pct": -0.014584206432295348,
-      "fit_rmse_m": null,
-      "fit_p95_m": null
-    },
-    {
-      "driver": "LEC",
       "lap_number": 28,
       "lap_time_ms": 91967,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4351.095596202394,
       "length_error_pct": -0.003194250652466483,
@@ -1142,8 +1140,10 @@
       "lap_number": 29,
       "lap_time_ms": 79002,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4308.394839943471,
       "length_error_pct": -0.012976697027014405,
@@ -1155,8 +1155,10 @@
       "lap_number": 53,
       "lap_time_ms": 91576,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4437.329636156617,
       "length_error_pct": 0.016561368344013176,
@@ -1168,8 +1170,10 @@
       "lap_number": 54,
       "lap_time_ms": 78603,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4308.976813329953,
       "length_error_pct": -0.012843370970441732,
@@ -1181,8 +1185,10 @@
       "lap_number": 67,
       "lap_time_ms": 112504,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4419.074932007249,
       "length_error_pct": 0.012379342542371385,
@@ -1194,8 +1200,10 @@
       "lap_number": 68,
       "lap_time_ms": 114938,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4412.453356552905,
       "length_error_pct": 0.010862385643426214,
@@ -1207,8 +1215,10 @@
       "lap_number": 69,
       "lap_time_ms": 110800,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4389.941376927161,
       "length_error_pct": 0.005705047629588769,
@@ -1220,8 +1230,10 @@
       "lap_number": 70,
       "lap_time_ms": 122993,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4302.1344412205135,
       "length_error_pct": -0.014410910847942349,
@@ -1230,23 +1242,13 @@
     },
     {
       "driver": "NOR",
-      "lap_number": 1,
-      "lap_time_ms": 85741,
-      "reasons": [
-        "fastf1_inaccurate"
-      ],
-      "path_length_m": 4297.854436749708,
-      "length_error_pct": -0.01539143011473478,
-      "fit_rmse_m": null,
-      "fit_p95_m": null
-    },
-    {
-      "driver": "NOR",
       "lap_number": 29,
       "lap_time_ms": 92211,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4425.573067328167,
       "length_error_pct": 0.013868020164987286,
@@ -1258,8 +1260,10 @@
       "lap_number": 30,
       "lap_time_ms": 78172,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4299.977027696228,
       "length_error_pct": -0.014905159286566582,
@@ -1271,8 +1275,10 @@
       "lap_number": 47,
       "lap_time_ms": 91610,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4485.810462745881,
       "length_error_pct": 0.027667988644306536,
@@ -1284,8 +1290,10 @@
       "lap_number": 48,
       "lap_time_ms": 77984,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4296.381386082148,
       "length_error_pct": -0.01572889578103391,
@@ -1294,23 +1302,13 @@
     },
     {
       "driver": "OCO",
-      "lap_number": 1,
-      "lap_time_ms": 90156,
-      "reasons": [
-        "fastf1_inaccurate"
-      ],
-      "path_length_m": 4298.987303957866,
-      "length_error_pct": -0.015131898113800368,
-      "fit_rmse_m": null,
-      "fit_p95_m": null
-    },
-    {
-      "driver": "OCO",
       "lap_number": 57,
       "lap_time_ms": 93711,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4456.427421487109,
       "length_error_pct": 0.02093653818258319,
@@ -1322,8 +1320,10 @@
       "lap_number": 58,
       "lap_time_ms": 81264,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4316.775104028716,
       "length_error_pct": -0.01105683679031602,
@@ -1335,8 +1335,10 @@
       "lap_number": 66,
       "lap_time_ms": 106256,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4418.905880375667,
       "length_error_pct": 0.012340613988936551,
@@ -1348,8 +1350,10 @@
       "lap_number": 67,
       "lap_time_ms": 117088,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4352.019550347745,
       "length_error_pct": -0.002982579181716937,
@@ -1361,8 +1365,10 @@
       "lap_number": 68,
       "lap_time_ms": 123241,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4352.356108463453,
       "length_error_pct": -0.0029054760573866377,
@@ -1374,8 +1380,10 @@
       "lap_number": 69,
       "lap_time_ms": 125686,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4293.951226850629,
       "length_error_pct": -0.01628562836487394,
@@ -1384,23 +1392,13 @@
     },
     {
       "driver": "PIA",
-      "lap_number": 1,
-      "lap_time_ms": 83939,
-      "reasons": [
-        "fastf1_inaccurate"
-      ],
-      "path_length_m": 4301.237291207695,
-      "length_error_pct": -0.01461644167828883,
-      "fit_rmse_m": null,
-      "fit_p95_m": null
-    },
-    {
-      "driver": "PIA",
       "lap_number": 16,
       "lap_time_ms": 92816,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4379.754598956389,
       "length_error_pct": 0.003371327621815189,
@@ -1412,8 +1410,10 @@
       "lap_number": 17,
       "lap_time_ms": 79713,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4293.2725366101395,
       "length_error_pct": -0.016441111580259092,
@@ -1425,8 +1425,10 @@
       "lap_number": 45,
       "lap_time_ms": 91172,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4327.51757009767,
       "length_error_pct": -0.008595812502766444,
@@ -1438,8 +1440,10 @@
       "lap_number": 46,
       "lap_time_ms": 78078,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4294.667909065042,
       "length_error_pct": -0.016121441452408465,
@@ -1451,8 +1455,10 @@
       "lap_number": 67,
       "lap_time_ms": 111532,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4359.044613448149,
       "length_error_pct": -0.0013731860683770527,
@@ -1464,8 +1470,10 @@
       "lap_number": 68,
       "lap_time_ms": 118447,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4363.058576761373,
       "length_error_pct": -0.0004536149810895505,
@@ -1477,8 +1485,10 @@
       "lap_number": 69,
       "lap_time_ms": 123935,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4358.497946566613,
       "length_error_pct": -0.0014984236501412148,
@@ -1490,8 +1500,10 @@
       "lap_number": 70,
       "lap_time_ms": 123490,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4307.795691635521,
       "length_error_pct": -0.01311395773868396,
@@ -1500,23 +1512,13 @@
     },
     {
       "driver": "RUS",
-      "lap_number": 1,
-      "lap_time_ms": 81852,
-      "reasons": [
-        "fastf1_inaccurate"
-      ],
-      "path_length_m": 4294.6388563199525,
-      "length_error_pct": -0.01612809723431431,
-      "fit_rmse_m": null,
-      "fit_p95_m": null
-    },
-    {
-      "driver": "RUS",
       "lap_number": 13,
       "lap_time_ms": 92351,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4384.482347547269,
       "length_error_pct": 0.004454421953498434,
@@ -1528,8 +1530,10 @@
       "lap_number": 14,
       "lap_time_ms": 78756,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4309.825849298864,
       "length_error_pct": -0.012648862733033143,
@@ -1541,8 +1545,10 @@
       "lap_number": 42,
       "lap_time_ms": 92340,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4451.916877867694,
       "length_error_pct": 0.01990320399970745,
@@ -1554,8 +1560,10 @@
       "lap_number": 43,
       "lap_time_ms": 78490,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4307.261955242848,
       "length_error_pct": -0.013236233035350998,
@@ -1567,8 +1575,10 @@
       "lap_number": 67,
       "lap_time_ms": 103500,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4374.286906410441,
       "length_error_pct": 0.0021187172746137736,
@@ -1580,8 +1590,10 @@
       "lap_number": 68,
       "lap_time_ms": 126769,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4356.887472346232,
       "length_error_pct": -0.001867372096930692,
@@ -1593,8 +1605,10 @@
       "lap_number": 69,
       "lap_time_ms": 123817,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4366.015663087,
       "length_error_pct": 0.0002238329364589356,
@@ -1606,8 +1620,10 @@
       "lap_number": 70,
       "lap_time_ms": 127536,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4302.375983439942,
       "length_error_pct": -0.014355575204835306,
@@ -1616,23 +1632,13 @@
     },
     {
       "driver": "SAI",
-      "lap_number": 1,
-      "lap_time_ms": 90973,
-      "reasons": [
-        "fastf1_inaccurate"
-      ],
-      "path_length_m": 4302.9794981528175,
-      "length_error_pct": -0.014217314180155538,
-      "fit_rmse_m": null,
-      "fit_p95_m": null
-    },
-    {
-      "driver": "SAI",
       "lap_number": 58,
       "lap_time_ms": 78678,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4292.593487383206,
       "length_error_pct": -0.016596677036942776,
@@ -1644,8 +1650,10 @@
       "lap_number": 66,
       "lap_time_ms": 105951,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4347.161059864081,
       "length_error_pct": -0.004095625572031555,
@@ -1657,8 +1665,10 @@
       "lap_number": 67,
       "lap_time_ms": 117479,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4353.315964733183,
       "length_error_pct": -0.0026855796595576923,
@@ -1670,8 +1680,10 @@
       "lap_number": 68,
       "lap_time_ms": 123540,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4353.552643349253,
       "length_error_pct": -0.0026313582341649247,
@@ -1683,8 +1695,10 @@
       "lap_number": 69,
       "lap_time_ms": 124853,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4294.887299411114,
       "length_error_pct": -0.016071180649472574,
@@ -1693,23 +1707,13 @@
     },
     {
       "driver": "STR",
-      "lap_number": 1,
-      "lap_time_ms": 91602,
-      "reasons": [
-        "fastf1_inaccurate"
-      ],
-      "path_length_m": 4302.569470630079,
-      "length_error_pct": -0.014311248634827837,
-      "fit_rmse_m": null,
-      "fit_p95_m": null
-    },
-    {
-      "driver": "STR",
       "lap_number": 24,
       "lap_time_ms": 93814,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4376.618940646933,
       "length_error_pct": 0.0026529701043239923,
@@ -1721,8 +1725,10 @@
       "lap_number": 25,
       "lap_time_ms": 79619,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4296.266906650694,
       "length_error_pct": -0.015755122222842064,
@@ -1734,8 +1740,10 @@
       "lap_number": 51,
       "lap_time_ms": 103588,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4447.698714940695,
       "length_error_pct": 0.01893685220063712,
@@ -1747,8 +1755,10 @@
       "lap_number": 52,
       "lap_time_ms": 78926,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4296.256999179425,
       "length_error_pct": -0.015757391955626362,
@@ -1760,8 +1770,10 @@
       "lap_number": 66,
       "lap_time_ms": 123386,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4359.745486650106,
       "length_error_pct": -0.0012126208907505653,
@@ -1773,8 +1785,10 @@
       "lap_number": 67,
       "lap_time_ms": 115934,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4365.7070982196365,
       "length_error_pct": 0.0001531428706964752,
@@ -1786,8 +1800,10 @@
       "lap_number": 68,
       "lap_time_ms": 101811,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4354.740826993429,
       "length_error_pct": -0.0023591536223358323,
@@ -1799,8 +1815,10 @@
       "lap_number": 69,
       "lap_time_ms": 115527,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4297.958840621958,
       "length_error_pct": -0.015367511913488171,
@@ -1809,23 +1827,13 @@
     },
     {
       "driver": "TSU",
-      "lap_number": 1,
-      "lap_time_ms": 91334,
-      "reasons": [
-        "fastf1_inaccurate"
-      ],
-      "path_length_m": 4301.876208537046,
-      "length_error_pct": -0.014470070160317426,
-      "fit_rmse_m": null,
-      "fit_p95_m": null
-    },
-    {
-      "driver": "TSU",
       "lap_number": 56,
       "lap_time_ms": 94420,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4459.937274435791,
       "length_error_pct": 0.021740621090268218,
@@ -1837,8 +1845,10 @@
       "lap_number": 57,
       "lap_time_ms": 79644,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4301.588593522912,
       "length_error_pct": -0.01453596076036269,
@@ -1850,8 +1860,10 @@
       "lap_number": 66,
       "lap_time_ms": 113199,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4374.748505315266,
       "length_error_pct": 0.0022244663743632483,
@@ -1863,8 +1875,10 @@
       "lap_number": 67,
       "lap_time_ms": 117242,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4325.505188736707,
       "length_error_pct": -0.009056835081134536,
@@ -1876,8 +1890,10 @@
       "lap_number": 68,
       "lap_time_ms": 106349,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4342.387268691279,
       "length_error_pct": -0.005189267939114126,
@@ -1889,8 +1905,10 @@
       "lap_number": 69,
       "lap_time_ms": 121904,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4320.46816329482,
       "length_error_pct": -0.010210782589082815,
@@ -1899,23 +1917,13 @@
     },
     {
       "driver": "VER",
-      "lap_number": 1,
-      "lap_time_ms": 82549,
-      "reasons": [
-        "fastf1_inaccurate"
-      ],
-      "path_length_m": 4299.942672907371,
-      "length_error_pct": -0.014913029729836115,
-      "fit_rmse_m": null,
-      "fit_p95_m": null
-    },
-    {
-      "driver": "VER",
       "lap_number": 12,
       "lap_time_ms": 93110,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4355.414321977928,
       "length_error_pct": -0.0022048606039772258,
@@ -1927,8 +1935,10 @@
       "lap_number": 13,
       "lap_time_ms": 79048,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4311.095944882341,
       "length_error_pct": -0.0123578926654171,
@@ -1940,8 +1950,10 @@
       "lap_number": 37,
       "lap_time_ms": 91919,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4416.300605108425,
       "length_error_pct": 0.011743763538836917,
@@ -1953,8 +1965,10 @@
       "lap_number": 38,
       "lap_time_ms": 78724,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4300.762912350753,
       "length_error_pct": -0.014725118576213475,
@@ -1966,8 +1980,10 @@
       "lap_number": 67,
       "lap_time_ms": 103478,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4356.444207147526,
       "length_error_pct": -0.0019689210720765715,
@@ -1979,8 +1995,10 @@
       "lap_number": 68,
       "lap_time_ms": 125276,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4343.7694022195565,
       "length_error_pct": -0.004872630757307478,
@@ -1992,8 +2010,10 @@
       "lap_number": 69,
       "lap_time_ms": 123745,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4335.889228710628,
       "length_error_pct": -0.006677923719937761,
@@ -2005,8 +2025,10 @@
       "lap_number": 70,
       "lap_time_ms": 126683,
       "reasons": [
-        "fastf1_inaccurate",
         "pit_lap"
+      ],
+      "warnings": [
+        "fastf1_inaccurate"
       ],
       "path_length_m": 4296.26386112632,
       "length_error_pct": -0.015755819931301637,

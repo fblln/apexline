@@ -184,11 +184,11 @@ def draw_lap_examples(
             "repair_lines": [],
         },
         {
-            "title": "Pit/inaccurate lap",
+            "title": "Pit lap with timing warning",
             "subtitle_lines": ["RUS lap 13, projected with clean-lap transform"],
             "driver": "RUS",
             "lap": 13,
-            "reason": "pit_lap + fastf1_inaccurate",
+            "reason": "pit_lap | warning: fastf1_inaccurate",
             "color": "#f97316",
             "repair_lines": None,
         },
@@ -241,7 +241,7 @@ def draw_lap_examples(
         length_error_pct = length_error_m / reference_length * 100
         lap_time_ms = analyzer.value_to_ms(lap.get("LapTime"))
         box = merged_bbox([gps_xy, transformed])
-        fit_text = "shape fit: skipped after pre-fit rejection"
+        fit_text = "shape fit: skipped because pit geometry is not representative"
         if fit is not None:
             fit_text = f"fit: RMSE {fit.rmse_m:.1f} m, p95 {fit.p95_m:.1f} m"
 
@@ -277,7 +277,7 @@ def draw_lap_examples(
     parts.extend(
         [
             '<line x1="586" y1="622" x2="636" y2="622" stroke="#94a3b8" stroke-width="4" stroke-linecap="round"/>',
-            text_svg(646, 627, "repo GPS", size=13, fill="#475569"),
+            text_svg(646, 627, "oracle GPS", size=13, fill="#475569"),
             '<line x1="742" y1="622" x2="792" y2="622" stroke="#059669" stroke-width="4" stroke-linecap="round"/>',
             text_svg(802, 627, "FastF1 trace", size=13, fill="#475569"),
             "</svg>",

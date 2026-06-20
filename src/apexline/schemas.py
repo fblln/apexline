@@ -6,7 +6,6 @@ from typing import Any
 SCHEMA_VERSION = "1.0.0"
 KNOWN_REJECTION_REASONS = {
     "compliant",
-    "fastf1_inaccurate",
     "pit_lap",
     "too_few_position_samples",
     "path_length_outlier",
@@ -14,6 +13,7 @@ KNOWN_REJECTION_REASONS = {
     "shape_p95_over_threshold",
     "no_position_data",
 }
+KNOWN_WARNING_REASONS = {"fastf1_inaccurate"}
 
 
 def _require_mapping(value: Any, label: str) -> dict[str, Any]:
@@ -41,6 +41,15 @@ def _validate_reason_counts(reason_counts: Any, label: str) -> None:
             raise ValueError(f"{label}.{reason} is not a recognized rejection reason")
         if not isinstance(count, int):
             raise ValueError(f"{label}.{reason} must be an integer")
+
+
+def _validate_warning_counts(warning_counts: Any, label: str) -> None:
+    mapping = _require_mapping(warning_counts, label)
+    for warning, count in mapping.items():
+        if warning not in KNOWN_WARNING_REASONS:
+            raise ValueError(f"{label}.{warning} is not a recognized warning")
+        if not isinstance(count, int):
+            raise ValueError(f"{label}.{warning} must be an integer")
 
 
 def _validate_thresholds(thresholds: Any, label: str) -> None:
@@ -79,6 +88,7 @@ def validate_lap_diagnostic_record(record: Any, *, allow_legacy: bool = False) -
     ]
     if not allow_legacy:
         required.extend(["year", "round", "event_name", "session_type", "lap_key"])
+        required.append("warnings")
         required.extend(
             [
                 "normalized_position_samples",
@@ -93,6 +103,11 @@ def validate_lap_diagnostic_record(record: Any, *, allow_legacy: bool = False) -
     for reason in reasons:
         if reason not in KNOWN_REJECTION_REASONS:
             raise ValueError(f"lap_diagnostic_record.reasons contains unknown value {reason!r}")
+    if "warnings" in value:
+        warnings = _require_list(value["warnings"], "lap_diagnostic_record.warnings")
+        for warning in warnings:
+            if warning not in KNOWN_WARNING_REASONS:
+                raise ValueError(f"lap_diagnostic_record.warnings contains unknown value {warning!r}")
     if value["fit"] is not None:
         fit = _require_mapping(value["fit"], "lap_diagnostic_record.fit")
         _require_keys(
@@ -142,6 +157,10 @@ def validate_lap_diagnostics_event(record: Any, *, allow_legacy: bool = False) -
         ],
     )
     _validate_reason_counts(value["reason_counts"], "lap_diagnostics_event.reason_counts")
+    if not allow_legacy:
+        _require_keys(value, "lap_diagnostics_event", ["warning_counts"])
+    if "warning_counts" in value:
+        _validate_warning_counts(value["warning_counts"], "lap_diagnostics_event.warning_counts")
     _validate_thresholds(value["thresholds"], "lap_diagnostics_event.thresholds")
     if value["fastest_lap_with_position"] is not None:
         validate_lap_diagnostic_record(value["fastest_lap_with_position"], allow_legacy=allow_legacy)
@@ -198,7 +217,26 @@ def validate_circuit_analysis_row(record: Any, *, allow_legacy: bool = False) ->
         _require_mapping(value["repo_vs_fastf1"], "circuit_analysis_row.repo_vs_fastf1")
     if value["repo_vs_fastf1_average"] is not None:
         _require_mapping(value["repo_vs_fastf1_average"], "circuit_analysis_row.repo_vs_fastf1_average")
-    _require_mapping(value["lap_compliance_summary"], "circuit_analysis_row.lap_compliance_summary")
+    compliance_summary = _require_mapping(
+        value["lap_compliance_summary"],
+        "circuit_analysis_row.lap_compliance_summary",
+    )
+    if not allow_legacy:
+        _require_keys(
+            compliance_summary,
+            "circuit_analysis_row.lap_compliance_summary",
+            ["reason_counts", "warning_counts"],
+        )
+    if "reason_counts" in compliance_summary:
+        _validate_reason_counts(
+            compliance_summary["reason_counts"],
+            "circuit_analysis_row.lap_compliance_summary.reason_counts",
+        )
+    if "warning_counts" in compliance_summary:
+        _validate_warning_counts(
+            compliance_summary["warning_counts"],
+            "circuit_analysis_row.lap_compliance_summary.warning_counts",
+        )
 
 
 def validate_circuit_analysis(records: Any, *, allow_legacy: bool = False) -> None:
@@ -233,8 +271,9 @@ def validate_rejected_lap_gallery(record: Any, *, allow_legacy: bool = False) ->
     _require_mapping(value["thresholds"], "rejected_lap_gallery.thresholds")
     _require_mapping(value["generation_provenance"], "rejected_lap_gallery.generation_provenance")
     for lap in _require_list(value["rejected_laps"], "rejected_lap_gallery.rejected_laps"):
+        lap_value = _require_mapping(lap, "rejected_lap")
         _require_keys(
-            _require_mapping(lap, "rejected_lap"),
+            lap_value,
             "rejected_lap",
             [
                 "driver",
@@ -247,6 +286,17 @@ def validate_rejected_lap_gallery(record: Any, *, allow_legacy: bool = False) ->
                 "fit_p95_m",
             ],
         )
+        if not allow_legacy:
+            _require_keys(lap_value, "rejected_lap", ["warnings"])
+        reasons = _require_list(lap_value["reasons"], "rejected_lap.reasons")
+        for reason in reasons:
+            if reason not in KNOWN_REJECTION_REASONS or reason == "compliant":
+                raise ValueError(f"rejected_lap.reasons contains unknown value {reason!r}")
+        if "warnings" in lap_value:
+            warnings = _require_list(lap_value["warnings"], "rejected_lap.warnings")
+            for warning in warnings:
+                if warning not in KNOWN_WARNING_REASONS:
+                    raise ValueError(f"rejected_lap.warnings contains unknown value {warning!r}")
 
 
 def validate_artifact_manifest(record: Any, *, allow_legacy: bool = False) -> None:

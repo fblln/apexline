@@ -3,7 +3,7 @@
     "schema_version": "1.0.0",
     "artifact_kind": "circuit_analysis_row",
     "provenance": {
-      "generated_at": "2026-06-20T08:06:15Z",
+      "generated_at": "2026-06-20T13:05:31Z",
       "generator": "apexline",
       "schema_version": "1.0.0",
       "command": "validate",
@@ -137,16 +137,18 @@
     },
     "lap_compliance_summary": {
       "total_laps": 1349,
-      "fitted_laps": 1197,
-      "compliant_laps": 1197,
-      "non_compliant_laps": 152,
+      "fitted_laps": 1217,
+      "compliant_laps": 1217,
+      "non_compliant_laps": 132,
       "shape_non_compliant_laps": 0,
       "reason_counts": {
-        "compliant": 1197,
-        "fastf1_inaccurate": 152,
+        "compliant": 1217,
         "path_length_outlier": 2,
         "pit_lap": 131,
         "too_few_position_samples": 1
+      },
+      "warning_counts": {
+        "fastf1_inaccurate": 152
       },
       "thresholds": {
         "length_tolerance_pct": 0.05,
@@ -189,6 +191,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 10,
         "event_name": "Canadian Grand Prix",
@@ -223,6 +226,7 @@
         },
         "compliant": true,
         "reasons": [],
+        "warnings": [],
         "year": 2025,
         "round": 10,
         "event_name": "Canadian Grand Prix",

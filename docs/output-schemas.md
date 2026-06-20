@@ -63,13 +63,20 @@ and both effective thresholds for reproducibility.
 
 Known rejection reasons:
 
-- `fastf1_inaccurate`
 - `pit_lap`
 - `too_few_position_samples`
 - `path_length_outlier`
 - `shape_rmse_over_threshold`
 - `shape_p95_over_threshold`
 - `no_position_data`
+
+Known non-blocking warnings:
+
+- `fastf1_inaccurate`
+
+`fastf1_inaccurate` reflects FastF1 timing and track-status integrity checks.
+It does not block oracle shape fitting when position samples, path length, and
+the other geometry checks are usable.
 
 ## Artifact Kinds
 
@@ -120,16 +127,18 @@ Required top-level fields:
 - `non_compliant_laps`
 - `shape_non_compliant_laps`
 - `reason_counts`
+- `warning_counts`
 - `thresholds`
 - `fastest_lap_with_position`
 - `fastest_compliant_lap`
 - `worst_shape_laps`
 - `worst_fitted_laps`
 
-Embedded lap records include the stable lap identifiers, raw path length, any
-overlap-normalized path length, and fit metrics when a lap passed the pre-fit
-checks. `normalization` records how much prefix/suffix distance was trimmed from
-an over-long lap before shape matching.
+Embedded lap records include the stable lap identifiers, blocking `reasons`,
+non-blocking `warnings`, raw path length, any overlap-normalized path length,
+and fit metrics when a lap passed the pre-fit checks. `normalization` records
+how much prefix/suffix distance was trimmed from an over-long lap before shape
+matching.
 
 ### `rejected_lap_gallery`
 
@@ -152,6 +161,9 @@ Required top-level fields:
 - `max_render_points`
 - `rendering_note`
 - `rejected_laps`
+
+Each rejected-lap record includes blocking `reasons` and any accompanying
+non-blocking `warnings`.
 
 ### `artifact_manifest`
 

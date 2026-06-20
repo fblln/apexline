@@ -44,6 +44,7 @@
           "lap_number",
           "lap_time_ms",
           "reasons",
+          "warnings",
           "path_length_m",
           "length_error_pct",
           "fit_rmse_m",
@@ -53,7 +54,20 @@
           "driver": {"type": "string"},
           "lap_number": {"type": "integer"},
           "lap_time_ms": {"type": ["integer", "null"]},
-          "reasons": {"type": "array", "items": {"type": "string"}},
+          "reasons": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "pit_lap",
+                "too_few_position_samples",
+                "path_length_outlier",
+                "shape_rmse_over_threshold",
+                "shape_p95_over_threshold",
+                "no_position_data"
+              ]
+            }
+          },
+          "warnings": {"type": "array", "items": {"const": "fastf1_inaccurate"}},
           "path_length_m": {"type": ["number", "null"]},
           "length_error_pct": {"type": ["number", "null"]},
           "fit_rmse_m": {"type": ["number", "null"]},
