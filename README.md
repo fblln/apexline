@@ -1,150 +1,99 @@
 # Apexline
 
-**Apexline validates whether FastF1 lap position traces match an oracle Formula
-1 circuit GPS LineString for any supported year, event, and session. It
-normalizes lap-boundary overlap, rejects laps that still cannot represent one
-clean circuit loop, and exports reusable diagnostics, manifests, and compact
-encoded polylines for maps and spatial tooling.**
-
-It started as a simple question:
-
-> Does this FastF1 lap actually match the oracle circuit shape closely enough to
-> trust the circuit GPS LineString and publish a compact map polyline?
-
-The answer is: yes, but only after validating the lap against the oracle and
-making lap-boundary overlap explicit.
+**Apexline checks whether a FastF1 lap's position trace has the same shape as an
+oracle Formula 1 circuit GPS LineString. It normalizes lap-boundary overlap,
+rejects laps that can't represent one clean loop, and exports diagnostics,
+manifests, and compact encoded polylines for maps and spatial tooling.**
 
 ![2025 validation RMSE](docs/assets/validation-rmse-2025.svg)
 
-## What Makes This Useful
+## What and Why
 
-FastF1 does **not** provide latitude/longitude telemetry for cars. It provides
-local circuit `X/Y/Z` position channels. That means you cannot directly ask:
+FastF1 does **not** provide GPS latitude/longitude for cars — only local circuit
+`X/Y/Z` position channels. So you can't ask "how many GPS meters off was this
+car?", but you can ask the question Apexline answers:
 
-```text
-How many GPS meters away was this car from this coordinate?
-```
+> Does this FastF1 lap have the same shape as the oracle circuit GPS LineString?
 
-But you can ask something almost as useful:
-
-```text
-Does this FastF1 lap have the same shape as the oracle circuit GPS LineString?
-```
-
-Apexline answers that with a geometry fit:
+It answers with a geometry fit, and reports *why* a lap was accepted, recovered,
+or rejected:
 
 ```text
-oracle circuit GPS LineString
-        +
-FastF1 local X/Y lap positions
-        |
-        v
-projection to local meters
-        |
-        v
-lap-boundary overlap normalization
-        |
-        v
-closed-path resampling
-        |
-        v
-phase + direction search
-        |
-        v
-scale / rotate / translate fit
-        |
-        v
-RMSE, p50, p95, max error
-        |
-        v
-validated oracle polyline + lap diagnostics
+oracle GPS LineString + FastF1 local X/Y lap positions
+  -> project to local meters
+  -> normalize lap-boundary overlap
+  -> resample closed paths
+  -> search phase + direction
+  -> fit scale / rotate / translate (Procrustes, no warping)
+  -> RMSE, p50, p95, max error
+  -> validated oracle polyline + lap diagnostics
 ```
 
-The result is a practical cross-validation tool for:
+Useful for: validating a lap against the oracle shape, finding laps that aren't
+trustworthy evidence, flagging suspicious oracle outlines, picking clean
+representative laps, and simplifying GPS polylines without destroying corners.
 
-- validating whether a FastF1 lap matches the oracle circuit shape,
-- finding laps that should not be used as evidence,
-- detecting suspicious oracle circuit outlines,
-- selecting clean representative laps from FastF1,
-- simplifying GPS polylines without destroying tight corners,
-- producing metrics that explain *why* a lap or oracle line was accepted.
+## How It Works
 
-## Real Canada 2025 Example
+1. **Load GPS reference** — a circuit LineString from
+   [`bacinger/f1-circuits`](https://github.com/bacinger/f1-circuits) (WGS84),
+   projected to a local meter plane (equirectangular around the centroid) so
+   shape comparison needs no heavy GIS stack.
+2. **Load FastF1 positions** — `lap.get_pos_data()[["X", "Y"]]`, treated as local
+   shape evidence, not GPS.
+3. **Normalize lap-boundary overlap** — FastF1 lap slices can repeat a segment
+   near the timing line. Apexline recovers the contiguous one-lap window that
+   matches the oracle path length and closes cleanly; otherwise the lap is a
+   `path_length_outlier`.
+4. **Separate geometry failures from timing warnings** — only checks that
+   invalidate the geometry block a lap (`pit_lap`, `too_few_position_samples`,
+   `path_length_outlier`). FastF1's `IsAccurate == False` is kept as the
+   non-blocking `fastf1_inaccurate` warning, so a real-but-flagged lap still gets
+   a full shape fit.
+5. **Fit shape to the oracle** — close and resample both paths, search forward/
+   reversed direction and circular start offsets, then fit a 2D similarity
+   transform `target ~= scale * rotation * source + translation`. Translation,
+   rotation, and scale are allowed (FastF1 units aren't GPS); arbitrary warping
+   is not, so a wrong shape stays high-residual.
+6. **Report shape error** — `rmse_m`, `p50_m`, `p95_m`, `max_m`, plus fitted
+   rotation, scale, and phase offset. Compliance thresholds scale with circuit
+   length so long tracks don't fail on harmless absolute residuals:
 
-Canada 2025 is a good stress test because the lap is compact, chicane-heavy,
-and sensitive to start/finish phase alignment.
+   ```text
+   RMSE <= max(32 m, 1.6% of oracle length)
+   p95  <= max(75 m, 2.5% of oracle length)
+   ```
 
-After validation, Apexline found:
+7. **Shrink the oracle line without moving corners** — drop only points whose
+   removal changes the line by less than the tolerance (default `1.0 m`), then
+   encode the rest as one compact polyline string. No new shape is invented.
 
-| Metric | Value |
-|---|---:|
-| Total laps inspected | 1349 |
-| Laps fitted against oracle shape | 1217 |
-| Compliant laps | 1217 |
-| Non-compliant laps | 132 |
-| Shape non-compliant laps | 0 |
-| Fastest lap | RUS lap 63, 74.119 s |
-| Fastest lap fit RMSE | 5.01 m |
-| Fastest lap fit p95 | 8.70 m |
-| Oracle GPS polyline points | 84 |
-| Polyline simplification max error | 0.95 m |
+![Polyline simplification explainer](docs/assets/polyline-compactness-2025.svg)
 
-Non-compliant reason counts are intentionally not mutually exclusive:
+![Encoded polyline pipeline](docs/assets/polyline-encoding-explainer.svg)
 
-| Reason | Count |
-|---|---:|
-| `pit_lap` | 131 |
-| `path_length_outlier` | 2 |
-| `too_few_position_samples` | 1 |
+## Worked Example: Canada 2025
 
-Separately, 152 laps carry the non-blocking `fastf1_inaccurate` warning. That
-flag is FastF1 timing/track-status metadata; it does not block the shape fit, so
-those laps can still be compliant evidence.
-
-That distinction matters. A lap can be a real race lap and still be bad
-evidence for the oracle circuit shape. Apexline keeps those cases explicit.
-
-## Canada Proof Point
-
-The figure below is generated by the `apexline-canada-examples` command from
-actual Canada 2025 FastF1 position samples.
-
-Gray is the GPS outline from
-[`bacinger/f1-circuits`](https://github.com/bacinger/f1-circuits). The colored
-line is the FastF1 trace projected through one transform learned from a clean
-anchor lap, Russell lap 63.
+Generated by `apexline-canada-examples` from real FastF1 samples. Gray is the
+GPS outline; the colored line is the FastF1 trace projected through one transform
+learned from a clean anchor lap (Russell lap 63).
 
 ![Canada 2025 lap diagnostic overlays](docs/assets/canada-2025-lap-diagnostic-overlays.svg)
 
-Three different cases are visible:
-
-| Case | What Apexline Sees | Why It Matters |
+| Case | What Apexline sees | Why it matters |
 |---|---|---|
-| RUS lap 63 | Fastest lap, clean shape fit, RMSE 3.9 m, p95 6.6 m | Representative clean evidence against the oracle line |
-| VER lap 2 | Raw 5012.9 m trace on a 4365.0 m oracle, normalized to 4415.1 m, RMSE 28.2 m | Shows why lap-boundary seam repair matters: the raw trace looked bad, the recovered one-lap window is usable |
-| RUS lap 13 | Pit-in lap; FastF1 also raises a timing-integrity warning | Projected for inspection, but rejected because pit geometry is not representative |
+| RUS lap 63 | Clean fit, RMSE 3.9 m, p95 6.6 m | Representative clean evidence |
+| VER lap 2 | Raw 5012.9 m trace normalized to 4415.1 m on a 4365.0 m oracle, RMSE 28.2 m | Seam repair recovers a usable one-lap window |
+| RUS lap 13 | Pit-in lap + timing warning | Projected for inspection, rejected: pit geometry isn't representative |
 
-This is the core value: the script does not just compute a score. It explains
-why a lap is useful, recoverable, suspicious, or invalid for this specific
-geometry task.
+The point: it doesn't just score a lap, it explains whether the lap is useful,
+recoverable, suspicious, or invalid for this geometry task.
 
-Belgium 2025 demonstrates why thresholds must account for circuit length. Spa's
-apparently large absolute residuals are small relative to its 6.98 km oracle
-line: all 807 fitted laps pass the proportional shape limits. The remaining 72
-rejections are pit-status laps, not geometry; a further 132 laps carry the
-non-blocking FastF1 accuracy warning:
-[Belgian rejected-lap gallery](docs/assets/rejected-laps-2025/13-belgian-grand-prix.svg).
+## 2025 Season Coverage
 
-![Belgian 2025 rejected-lap gallery](docs/assets/rejected-laps-2025/13-belgian-grand-prix.svg)
-
-## 2025 All-Circuit Lap Quality
-
-The 2025 season run inspected every race lap available through FastF1 and
-classified whether each lap is valid evidence against the oracle circuit shape.
+Every available 2025 race lap, classified as evidence against the oracle shape.
 
 ![2025 lap compliance](docs/assets/lap-compliance-2025.svg)
-
-Season totals:
 
 | Metric | Value |
 |---|---:|
@@ -152,64 +101,19 @@ Season totals:
 | Total laps inspected | 26,689 |
 | Fitted laps | 25,022 |
 | Good laps | 25,019 (93.7%) |
-| Bad laps | 1,670 (6.3%) |
-| Shape-threshold bad laps | 3 |
+| Shape-threshold failures | 3 |
 
-Rejection signals are not mutually exclusive; one lap can hit more than one
-reason.
+Almost all rejections happen *before* fitting (`pit_lap`, `path_length_outlier`,
+`too_few_position_samples`) and are independently auditable; only 3 fitted laps
+failed the proportional shape thresholds. Full breakdowns:
+[lap compliance](docs/lap-compliance-2025.md) ·
+[validation summary](docs/2025-validation-summary.md).
 
-| Reason | Count |
-|---|---:|
-| `pit_lap` | 1,625 |
-| `path_length_outlier` | 45 |
-| `too_few_position_samples` | 19 |
-| `shape_p95_over_threshold` | 3 |
+### Rejected-lap galleries
 
-FastF1's timing-oriented `IsAccurate` flag is tracked separately as the
-non-blocking `fastf1_inaccurate` warning, raised on 3,646 laps. It does not
-prevent a lap from passing the oracle shape fit.
-
-What stood out:
-
-- Cleanest circuits by usable evidence were Singapore `96.1%`, United States
-  `96.1%`, Japan `96.0%`, Miami `95.8%`, and Italy `95.8%`.
-- `25,019` of `25,022` fitted laps passed shape validation; only `3` failed the
-  proportional shape thresholds (Australia `2`, Monaco `1`). The remaining
-  rejections occur before fitting and are independently auditable data-quality
-  exclusions.
-- Belgium moved from `158` false shape rejects to `0` after the limits were made
-  proportional to oracle length; the same visual audit cleared smaller
-  threshold-edge clusters elsewhere.
-- Averaging the five best fitted laps helped on `11 / 24` circuits and hurt on
-  `13 / 24`; Canada was the sharpest warning case, moving from `5.0 m` best-lap
-  RMSE to `12.4 m` after averaging.
-
-The full per-circuit table is in [docs/lap-compliance-2025.md](docs/lap-compliance-2025.md).
-The circuit-fit view is in [docs/2025-validation-summary.md](docs/2025-validation-summary.md).
-
-## Rejected Lap Galleries
-
-For deeper inspection, Apexline can render every rejected lap for selected
-events. Each panel shows the GPS reference in gray and the rejected FastF1 lap
-projected with one clean anchor-lap transform for that event. Rejected laps do
-not learn their own rotation or translation, so the visual does not hide the
-failure mode. By default these audit galleries render raw position points
-without thinning; `--max-render-points` is available only if smaller SVGs are
-more important than corner-level fidelity.
-
-A FastF1 timing-accuracy warning alone does not put a lap in this gallery. The
-gallery is reserved for blocking geometry/data reasons such as pit geometry,
-insufficient position samples, unrecoverable path length, or residual shape.
-
-Generated 2025 galleries:
-
-| Event | Rejected laps | Gallery | Data |
-|---|---:|---|---|
-| Canadian Grand Prix | 132 | [SVG](docs/assets/rejected-laps-2025/10-canadian-grand-prix.svg) | [JSON](docs/assets/rejected-laps-2025/10-canadian-grand-prix.json) |
-| Belgian Grand Prix | 72 | [SVG](docs/assets/rejected-laps-2025/13-belgian-grand-prix.svg) | [JSON](docs/assets/rejected-laps-2025/13-belgian-grand-prix.json) |
-
-The full galleries are intentionally tall. The updated renders can be inspected
-in place without making the main README permanently thousands of pixels longer:
+Audit galleries render every rejected lap with one clean anchor-lap transform
+(rejected laps don't learn their own fit, so failures aren't hidden). Timing
+warnings alone don't land a lap here — only blocking geometry/data reasons.
 
 <details>
 <summary>Canada: 132 rejected laps</summary>
@@ -225,374 +129,64 @@ in place without making the main README permanently thousands of pixels longer:
 
 </details>
 
-The gallery index is available at
-[docs/rejected-lap-galleries-2025.md](docs/rejected-lap-galleries-2025.md).
-
-Generate the same galleries:
-
 ```bash
-.venv/bin/apexline-rejected-galleries \
-  --year 2025 \
-  --session R \
-  --circuits Canada Belgian
+.venv/bin/apexline-rejected-galleries --year 2025 --session R --circuits Canada Belgian
 ```
-
-## Algorithm
-
-### 1. Load GPS Reference
-
-Apexline loads a circuit LineString from
-[`bacinger/f1-circuits`](https://github.com/bacinger/f1-circuits):
-
-```text
-circuits/ca-1978.geojson
-```
-
-The coordinates are WGS84 longitude/latitude. The script converts them into a
-local meter plane using an equirectangular projection around the circuit
-centroid. For circuit-scale distances, this is accurate enough for shape
-comparison and avoids heavier GIS dependencies.
-
-### 2. Load FastF1 Position Samples
-
-For a requested `year`, `event`, and `session`, Apexline loads the FastF1 session and
-extracts each lap's local FastF1 position stream:
-
-```python
-lap.get_pos_data()[["X", "Y"]]
-```
-
-FastF1 positions are local track coordinates, not GPS. Apexline treats them as
-shape evidence.
-
-### 3. Normalize Lap-Boundary Overlap
-
-FastF1 lap slices can include a small repeated segment near the timing line. If
-a lap is too long, Apexline first looks for a contiguous one-lap window that:
-
-- has approximately the same path length as the oracle circuit,
-- closes cleanly at the start/end point,
-- preserves the original shape without warping.
-
-If that window exists, shape fitting uses the normalized one-lap trace while the
-artifact still records the raw path length and trimmed overlap. If cleanup does
-not recover a one-lap trace, the lap remains a `path_length_outlier`.
-
-### 4. Separate Geometry Failures From Timing Warnings
-
-Before expensive shape fitting, each lap gets classified. Only checks that can
-invalidate the geometry block a lap:
-
-| Check | Reason |
-|---|---|
-| pit-in or pit-out is present | `pit_lap` |
-| too few position points | `too_few_position_samples` |
-| normalized path length still differs by more than 5% | `path_length_outlier` |
-
-FastF1's `IsAccurate == False` flag is recorded separately as the non-blocking
-`fastf1_inaccurate` warning. That flag covers timing and track-status integrity;
-it does not imply that the GPS shape is wrong. A non-pit lap with usable position
-samples therefore still receives a full oracle shape fit.
-
-This separates timing quality from the actual question Apexline answers:
-whether a FastF1 position trace matches the oracle circuit shape.
-
-### 5. Fit FastF1 Shape To The Oracle
-
-For each usable lap:
-
-1. Close the normalized FastF1 and oracle paths.
-2. Resample both by equal path progress.
-3. Try forward and reversed direction.
-4. Search circular start offsets.
-5. Fit FastF1 to the oracle with a similarity transform:
-
-```text
-target ~= scale * rotation * source + translation
-```
-
-This is a Procrustes-style fit in 2D. It intentionally allows translation,
-rotation, and scale because FastF1's local coordinate system is not GPS.
-
-The important part is what it does **not** allow: arbitrary warping. If the lap
-or oracle shape is wrong, the residual errors stay high.
-
-### 6. Report Shape Error
-
-Apexline reports:
-
-| Metric | Meaning |
-|---|---|
-| `rmse_m` | overall fit error |
-| `p50_m` | median pointwise error |
-| `p95_m` | high-end error without overreacting to one sample |
-| `max_m` | worst pointwise error |
-| `rotation_degrees` | fitted orientation difference |
-| `scale_m_per_fastf1_unit` | inferred FastF1 unit scale |
-| `start_offset_samples` | phase alignment used for the fit |
-
-For compliance, the default shape thresholds scale with the oracle circuit
-length while retaining minimum floors:
-
-```text
-RMSE <= max(32 m, 1.6% of oracle length)
-p95  <= max(75 m, 2.5% of oracle length)
-```
-
-Scaling prevents long circuits from failing on harmless absolute residuals.
-The floor keeps short circuits from becoming unrealistically strict. Laps with
-visible shape divergence still exceed the proportional limits.
-
-### 7. Shrink The Oracle GPS Line Without Moving Corners
-
-Once the oracle line is validated, Apexline turns it into something small enough
-for maps and downstream tools.
-
-The important constraint is that Apexline does not invent a new track shape. It
-starts from the oracle GPS LineString and only removes intermediate points when
-the removed segment stays within the simplification tolerance.
-
-Read the process left to right:
-
-```text
-source GPS points
-      ->
-drop only the points whose removal changes the line by less than 1 m
-      ->
-encode the remaining coordinates as one compact polyline string
-```
-
-The default tolerance is conservative:
-
-```text
-polyline tolerance = 1.0 m
-```
-
-For Canada 2025, the result is:
-
-| Artifact | Value |
-|---|---:|
-| Source GPS points | 102 |
-| Simplified points | 84 |
-| Encoded characters | 242 |
-| Max simplification error | 0.95 m |
-| Length delta | -0.39 m |
-
-That means 18 points were removed, but every removed point stayed within
-0.95 m of the simplified line. The total path length changed by less than half
-a meter on a 4.365 km lap.
-
-![Polyline simplification explainer](docs/assets/polyline-compactness-2025.svg)
-
-In practical terms:
-
-- the left panel is the full oracle GPS path,
-- the middle panel is the same path after dropping low-value points,
-- the right panel is the exact data you would ship to a map client or API.
-
-The second graphic explains what happens inside that compact string. Encoding
-does not fit or reshape the circuit: it quantizes coordinates, stores movement
-from the previous point, writes those small deltas as variable-length
-characters, and can then be decoded by common mapping libraries.
-
-![Encoded polyline pipeline](docs/assets/polyline-encoding-explainer.svg)
 
 ## Quick Start
 
 ```bash
 python3 -m venv .venv
 .venv/bin/python -m pip install -e .
+
+# Validate one event/session (Race is the default; FP1/Q/SQ/S/R also work)
+.venv/bin/apexline validate --year 2025 --event Canada --session R
 ```
 
-Run one event/session. Race sessions are the default, but any FastF1-supported
-session code can be used, such as `FP1`, `FP2`, `FP3`, `Q`, `SQ`, `S`, or `R`.
-
-```bash
-.venv/bin/apexline validate \
-  --year 2025 \
-  --event Canada \
-  --session R
-```
-
-Default outputs are written under `data/<year>/<event>/<session>/`:
+Outputs land in `data/<year>/<event>/<session>/`:
 
 | File | Purpose |
 |---|---|
 | `circuit-analysis.json` | circuit-level fit and polyline diagnostics |
-| `circuit-analysis.csv` | flattened circuit diagnostics |
 | `lap-diagnostics.json` | lap-level rejection and compliance diagnostics |
-| `artifact-manifest.json` | command, thresholds, source identity, and output paths |
+| `artifact-manifest.json` | command, thresholds, source identity, output paths |
 
-Validate generated or checked-in artifacts:
-
-```bash
-.venv/bin/apexline schema-check data/2025/canadian-grand-prix/r/lap-diagnostics.json
-```
-
-Run a no-download fixture demo:
+Other commands:
 
 ```bash
-.venv/bin/apexline fixture-demo --output-dir data/fixture-demo
-.venv/bin/apexline-summarize --manifest data/fixture-demo/artifact-manifest.json
+.venv/bin/apexline batch --year 2025 --session R          # full-year batch
+.venv/bin/apexline schema-check <lap-diagnostics.json>     # validate an artifact
+.venv/bin/apexline fixture-demo --output-dir data/demo     # no-download demo
+.venv/bin/apexline-summarize --year 2025                   # season lap-quality summary
 ```
 
-Run a full-year batch explicitly:
-
-```bash
-.venv/bin/apexline batch \
-  --year 2025 \
-  --session R
-```
-
-Summarize lap quality for any generated year:
-
-```bash
-.venv/bin/apexline-summarize --year 2025
-.venv/bin/apexline-validation-summary --year 2025
-```
-
-The scripts are year- and session-driven. For example, `--year 2024 --session Q`
-uses `data/2024/all-events/q/` for a qualifying batch.
-
-You need FastF1 race data available in `data/fastf1-cache`, or network access
-so FastF1 can download it. The `bacinger/f1-circuits` repository is cloned into
-`/tmp/f1-circuits` by default if missing.
-
-`--output-dir` defaults to `data/`. `--write-mode` controls whether existing
-artifacts are overwritten, skipped, or rejected. The `apexline` console command
-is the primary interface.
-
-## Outputs
-
-New CLI runs stamp JSON artifacts with `schema_version: "1.0.0"`. Field-level
-schema documentation lives in [docs/output-schemas.md](docs/output-schemas.md).
-Machine-readable JSON Schema files live in [schemas](schemas).
-
-### Circuit Analysis JSON
-
-`data/2025/canadian-grand-prix/r/circuit-analysis.json` contains the
-circuit-level result:
-
-| Field | Meaning |
-|---|---|
-| `encoded_polyline` | validated GPS polyline |
-| `repo_vs_fastf1` | best single FastF1 lap fit metrics |
-| `averaged_fastf1_encoded_polyline` | fitted average of the best FastF1 laps |
-| `repo_vs_fastf1_average` | GPS vs averaged FastF1 metrics |
-| `lap_compliance_summary` | lap-level quality summary |
-| `polyline_vs_source` | simplification loss from source GPS |
-| `polyline_vs_fastf1` | simplified polyline vs FastF1 shape |
-| `schema_version` | artifact schema version for downstream validation |
-
-### Lap Diagnostics JSON
-
-`data/2025/canadian-grand-prix/r/lap-diagnostics.json` explains compliance:
-
-| Field | Meaning |
-|---|---|
-| `total_laps` | all laps inspected |
-| `fitted_laps` | laps that passed pre-fit checks |
-| `compliant_laps` | laps passing all checks |
-| `reason_counts` | count by rejection reason |
-| `warning_counts` | count by non-blocking metadata warning |
-| `fastest_lap_with_position` | fastest lap with enough position samples |
-| `fastest_compliant_lap` | fastest lap that passes all checks |
-| `worst_shape_laps` | laps that failed shape thresholds |
-| `worst_fitted_laps` | highest-error fitted laps, even if still compliant |
-| `schema_version` | artifact schema version for downstream validation |
-
-### Season Lap Compliance
-
-`data/2025/all-events/r/lap-diagnostics.json` is the checked-in all-circuit
-lap-quality source. The
-summary command creates:
-
-| File | Purpose |
-|---|---|
-| `docs/lap-compliance-2025.md` | markdown season table |
-| `docs/assets/lap-compliance-2025.svg` | good-vs-bad circuit visual |
-
-## Downstream Consumption
-
-Race Telemetry Workbench should consume Apexline outputs through the generated
-files rather than copying implementation code. Recommended flow:
-
-1. Validate `schema_version` and `artifact_kind`.
-2. Import `lap_diagnostics_event` rows first, because those are the most stable
-   basis for bad-lap quality joins.
-3. Treat `lap_key` as the deterministic per-lap identity when joining derived
-   lap diagnostics.
-4. Keep Apexline thresholds visible in downstream metadata instead of flattening
-   them away.
-
-The current workbench-side backlog and importer work should happen after these
-artifact schemas stabilize.
+Needs FastF1 data in `data/fastf1-cache` (or network access to download). The
+`bacinger/f1-circuits` repo is cloned into `/tmp/f1-circuits` if missing. JSON
+artifacts are stamped with `schema_version`; field-level docs and JSON Schemas
+are in [docs/output-schemas.md](docs/output-schemas.md) and [schemas](schemas).
 
 ## Limitations
 
-- FastF1 exposes local `X/Y/Z` session coordinates, not car GPS latitude and
-  longitude.
+- FastF1 exposes local `X/Y/Z`, not car GPS latitude/longitude.
 - Shape-fit metrics are validation metrics, not absolute geodetic error.
 - Session availability depends on what FastF1 can download and cache.
-- Tight thresholds are intentionally conservative and can move borderline laps
-  between compliant and rejected.
-- Averaged FastF1 traces are still driven racing lines, not guaranteed
-  centerlines.
-
-## Further Analysis
-
-The README keeps the headline story. The deeper generated analysis lives here:
-
-- [2025 validation summary](docs/2025-validation-summary.md)
-- [2025 lap compliance summary](docs/lap-compliance-2025.md)
-- [2025 rejected lap galleries](docs/rejected-lap-galleries-2025.md)
-
-## Engineering Notes
-
-This is a focused telemetry-validation project for turning noisy public F1 data
-into reproducible, inspectable circuit-line evidence. The important parts:
-
-- It reconciles two coordinate systems without pretending they are the same.
-- It uses geometry, not screenshots, to validate track outlines.
-- It classifies data quality before calculating expensive metrics.
-- It produces explainable failure reasons, not just pass/fail.
-- It generates reproducible visual evidence from real telemetry samples.
-- It keeps polyline compression conservative enough to preserve chicanes.
-
-The main engineering choice is restraint: no arbitrary warping, no invented GPS
-for FastF1, and no treating a lap as usable just because position samples exist.
+- Conservative thresholds can move borderline laps between compliant and rejected.
+- Averaged FastF1 traces are driven racing lines, not guaranteed centerlines.
 
 ## Documentation
 
+- [Output schemas](docs/output-schemas.md)
+- [2025 validation summary](docs/2025-validation-summary.md)
 - [2025 lap compliance summary](docs/lap-compliance-2025.md)
 - [2025 rejected lap galleries](docs/rejected-lap-galleries-2025.md)
-- [2025 validation summary](docs/2025-validation-summary.md)
-- [Output schemas](docs/output-schemas.md)
 - [Single-session example](examples/single-session.md)
 - [Parameter guide](docs/parameter-guide.md)
 
-## License And Data Sources
+## License and Data Sources
 
-This repository includes an MIT [LICENSE](LICENSE) for project code.
+MIT [LICENSE](LICENSE) for project code. Generated artifacts in `data/` and
+`docs/assets/` are checked-in research outputs, not an API contract. FastF1
+telemetry remains subject to upstream data-source constraints.
 
-Generated artifacts in `data/` and `docs/assets/` are checked-in research
-outputs, not a public API contract by themselves. FastF1-derived telemetry and
-timing data remains subject to the FastF1 ecosystem and upstream data-source
-constraints. Circuit reference geometry comes from the upstream circuit-line
-repository below.
-
-- GPS circuit outlines:
-  [`bacinger/f1-circuits`](https://github.com/bacinger/f1-circuits)
-- FastF1 session and position data:
-  [`FastF1`](https://docs.fastf1.dev/)
-
-The fit metrics are shape-validation metrics, not absolute GPS telemetry error.
-FastF1 local `X/Y` data is used as independent shape evidence, not as latitude
-and longitude.
-
-## Repository Name
-
-Suggested repo name: **apexline**.
-
-It is short, motorsport-specific, and describes the core artifact: a validated
-track line.
+- GPS circuit outlines: [`bacinger/f1-circuits`](https://github.com/bacinger/f1-circuits)
+- FastF1 session and position data: [`FastF1`](https://docs.fastf1.dev/)
